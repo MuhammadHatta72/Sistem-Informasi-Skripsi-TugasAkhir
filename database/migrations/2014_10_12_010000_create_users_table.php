@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum(
                 'role',
                 [
-                    'admin',
+                    'dosen',
                     'dosen',
                     'mahasiswa',
                 ]

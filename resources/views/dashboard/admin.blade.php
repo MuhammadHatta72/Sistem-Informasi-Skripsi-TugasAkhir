@@ -5,14 +5,14 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Welcome SuperAdmin</h1>
+            <h1>Welcome Admin</h1>
         </div>
 
         <div class="section-body">
             <div class="row">
                 <div class="col-xl-6 mb-4">
                     <!-- Dashboard example card 1-->
-                    <a class="card lift h-100" href="{{route('users.index')}}">
+                    <a class="card lift h-100" href="">
                         <div class="card-body d-flex justify-content-center flex-column">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="me-3">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-xl-6 mb-4">
                     <!-- Dashboard example card 1-->
-                    <a class="card lift h-100" href="{{route('wewenang.index')}}">
+                    <a class="card lift h-100" href="">
                         <div class="card-body d-flex justify-content-center flex-column">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="me-3">
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
-                            <a class="text-white stretched-link" href="{{ route('users.index', ['mahasiswa' => 'oki']) }}"><h6>Detail</h6></a>
+                            <a class="text-white stretched-link" href=""><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
-                            <a class="text-white stretched-link" href="{{ route('users.index', ['mahasiswa' => 'admin']) }}"><h6>Detail</h6></a>
+                            <a class="text-white stretched-link" href=""><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -89,6 +89,6 @@
 
 @section('sidebar')
     @parent
-    <li class="nav-item {{ request()->is('kelola-superadmin', 'users*') ? 'active' : '' }}"><a href="{{route('kelola.superadmin')}}" class="nav-link"><i class="fas fa-users"></i><span>Kelola Pengguna</span></a></li>
-    <li class="nav-item {{ request()->is('kelola-wewenang', 'wewenang*') ? 'active' : '' }}"><a href="{{route('kelola.wewenang')}}" class="nav-link"><i class="fas fa-handshake"></i><span>Kelola Wewenang</span></a></li>
+    <li class="nav-item {{ request()->is('kelola-admin', 'users*') ? 'active' : '' }}"><a href="" class="nav-link"><i class="fas fa-users"></i><span>Kelola Pengguna</span></a></li>
+    <li class="nav-item {{ request()->is('kelola-wewenang', 'wewenang*') ? 'active' : '' }}"><a href="" class="nav-link"><i class="fas fa-handshake"></i><span>Kelola Wewenang</span></a></li>
 @endsection

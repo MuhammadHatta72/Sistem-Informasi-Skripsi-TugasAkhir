@@ -40,7 +40,7 @@
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
                             <a class="text-white stretched-link"
-                               href="{{ route('peminjaman-admin.index', ['history' => 'valid']) }}"><h6>Detail</h6></a>
+                               href=""><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
                             <a class="text-white stretched-link"
-                               href="{{ route('peminjaman-admin.index', ['history' => 'proses']) }}"><h6>Detail</h6></a>
+                               href=""><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
                             <a class="text-white stretched-link"
-                               href="{{ route('validasi.index', ['validasi' => 'proses']) }}"><h6>Detail</h6></a>
+                               href=""><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

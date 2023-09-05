@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     public static array $permissionRole = [
-        'dashboard' => ['superadmin', 'admin'],
-        'admin' => ['admin'],
+        'dashboard' => ['admin', 'dosen', 'mahasiswa'],
         'dosen' => ['dosen'],
         'mahasiswa' => ['mahasiswa']
     ];
