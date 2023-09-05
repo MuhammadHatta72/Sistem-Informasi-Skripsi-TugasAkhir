@@ -1,6 +1,44 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Super Admin')
+@section('title', 'Dashboard Admin')
+
+@section('sidebar')
+    @parent
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-calendar-check"></i><span>Jadwal</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('outline.create') }}">Outline</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('outline.index') }}">Proposal</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('outline.index') }}">Skripsi</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-calendar-check"></i><span>Cetak Surat Perintah</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('outline.create') }}">Dosen Pembimbing</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('outline.index') }}">Dosen Penguji</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">
+        <a href="{{ route('home') }}" class="nav-link">
+            <i class="fas fa-poll-h"></i><span>Kelola Pengguna</span>
+        </a>
+    </li>
+@endsection
 
 @section('content')
     <section class="section">
@@ -37,7 +75,7 @@
                                     <i class="fas fa-handshake" style="font-size: xxx-large"></i>
                                     <br>
                                     <br>
-                                    <h5>Daftar Wewenang</h5>
+                                    <h5>Lorem</h5>
                                     <div class="text-muted small">Lihat dan kelola daftar wewenang dengan mudah.</div>
                                 </div>
                                 <img src="https://sb-admin-pro.startbootstrap.com/assets/img/illustrations/browser-stats.svg"
@@ -87,8 +125,4 @@
     </section>
 @endsection
 
-@section('sidebar')
-    @parent
-    <li class="nav-item {{ request()->is('kelola-admin', 'users*') ? 'active' : '' }}"><a href="" class="nav-link"><i class="fas fa-users"></i><span>Kelola Pengguna</span></a></li>
-    <li class="nav-item {{ request()->is('kelola-wewenang', 'wewenang*') ? 'active' : '' }}"><a href="" class="nav-link"><i class="fas fa-handshake"></i><span>Kelola Wewenang</span></a></li>
-@endsection
+
