@@ -11,9 +11,9 @@ class AuthServiceProvider extends ServiceProvider
 {
     public static array $permission = [
         'dashboard' => ['superadmin', 'admin'],
-        'superadmin' => ['superadmin'],
         'admin' => ['admin'],
-        'user' => ['user']
+        'dosen' => ['dosen'],
+        'mahasiswa' => ['mahasiswa']
     ];
 
     /**

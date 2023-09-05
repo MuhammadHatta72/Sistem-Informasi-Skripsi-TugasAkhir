@@ -1,6 +1,6 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="{{ route('home') }}">SIM-SARPRAS</a>
+        <a href="{{ route('home') }}">SIM-SKRIPSI</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
         <a href="{{ route('home') }}">SS</a>
@@ -18,9 +18,9 @@
         @show
     </ul>
 
-    <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+    <div class="mt-4 mb-4 p-2 hide-sidebar-mini">
         <a href="https://helpakademik.polinema.ac.id/" class="btn btn-primary btn-lg btn-block btn-icon-split">
-            <img src="{{ asset('assets/img/logo_polinema.png') }}" alt="logo" width="30" class=circle"> PUSKOM POLINEMA
+            <img src="{{ asset('assets/img/logo_polinema.png') }}" alt="logo" width="30" class=circle">  AKUNTANSI POLINEMA
         </a>
     </div>
 </aside>

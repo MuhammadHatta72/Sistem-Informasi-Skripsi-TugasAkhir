@@ -18,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
             crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{{ asset('assets/img/logo_polinema.png') }}" style="width: 50px">
-    <title>SIM-SARPRAS POLINEMA</title>
+    <title>SIM-SKRIPSI POLINEMA</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('assets/css/vendor/bootstrap.min.css')}}" rel="stylesheet">
@@ -58,8 +58,7 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a class="navbar-brand text-primary logo h1" href="#" style="font-size: xxx-large">SIM-SARPRAS
-                        POLINEMA</a>
+                    <a class="navbar-brand text-primary logo h1" href="#" style="font-size: xxx-large">SIM-SKRIPSI POLINEMA</a>
                     <!-- </a> -->
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -97,8 +96,8 @@
                              data-wow-delay="1s">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h2>Sistem Inforamasi Peminjaman Sarana dan Prasarana Polinema</h2>
-                                    <p>Selamat datang di Sistem Informasi Peminjaman Sarana Prasarana Polinema</p>
+                                    <h2>Sistem Informasi Skripsi dan Tugas Akhir Akuntansi Polinema</h2>
+                                    <p>Selamat datang di Sistem Informasi Skripsi dan Tugas Akhir Polinema</p>
                                 </div>
                                 <div class="col-lg-12">
                                     <a class="btn btn-link fw-500" href="#!">Learn More</a>

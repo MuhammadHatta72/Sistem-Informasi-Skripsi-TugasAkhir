@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\PeminjamanAdminController;
 use App\Http\Controllers\PeminjamanUserController;
+use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\SarprasController;
 use App\Http\Controllers\CetakSuratController;
+use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\WewenangController;
@@ -97,12 +100,18 @@ Route::middleware('can:admin')->group(function () {
     Route::resource('sarpras', SarprasController::class);
 });
 
-Route::middleware('can:user')->group(function () {
+Route::middleware('can:mahasiswa')->group(function () {
+
     Route::get('daftar-sarana-prasarana-user', [SarprasController::class, 'user'])->name('daftarsaranaprasarana.user');
 
     Route::post('bukti-pdf',[CetakSuratController::class, 'generatebuktiPDF'])->name('bukti.pdf');
 
     Route::resource('peminjaman-user', PeminjamanUserController::class);
+
+    Route::resource('outline', OutlineController::class);
+    Route::resource('proposal', ProposalController::class);
+    Route::resource('skripsi', SkripsiController::class);
+
 });
 
 
