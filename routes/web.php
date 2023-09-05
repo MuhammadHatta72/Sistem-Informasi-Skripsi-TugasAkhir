@@ -76,7 +76,25 @@ Route::middleware('can:superadmin')->group(function () {
     Route::resource('wewenang', WewenangController::class);
 });
 
-Route::middleware('can:admin')->group(function () {
+Route::middleware('can:dosen')->group(function () {
+    Route::middleware('can:KPS')->group(function () {
+        Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
+    });
+    Route::middleware('can:dosen_penilai')->group(function () {
+        Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');
+    });
+    Route::middleware('can:dosen_penguji_proposal')->group(function () {
+        Route::view('dashboard-dosen_penguji_proposal', 'dashboard.dosen_penguji_proposal')->name('dashboard.dosen_penguji_proposal');
+    });
+    Route::middleware('can:dosen_pembimbing')->group(function () {
+        Route::view('dashboard-dosen_pembimbing', 'dashboard.dosen_pembimbing')->name('dashboard.dosen_pembimbing');
+    });
+    Route::middleware('can:dosen_penguji_skripsi')->group(function () {
+        Route::view('dashboard-dosen_penguji_skripsi', 'dashboard.dosen_penguji_skripsi')->name('dashboard.dosen_penguji_skripsi');
+    });
+
+
+//    lawas
     Route::get('daftar-sarana-prasarana-admin', [SarprasController::class, 'admin'])->name('daftarsaranaprasarana.admin');
 
     Route::get('kelola-ruang', function () {
@@ -102,11 +120,11 @@ Route::middleware('can:admin')->group(function () {
 
 Route::middleware('can:mahasiswa')->group(function () {
 
-    Route::get('daftar-sarana-prasarana-user', [SarprasController::class, 'user'])->name('daftarsaranaprasarana.user');
+    Route::get('daftar-sarana-prasarana-mahasiswa', [SarprasController::class, 'mahasiswa'])->name('daftarsaranaprasarana.mahasiswa');
 
     Route::post('bukti-pdf',[CetakSuratController::class, 'generatebuktiPDF'])->name('bukti.pdf');
 
-    Route::resource('peminjaman-user', PeminjamanUserController::class);
+    Route::resource('peminjaman-mahasiswa', PeminjamanUserController::class);
 
     Route::resource('outline', OutlineController::class);
     Route::resource('proposal', ProposalController::class);

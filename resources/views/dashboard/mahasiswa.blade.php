@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
-                            <a class="text-white stretched-link" href="{{ route('peminjaman-user.index', ['history' => 'valid']) }}"><h6>Detail</h6></a>
+                            <a class="text-white stretched-link" href="{{ route('peminjaman-mahasiswa.index', ['history' => 'valid']) }}"><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
-                            <a class="text-white stretched-link" href="{{ route('peminjaman-user.index', ['history' => 'proses']) }}"><h6>Detail</h6></a>
+                            <a class="text-white stretched-link" href="{{ route('peminjaman-mahasiswa.index', ['history' => 'proses']) }}"><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
 
 @section('sidebar')
     @parent
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-user', 'peminjaman-user*')) ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Outline</span>
         </a>
@@ -64,7 +64,7 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-user', 'peminjaman-user*')) ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Proposal</span>
         </a>
@@ -77,7 +77,7 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-user', 'peminjaman-user*')) ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
         </a>

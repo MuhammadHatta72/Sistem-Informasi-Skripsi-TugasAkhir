@@ -8,9 +8,9 @@ var map = new GMaps({
 });
 // initialize map geolocation
 GMaps.geolocate({
-  // when geolocation is allowed by user
+  // when geolocation is allowed by mahasiswa
   success: function(position) {
-    // set center map according to user position
+    // set center map according to mahasiswa position
     map.setCenter(position.coords.latitude, position.coords.longitude);
     // add a marker to the map
     map.addMarker({
@@ -19,11 +19,11 @@ GMaps.geolocate({
       title: 'You'
     });
   },
-  // when geolocation is blocked by the user
+  // when geolocation is blocked by the mahasiswa
   error: function(error) {
     toastr.error('Geolocation failed: '+error.message);
   },
-  // when the user's browser does not support
+  // when the mahasiswa's browser does not support
   not_supported: function() {
     toastr.error("Your browser does not support geolocation");
   }

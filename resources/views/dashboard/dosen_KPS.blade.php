@@ -1,42 +1,54 @@
-@extends('layouts.app')
+@extends('dashboard.dosen')
 
 @section('title', 'Dashboard Dosen')
 
-@section('navbar')
-    @if(auth()->user()->sub_role != null)
-        @php
-            $currentRoute = Route::currentRouteName();
-            $subRole = auth()->user()->sub_role;
-
-            $routeMap = [
-                'KPS' => 'dashboard.kps',
-                'dosen_penilai' => 'dashboard.dosen_penilai',
-                'dosen_penguji_proposal' => 'dashboard.dosen_penguji_proposal',
-                'dosen_pembimbing' => 'dashboard.dosen_pembimbing',
-                'dosen_penguji_skripsi' => 'dashboard.dosen_penguji_skripsi',
-            ];
-        @endphp
-        @if ($currentRoute != 'home')
-            <a href="{{ route('home') }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-home"></i> Kembali ke Dashboard Utama
-            </a>
-            <div class="dropdown-divider"></div>
-        @endif
-
-        @if (array_key_exists($subRole, $routeMap) && $currentRoute != $routeMap[$subRole])
-            <a href="{{ route($routeMap[$subRole]) }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-sign-in-alt"></i> Login Sebagai {{ ucwords(str_replace('_', ' ', $subRole)) }}
-            </a>
-            <div class="dropdown-divider"></div>
-        @endif
-    @endif
+@section('sidebar')
     @parent
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-calendar-check"></i><span>Outline</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('outline.create') }}">Pengajuan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('outline.index') }}">History</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-calendar-check"></i><span>Ujian Proposal</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('proposal.create') }}">Pengajuan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('proposal.index') }}">History</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('skripsi.create') }}">Pengajuan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('skripsi.index') }}">History</a>
+            </li>
+        </ul>
+    </li>
 @endsection
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Welcome Dosen</h1>
+            <h1>Welcome Kepala Program Studi</h1>
         </div>
 
         <div class="section-body">
@@ -100,6 +112,4 @@
     </section>
 @endsection
 
-@section('sidebar')
-    @parent
-@endsection
+

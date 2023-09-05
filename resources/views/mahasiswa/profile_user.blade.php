@@ -23,7 +23,7 @@
                                     @else
                                         <img class="img-account-profile rounded-circle mb-2" src="https://sb-admin-pro.startbootstrap.com/assets/img/illustrations/profiles/profile-1.png" alt="" style="width: 12rem"/>
                                     @endif
-{{--                                    <img class="img-account-profile rounded-circle mb-2" src="storage/<?= auth()->user()->logo; ?>" alt="Tidak ada gambar" style="width: 12rem"/>--}}
+{{--                                    <img class="img-account-profile rounded-circle mb-2" src="storage/<?= auth()->mahasiswa()->logo; ?>" alt="Tidak ada gambar" style="width: 12rem"/>--}}
                                     <!-- Profile picture help block-->
                                     <div class="small font-italic text-muted mb-4">JPG / PNG < 5 MB</div>
                                     <!-- Profile picture upload button-->
@@ -69,16 +69,16 @@
 
 @section('sidebar')
     @parent
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-user', 'peminjaman-user*')) ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Peminjaman</span>
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('daftarsaranaprasarana.user') }}">Daftar Sarana Prasarana</a>
+                <a class="nav-link" href="{{ route('daftarsaranaprasarana.mahasiswa') }}">Daftar Sarana Prasarana</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('peminjaman-user.index') }}">History User</a>
+                <a class="nav-link" href="{{ route('peminjaman-mahasiswa.index') }}">History User</a>
             </li>
         </ul>
     </li>

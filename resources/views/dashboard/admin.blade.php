@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
-                            <a class="text-white stretched-link" href="{{ route('users.index', ['user' => 'oki']) }}"><h6>Detail</h6></a>
+                            <a class="text-white stretched-link" href="{{ route('users.index', ['mahasiswa' => 'oki']) }}"><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
-                            <a class="text-white stretched-link" href="{{ route('users.index', ['user' => 'admin']) }}"><h6>Detail</h6></a>
+                            <a class="text-white stretched-link" href="{{ route('users.index', ['mahasiswa' => 'admin']) }}"><h6>Detail</h6></a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

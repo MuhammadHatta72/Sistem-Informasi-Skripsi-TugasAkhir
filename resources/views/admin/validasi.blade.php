@@ -137,7 +137,7 @@
                                                         {{-- <a href="{{route('peminjaman-admin.edit', ['peminjaman_admin' => $peminjaman->id]) }}">
                                                             <button class="badge bg-warning border-0 my-3 mx-3 text-white"
                                                                     type="button">
-                                                                <i class="fas fa-user-cog"></i> Edit
+                                                                <i class="fas fa-mahasiswa-cog"></i> Edit
                                                             </button>
                                                         </a> --}}
                                                     @endif

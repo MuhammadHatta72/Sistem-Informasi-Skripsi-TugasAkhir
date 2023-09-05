@@ -43,7 +43,7 @@
                                             <td>{{ $sarpra->wewenang->name }}</td>
                                             <td>{{ $sarpra->fasilitas }}</td>
                                             <td class="d-flex justify-content-center">
-                                                <a href="{{route('peminjaman-user.create', ['sarpras' => $sarpra->id]) }}">
+                                                <a href="{{route('peminjaman-mahasiswa.create', ['sarpras' => $sarpra->id]) }}">
                                                     <button class="badge bg-success border-0 mt-3 mr-2 text-white"
                                                             type="button">
                                                         <i class="fas fa-user-cog"></i> Pinjam
@@ -75,16 +75,16 @@
 
 @section('sidebar')
     @parent
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-user', 'peminjaman-user*')) ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Peminjaman</span>
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('daftarsaranaprasarana.user') }}">Daftar Sarana Prasarana</a>
+                <a class="nav-link" href="{{ route('daftarsaranaprasarana.mahasiswa') }}">Daftar Sarana Prasarana</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('peminjaman-user.index') }}">History User</a>
+                <a class="nav-link" href="{{ route('peminjaman-mahasiswa.index') }}">History User</a>
             </li>
         </ul>
     </li>

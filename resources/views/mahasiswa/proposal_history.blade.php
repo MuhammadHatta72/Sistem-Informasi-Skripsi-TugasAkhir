@@ -66,12 +66,12 @@
 {{--                                            </td>--}}
 {{--                                            <td class="d-flex justify-content-center">--}}
 {{--                                                @if($peminjaman->status == 'Proses' || $peminjaman->status == 'Ditolak')--}}
-{{--                                                    <a href="{{route('peminjaman-user.edit', ['peminjaman_user' => $peminjaman->id]) }}">--}}
+{{--                                                    <a href="{{route('peminjaman-mahasiswa.edit', ['peminjaman_user' => $peminjaman->id]) }}">--}}
 {{--                                                        <button class="badge bg-warning border-0 my-3 mx-3 text-white" type="button">--}}
 {{--                                                            <i class="fas fa-edit"></i> Edit--}}
 {{--                                                        </button>--}}
 {{--                                                    </a>--}}
-{{--                                                    <form action="{{ route('peminjaman-user.destroy', ['peminjaman_user' => $peminjaman->id]) }}" method="POST" class="d-inline">--}}
+{{--                                                    <form action="{{ route('peminjaman-mahasiswa.destroy', ['peminjaman_user' => $peminjaman->id]) }}" method="POST" class="d-inline">--}}
 {{--                                                        @method('DELETE')--}}
 {{--                                                        @csrf--}}
 {{--                                                        <button class="badge bg-danger border-0 my-3 mx-3 text-white" onclick="return confirm('Yakin Menghapus Peminjaman ?')">--}}

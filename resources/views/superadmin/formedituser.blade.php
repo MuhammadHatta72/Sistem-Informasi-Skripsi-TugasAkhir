@@ -12,7 +12,7 @@
                         <div class="card mb-4">
                             <div class="card-header bg-whitesmoke"><h4>Form Edit User</h4></div>
                             <div class="card-body ps-5 pe-15">
-                                <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('users.update', ['mahasiswa' => $user->id]) }}" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <div class="row mb-3">
@@ -68,7 +68,7 @@
                                         <div class="col-lg-4 col-sm-4">
                                             <label for="Role" class="form-label">Role</label>
                                             <select class="form-control" name="role" id="role">
-                                                @if(old('role', $user->role) == 'user')
+                                                @if(old('role', $user->role) == 'mahasiswa')
                                                     <option value="user" selected>User</option>
                                                 @else
                                                     <option value="user">User</option>

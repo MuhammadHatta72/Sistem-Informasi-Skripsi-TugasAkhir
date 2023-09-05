@@ -12,7 +12,7 @@ class UpdateUserPassword implements UpdatesUserPasswords
     use PasswordValidationRules;
 
     /**
-     * Validate and update the user's password.
+     * Validate and update the mahasiswa's password.
      *
      * @param  array<string, string>  $input
      */

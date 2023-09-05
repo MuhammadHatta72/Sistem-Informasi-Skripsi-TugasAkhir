@@ -53,12 +53,12 @@
                                             <td>{{ $user->wewenang->name }}</td>
                                             <td>{{ $user->phone }}</td>
                                             <td class="d-flex justify-content-center">
-                                                <a href="{{route('users.edit', ['user' => $user->id]) }}">
+                                                <a href="{{route('users.edit', ['mahasiswa' => $user->id]) }}">
                                                     <button class="badge bg-success border-0 mt-3 mr-2 text-white" type="button">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </button>
                                                 </a>
-                                                <form action="{{ route('users.destroy', ['user' => $user->id]) }}"
+                                                <form action="{{ route('users.destroy', ['mahasiswa' => $user->id]) }}"
                                                       method="POST" class="d-inline">
                                                     @method('DELETE')
                                                     @csrf
