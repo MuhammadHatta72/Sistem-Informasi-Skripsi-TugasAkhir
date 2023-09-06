@@ -13,6 +13,7 @@ class OutlineController extends Controller
      */
     public function index()
     {
+        
         return view('user.outline_history');
     }
 

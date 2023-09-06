@@ -21,7 +21,7 @@ return new class extends Migration
                 'role',
                 [
                     'dosen',
-                    'dosen',
+                    'admin',
                     'mahasiswa',
                 ]
             )->default('mahasiswa');
