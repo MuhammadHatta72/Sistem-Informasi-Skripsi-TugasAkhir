@@ -15,7 +15,9 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="me-3">
-                                    <div><h5>Proposal Valid</h5></div>
+                                    <div>
+                                        <h5>Proposal Valid</h5>
+                                    </div>
                                     <div class="display-4 text-white">1</div>
                                 </div>
                                 <i class="fas fa-clipboard-check" style="font-size:xx-large"></i>
@@ -32,14 +34,18 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="me-3">
-                                    <div><h5>Proposal Proses</h5></div>
+                                    <div>
+                                        <h5>Proposal Proses</h5>
+                                    </div>
                                     <div class="display-4 text-white">1</div>
                                 </div>
                                 <i class="fas fa-envelope-open-text" style="font-size:xx-large"></i>
                             </div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between small shadow-dark">
-                            <a class="text-white stretched-link" href=""><h6>Detail</h6></a>
+                            <a class="text-white stretched-link" href="">
+                                <h6>Detail</h6>
+                            </a>
                             <div class="text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -51,20 +57,22 @@
 
 @section('sidebar')
     @parent
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+    <li
+        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Outline</span>
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('outline.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('outline_pengajuan') }}">Pengajuan</a>
             </li>
             <li>
                 <a class="nav-link" href="{{ route('outline.index') }}">History</a>
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+    <li
+        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Proposal</span>
         </a>
@@ -77,7 +85,8 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+    <li
+        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
         </a>
