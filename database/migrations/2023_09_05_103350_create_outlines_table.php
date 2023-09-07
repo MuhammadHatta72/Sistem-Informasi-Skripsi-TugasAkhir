@@ -12,7 +12,26 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('outlines', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_outline');
+            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
+            $table->integer('dosen_id_penilai_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+            $table->integer('dosen_id_penilai_2')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+            $table->integer('jadwal_id')->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
+            $table->string('judul');
+            $table->string('bab1');
+            $table->string('bab2');
+            $table->string('bab3');
+            $table->enum(
+                'status',
+                [
+                    'dikirim',
+                    'diproses',
+                    'diterima',
+                    'ditolak',
+                ]
+            )->default('dikirim');
+            $table->integer('nilai1');
+            $table->integer('nilai2');
             $table->timestamps();
         });
     }
