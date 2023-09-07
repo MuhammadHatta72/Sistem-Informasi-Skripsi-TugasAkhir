@@ -52,7 +52,7 @@ Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:KPS')->group(function () {
         Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
         Route::get('/kps_outline', [KPSController::class, 'index'])->name('KPSoutline.index');
-        Route::get('/outline_kps', [KPSController::class, 'index'])->name('outline_kps.index');
+        Route::get('/outline_kps', [OutlineController::class, 'index'])->name('outline_kps.index');
     });
     Route::middleware('can:dosen_penilai')->group(function () {
         Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');

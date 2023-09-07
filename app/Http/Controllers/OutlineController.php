@@ -15,7 +15,17 @@ class OutlineController extends Controller
      */
     public function index()
     {
-        return view('dashboard.mahasiswa');
+        if (Auth::user()->role == 'mahasiswa' && Auth::user()->id == Outline::$id_mahasiswa) {
+            // the user is the owner of the outline
+            return view('user.outline_detail', compact(Outline::get()));
+        } elseif (Auth::user()->role == 'dosen' && Auth::user()->sub_role == 'KPS') {
+            // the user is the KPS;
+            $outlines = Outline::paginate(5);
+            return view('dosen.KPS.list_outline', compact('outlines'));
+        } else {
+            // the user is not authorized to view the outline
+            abort(403, 'Anda tidak memiliki akses untuk melihat outline ini');
+        }
     }
 
     /**
@@ -70,7 +80,7 @@ class OutlineController extends Controller
             return view('user.outline_detail', compact('outline'));
         } elseif (Auth::user()->role == 'dosen' && Auth::user()->sub_role == 'KPS') {
             // the user is the KPS
-            return view('dosen.outline_detail', compact('outline'));
+            return view('dosen.KPS.list_outline', compact('outline'));
         } else {
             // the user is not authorized to view the outline
             abort(403, 'Anda tidak memiliki akses untuk melihat outline ini');
