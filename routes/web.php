@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\SkripsiController;
+use App\Http\Controllers\KPS\KPSController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,16 +43,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::get('edit-profile', function () {
-
 })->name('profile.edit');
 
 Route::middleware('can:admin')->group(function () {
-
 });
 
 Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:KPS')->group(function () {
         Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
+        Route::get('/kps_outline', [KPSController::class, 'index'])->name('KPSoutline.index');
+        Route::get('/outline_kps', [KPSController::class, 'index'])->name('outline_kps.index');
     });
     Route::middleware('can:dosen_penilai')->group(function () {
         Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');
@@ -71,7 +72,7 @@ Route::middleware('can:mahasiswa')->group(function () {
     Route::resource('outline', OutlineController::class);
     Route::resource('proposal', ProposalController::class);
     Route::resource('skripsi', SkripsiController::class);
+    Route::post('/outline_pengajuan', [OutlineController::class, 'store'])->name('outline.store');
+    Route::view('mahasiswa.outline_pengajuan', 'mahasiswa.outline_pengajuan')->name('outline_pengajuan');
+    Route::get('/mahasiswa_outline', [OutlineController::class, 'index'])->name('mahasiswa_outline.index');
 });
-
-
-
