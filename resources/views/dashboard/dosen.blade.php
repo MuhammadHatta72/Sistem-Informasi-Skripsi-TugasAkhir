@@ -7,14 +7,6 @@
         @php
             $currentRoute = Route::currentRouteName();
             $subRole = auth()->user()->sub_role;
-
-            $routeMap = [
-                'KPS' => 'dashboard.kps',
-                'dosen_penilai' => 'dashboard.dosen_penilai',
-                'dosen_penguji_proposal' => 'dashboard.dosen_penguji_proposal',
-                'dosen_pembimbing' => 'dashboard.dosen_pembimbing',
-                'dosen_penguji_skripsi' => 'dashboard.dosen_penguji_skripsi',
-            ];
         @endphp
         @if ($currentRoute != 'home')
             <a href="{{ route('home') }}" class="dropdown-item has-icon text-success">
@@ -23,9 +15,25 @@
             <div class="dropdown-divider"></div>
         @endif
 
-        @if (array_key_exists($subRole, $routeMap) && $currentRoute != $routeMap[$subRole])
-            <a href="{{ route($routeMap[$subRole]) }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-sign-in-alt"></i> Login Sebagai {{ ucwords(str_replace('_', ' ', $subRole)) }}
+        @if ($subRole == 'KPS' && $currentRoute != 'dashboard.kps' && $currentRoute == 'home')
+            <a href="{{ route('dashboard.kps') }}" class="dropdown-item has-icon text-success">
+                <i class="fas fa-sign-in-alt"></i> Login Sebagai KPS
+            </a>
+        @elseif ($subRole == 'dosen_penilai' && $currentRoute != 'dashboard.dosen_penilai' && $currentRoute == 'home')
+            <a href="{{ route('dashboard.dosen_penilai') }}" class="dropdown-item has-icon text-success">
+                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Penilai
+            </a>
+        @elseif ($subRole == 'dosen_penguji_proposal' && $currentRoute != 'dashboard.dosen_penguji_proposal' && $currentRoute == 'home')
+            <a href="{{ route('dashboard.dosen_penguji_proposal') }}" class="dropdown-item has-icon text-success">
+                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Penguji Proposal
+            </a>
+        @elseif ($subRole == 'dosen_pembimbing' && $currentRoute != 'dashboard.dosen_pembimbing' && $currentRoute == 'home')
+            <a href="{{ route('dashboard.dosen_pembimbing') }}" class="dropdown-item has-icon text-success">
+                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Pembimbing
+            </a>
+        @elseif ($subRole == 'dosen_penguji_skripsi' && $currentRoute != 'dashboard.dosen_penguji_skripsi' && $currentRoute == 'home')
+            <a href="{{ route('dashboard.dosen_penguji_skripsi') }}" class="dropdown-item has-icon text-success">
+                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Penguji Skripsi
             </a>
             <div class="dropdown-divider"></div>
         @endif

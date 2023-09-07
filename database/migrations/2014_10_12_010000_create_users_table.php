@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_mahasiswa')->nullable();
+            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas');
+            $table->unsignedBigInteger('id_dosen')->nullable();
+            $table->foreign('id_dosen')->references('id')->on('dosens');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

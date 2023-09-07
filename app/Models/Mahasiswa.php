@@ -10,7 +10,7 @@ class Mahasiswa extends Model
     use HasFactory;
     public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->hasOne(User::class, 'id_mahasiswa');
     }
 
     public function outlines()

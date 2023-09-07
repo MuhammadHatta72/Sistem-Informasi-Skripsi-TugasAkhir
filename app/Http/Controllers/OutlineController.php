@@ -23,7 +23,7 @@ class OutlineController extends Controller
      */
     public function create()
     {
-        return view('user.outline_pengajuan');
+        return view('mahasiswa.outline_pengajuan');
     }
 
     /**
@@ -43,9 +43,11 @@ class OutlineController extends Controller
         // Periksa apakah pengguna memiliki peran "mahasiswa"
         if (auth()->user()->role == 'mahasiswa') {
             $outline = new Outline();
-
-            $outline->id_mahasiswa = auth()->user()->id;
+            $outline->id_mahasiswa = auth()->user()->mahasiswa->id;
             $outline->judul = $request->judul;
+            $outline->id_dosen_penilai_1 = null;
+            $outline->id_dosen_penilai_2 = null;
+            $outline->id_jadwal = null;
             $outline->bab1 = $request->bab1;
             $outline->bab2 = $request->bab2;
             $outline->bab3 = $request->bab3;

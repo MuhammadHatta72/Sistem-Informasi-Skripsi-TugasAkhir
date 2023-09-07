@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Mahasiswa',
             'email' => 'mahasiswa@gmail.com',
+            'id_mahasiswa' => 1,
             'role' => 'mahasiswa',
             'sub_role' => null,
             'email_verified_at' => now(),
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Dosen Biasa',
             'email' => 'dosenbiasa@gmail.com',
+            'id_dosen' => 1,
             'role' => 'dosen',
             'sub_role' => null,
             'email_verified_at' => now(),
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'KPS',
             'email' => 'kps@gmail.com',
+            'id_dosen' => 2,
             'role' => 'dosen',
             'sub_role' => 'KPS',
             'email_verified_at' => now(),

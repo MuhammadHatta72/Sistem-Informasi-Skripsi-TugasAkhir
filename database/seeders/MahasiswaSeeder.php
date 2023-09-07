@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Mahasiswa;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,9 @@ class MahasiswaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Mahasiswa::create([
+            'nim' => '1234567890',
+            'nama' => 'Ridwan',
+        ]);
     }
 }
