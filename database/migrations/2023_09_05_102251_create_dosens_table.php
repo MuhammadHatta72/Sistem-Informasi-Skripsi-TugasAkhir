@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dosens', function (Blueprint $table) {
-            $table->id('id_dosen');
-            $table->integer('user_id')->foreign('id_user')->references('id')->on('users');
+            $table->id();
+            $table->foreignId('id_user')->constrained('users');
             $table->integer('nik');
             $table->string('nama');
             $table->timestamps();

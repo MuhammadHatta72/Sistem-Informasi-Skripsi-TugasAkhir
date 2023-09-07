@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->id('id_proposal');
-            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
-            $table->integer('dosen_id_penguji_proposal')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-            $table->integer('dosen_id_pembimbing_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-            $table->integer('dosen_id_pembimbing_2')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-            $table->integer('jadwal_id')->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
+            $table->foreignId('id_mahasiswa')->constrained('mahasiswas');
+            $table->foreignId('id_dosen_penguji_proposal')->constrained('dosens');
+            $table->foreignId('id_dosen_pembimbing_1')->constrained('dosens');
+            $table->foreignId('id_dosen_pembimbing_2')->constrained('dosens');
+            $table->foreignId('id_jadwal')->constrained('jadwals');
+//            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
+//            $table->integer('dosen_id_penguji_proposal')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+//            $table->integer('dosen_id_pembimbing_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+//            $table->integer('dosen_id_pembimbing_2')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+//            $table->integer('jadwal_id')->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
             $table->string('judul');
             $table->enum(
                 'status',

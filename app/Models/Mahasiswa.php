@@ -10,21 +10,21 @@ class Mahasiswa extends Model
     use HasFactory;
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id_user');
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function outlines()
     {
-        return $this->hasMany(Outline::class, 'mahasiswa_id', 'id_mahasiswa');
+        return $this->hasMany(Outline::class, 'mahasiswa_id');
     }
 
     public function skripsis()
     {
-        return $this->hasMany(Skripsi::class, 'mahasiswa_id', 'id_mahasiswa');
+        return $this->hasMany(Skripsi::class, 'mahasiswa_id');
     }
 
     public function proposals()
     {
-        return $this->hasMany(Proposal::class, 'mahasiswa_id', 'id_mahasiswa');
+        return $this->hasMany(Proposal::class, 'mahasiswa_id');
     }
 }
