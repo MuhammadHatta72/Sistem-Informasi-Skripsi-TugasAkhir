@@ -51,23 +51,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function peminjaman(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Peminjaman::class, 'id_user');
-    }
-
-    public function wewenang(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Wewenang::class, 'id_wewenang');
-    }
-
     public function mahasiswa()
     {
-        return $this->hasOne(Mahasiswa::class, 'user_id', 'id_user');
+        return $this->hasOne(Mahasiswa::class, 'id_user');
     }
 
     public function dosen()
     {
-        return $this->hasOne(Dosen::class, 'user_id', 'id_user');
+        return $this->hasOne(Dosen::class, 'id_user');
     }
 }

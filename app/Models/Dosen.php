@@ -10,42 +10,42 @@ class Dosen extends Model
     use HasFactory;
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id_user');
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function outlines()
     {
-        return $this->hasMany(Outline::class, 'dosen_id_penilai_1', 'id_dosen')
-            ->orWhere('dosen_id_penilai_2', $this->id);
+        return $this->hasMany(Outline::class, 'id_dosen_penilai_1')
+            ->orWhere('id_dosen_penilai_2', $this->id);
     }
 
     public function skripsiPenguji()
     {
-        return $this->hasMany(Skripsi::class, 'dosen_id_penguji_skripsi', 'id_dosen');
+        return $this->hasMany(Skripsi::class, 'id_dosen_penguji_skripsi');
     }
 
     public function skripsiPembimbing1()
     {
-        return $this->hasMany(Skripsi::class, 'dosen_id_pembimbing_1', 'id_dosen');
+        return $this->hasMany(Skripsi::class, 'id_dosen_pembimbing_1');
     }
 
     public function skripsiPembimbing2()
     {
-        return $this->hasMany(Skripsi::class, 'dosen_id_pembimbing_2', 'id_dosen');
+        return $this->hasMany(Skripsi::class, 'id_dosen_pembimbing_2');
     }
 
     public function proposalPenguji()
     {
-        return $this->hasMany(Proposal::class, 'dosen_id_penguji_proposal', 'id_dosen');
+        return $this->hasMany(Proposal::class, 'id_dosen_penguji_proposal');
     }
 
     public function proposalPembimbing1()
     {
-        return $this->hasMany(Proposal::class, 'dosen_id_pembimbing_1', 'id_dosen');
+        return $this->hasMany(Proposal::class, 'id_dosen_pembimbing_1');
     }
 
     public function proposalPembimbing2()
     {
-        return $this->hasMany(Proposal::class, 'dosen_id_pembimbing_2', 'id_dosen');
+        return $this->hasMany(Proposal::class, 'id_dosen_pembimbing_2');
     }
 }

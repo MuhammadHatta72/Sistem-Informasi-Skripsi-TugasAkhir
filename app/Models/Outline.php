@@ -11,17 +11,17 @@ class Outline extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');
     }
 
     public function dosenPenilai1()
     {
-        return $this->belongsTo(Dosen::class, 'dosen_id_penilai_1');
+        return $this->belongsTo(Dosen::class, 'id_dosen_penilai_1');
     }
 
     public function dosenPenilai2()
     {
-        return $this->belongsTo(Dosen::class, 'dosen_id_penilai_2');
+        return $this->belongsTo(Dosen::class, 'id_dosen_penilai_2');
     }
 
     // public function jadwal()

@@ -11,22 +11,22 @@ class Proposal extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id_mahasiswa');
+        return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');
     }
 
     public function dosenPengujiProposal()
     {
-        return $this->belongsTo(Dosen::class, 'dosen_id_penguji_proposal', 'id_dosen');
+        return $this->belongsTo(Dosen::class, 'id_dosen_penguji_proposal');
     }
 
     public function dosenPembimbing1()
     {
-        return $this->belongsTo(Dosen::class, 'dosen_id_pembimbing_1', 'id_dosen');
+        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_1');
     }
 
     public function dosenPembimbing2()
     {
-        return $this->belongsTo(Dosen::class, 'dosen_id_pembimbing_2', 'id_dosen');
+        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_2');
     }
 
     // public function jadwal()
