@@ -1,3 +1,4 @@
+
 <div class="section-body">
     <div class="row">
         <div class="col-xl-12 mb-4">
@@ -74,7 +75,7 @@
                             <label for="dosen1">Dosen Penilai 1</label>
                             <select class="form-control" id="dosen1" name="dosen1">
                                 @foreach ($dosens as $dosen)
-                                    <option value="{{ $dosen->dosen->id }}">{{ $dosen->dosen->nama }}</option>
+                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -82,7 +83,7 @@
                             <label for="dosen2">Dosen Penilai 2</label>
                             <select class="form-control" id="dosen2" name="dosen2">
                                 @foreach ($dosens as $dosen)
-                                    <option value="{{ $dosen->dosen->id }}">{{ $dosen->dosen->nama }}</option>
+                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>
                         </div>

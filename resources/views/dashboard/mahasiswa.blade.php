@@ -64,7 +64,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('outline_mahasiswa.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('outline_mahasiswa.create', ['id' => auth()->user()->id]) }}">Pengajuan</a>
             </li>
             <li>
                 <a class="nav-link" href="{{ route('outline_mahasiswa.index') }}">History</a>

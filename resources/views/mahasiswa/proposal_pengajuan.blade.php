@@ -16,9 +16,9 @@
                         <div class="card-header bg-whitesmoke">
                             <h4>Form Pengajuan Proposal</h4>
                         </div>
-                        {{-- @if (true)
-                            Anda belum memiliki outline yang valid
-                        @else --}}
+{{--                        @if ()--}}
+{{--                            Anda belum memiliki outline yang valid--}}
+{{--                        @else--}}
                         <!-- display any success message -->
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -72,7 +72,7 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-                        {{-- @endif --}}
+{{--                         @endif--}}
                     </a>
                 </div>
             </div>

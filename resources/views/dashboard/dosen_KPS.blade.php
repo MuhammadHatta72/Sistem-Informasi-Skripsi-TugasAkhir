@@ -25,10 +25,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('proposal.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('proposal_kps.index') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('proposal.index') }}">History</a>
+                <a class="nav-link" href="{{ route('proposal_kps.index') }}">History</a>
             </li>
         </ul>
     </li>

@@ -70,14 +70,13 @@
                                         <th>Judul</th>
                                         <th>Action</th>
                                     </tr>
-                                    </tr>
                                     @forelse($proposals as $proposal)
                                         <tr>
                                             <td>{{ $proposal->mahasiswa->nama }}</td>
                                             <td>{{ $proposal->judul }}</td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $proposal->id }}">
+                                                    type="button" data-id="{{ $proposal->id_proposal }}">
                                                     <i class="fas fa-eye"></i> View
                                                 </button>
                                             </td>
@@ -105,19 +104,27 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $('.viewBtn').click(function() {
-            var proposalId = $(this).data('id');
-
-            $.ajax({
-                url: '/proposal/kps/' + proposalId, // Sesuaikan rute dengan yang benar
-                type: 'GET',
-                success: function(data) {
-                    $('#modalContent').html(data);
-                    $('#detailModal').modal('show');
-                },
-                error: function() {
-                    alert('Error fetching proposal detail');
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            });
+
+            $('.viewBtn').click(function () {
+                var proposalId = $(this).data('id');
+
+                $.ajax({
+                    url: '/proposal_kps/1',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#modalContent').html(data);
+                        $('#detailModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Error fetching proposal detail');
+                    }
+                });
             });
         });
     </script>

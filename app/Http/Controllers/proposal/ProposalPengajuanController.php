@@ -15,7 +15,7 @@ class ProposalPengajuanController extends Controller
         return view('mahasiswa.proposal_history', compact('proposals'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         return view('mahasiswa.proposal_pengajuan');
     }

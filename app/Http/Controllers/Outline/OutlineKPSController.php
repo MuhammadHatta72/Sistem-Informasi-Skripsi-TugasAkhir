@@ -101,7 +101,6 @@ class OutlineKPSController extends Controller
             ]);
             $outline = Outline::find($request->id);
 
-
             if ($request->status == 'Revisi') {
                 $outline->status = 'Diterima';
                 $dosen1_old = User::where('id_dosen', $outline->id_dosen_penilai_1)->first();

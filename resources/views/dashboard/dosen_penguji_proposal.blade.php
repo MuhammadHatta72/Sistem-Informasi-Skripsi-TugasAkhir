@@ -10,10 +10,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('proposal.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('proposal_dosen_penguji.create') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('proposal.index') }}">History</a>
+                <a class="nav-link" href="{{ route('proposal_dosen_penguji.index') }}">History</a>
             </li>
         </ul>
     </li>

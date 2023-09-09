@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\proposal;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 use App\Models\Proposal;
 use App\Models\User;
@@ -21,7 +22,7 @@ class ProposalKPSController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
-        $dosens = User::with('dosen')->where('sub_role', null)->where('role', 'dosen')->get();
+        $dosens = Dosen::join('users', 'users.id_dosen', '=', 'dosens.id')->where('sub_role', '')->orWhere('sub_role', null)->get();
         return view('dosen.KPS.detail_proposal', compact('proposal', 'dosens'));
     }
 
