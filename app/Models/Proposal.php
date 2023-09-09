@@ -9,6 +9,22 @@ class Proposal extends Model
 {
     use HasFactory;
 
+    protected $table = 'proposals';
+    protected $fillable = [
+        'id_mahasiswa',
+        'id_dosen_penguji_proposal',
+        'id_dosen_pembimbing_1',
+        'id_dosen_pembimbing_2',
+        'id_jadwal',
+        'judul',
+        'data1',
+        'data2',
+        'data3',
+        'status',
+        'nilai1',
+        'revisi',
+    ];
+
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');

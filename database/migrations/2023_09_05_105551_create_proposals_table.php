@@ -13,17 +13,20 @@ return new class extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->id('id_proposal');
-            $table->foreignId('id_mahasiswa')->constrained('mahasiswas');
-            $table->foreignId('id_dosen_penguji_proposal')->constrained('dosens');
-            $table->foreignId('id_dosen_pembimbing_1')->constrained('dosens');
-            $table->foreignId('id_dosen_pembimbing_2')->constrained('dosens');
-            $table->foreignId('id_jadwal')->constrained('jadwals');
-//            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
-//            $table->integer('dosen_id_penguji_proposal')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-//            $table->integer('dosen_id_pembimbing_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-//            $table->integer('dosen_id_pembimbing_2')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-//            $table->integer('jadwal_id')->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
+            $table->unsignedBigInteger('id_mahasiswa');
+            $table->unsignedBigInteger('id_dosen_penguji_proposal')->nullable();
+            $table->unsignedBigInteger('id_dosen_pembimbing_1')->nullable();
+            $table->unsignedBigInteger('id_dosen_pembimbing_2')->nullable();
+            $table->foreignId('id_jadwal')->nullable();
+            //            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
+            //            $table->integer('dosen_id_penguji_proposal')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+            //            $table->integer('dosen_id_pembimbing_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+            //            $table->integer('dosen_id_pembimbing_2')->foreign('id_dosen')->references('id_dosen')->on('dosens');
+            //            $table->integer('jadwal_id')->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
             $table->string('judul');
+            $table->text('data1');
+            $table->text('data2');
+            $table->text('data3');
             $table->enum(
                 'status',
                 [
@@ -33,8 +36,8 @@ return new class extends Migration
                     'ditolak',
                 ]
             )->default('dikirim');
-            $table->integer('nilai1');
-            $table->string('revisi');
+            $table->integer('nilai1')->nullable();
+            $table->string('revisi')->nullable();
             $table->timestamps();
         });
     }
