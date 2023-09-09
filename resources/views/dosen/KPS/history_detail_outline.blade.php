@@ -19,7 +19,41 @@
                     @csrf
                     <input type="hidden" name="status" id="status" value="">
                     <input type="hidden" name="id" value="{{ $outline->id }}">
-
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12">
+                            <label for="nama_mahasiswa" class="form-label">Nama Mahasiswa</label>
+                            <input type="text" class="form-control @error('nama_mahasiswa') is-invalid @enderror"
+                                   id="nama_mahasiswa" name="nama_mahasiswa" value="{{ $outline->mahasiswa->nama }}"
+                                   readonly>
+                            @error('nama_mahasiswa')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6 col-sm-4">
+                            <label for="dosen1_old" class="form-label">Dosen Penilai 1</label>
+                            <input type="text" class="form-control @error('dosen1_old') is-invalid @enderror"
+                                   id="dosen1_old" name="dosen1_old" value="{{ $outline->dosenPenilai1->nama }}" readonly>
+                            @error('dosen1_old')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="col-lg-6 col-sm-4">
+                            <label for="dosen2_old" class="form-label">Dosen Penilai 2</label>
+                            <input type="text" class="form-control @error('dosen2_old') is-invalid @enderror"
+                                   id="dosen2_old" name="dosen2_old" value="{{ $outline->dosenPenilai2->nama }}" readonly>
+                            @error('dosen2_old')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <label for="judul" class="form-label">Judul Outline</label>
@@ -73,7 +107,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-6 col-sm-4">
-                            <label for="dosen1">Dosen Penilai 1</label>
+                            <label for="dosen1">Dosen Penilai 1 Baru</label>
                             <select class="form-control" id="dosen1" name="dosen1">
                                 @foreach($dosens as $dosen)
                                     <option
@@ -82,7 +116,7 @@
                             </select>
                         </div>
                         <div class="col-lg-6 col-sm-4">
-                            <label for="dosen2">Dosen Penilai 2</label>
+                            <label for="dosen2">Dosen Penilai 2 Baru</label>
                             <select class="form-control" id="dosen2" name="dosen2">
                                 @foreach($dosens as $dosen)
                                     <option
@@ -91,8 +125,12 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
+                    @if($outline->status == 'Proses')
+                        <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
+                        <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
+                    @else
+                        <button type="button" class="btn btn-primary" onclick="setStatus('Revisi')">Edit</button>
+                    @endif
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>

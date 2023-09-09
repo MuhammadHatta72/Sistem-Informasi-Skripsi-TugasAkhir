@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Dosen Biasa',
             'email' => 'dosenbiasa@gmail.com',
-            'id_dosen' => 1,
+            'id_dosen' => null,
             'role' => 'dosen',
             'sub_role' => null,
             'email_verified_at' => now(),
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'KPS',
             'email' => 'kps@gmail.com',
-            'id_dosen' => 2,
+            'id_dosen' => null,
             'role' => 'dosen',
             'sub_role' => 'KPS',
             'email_verified_at' => now(),
@@ -124,6 +124,51 @@ class UserSeeder extends Seeder
             'name' => 'siti',
             'email' => 'dosensiti@gmail.com',
             'id_dosen' => 5,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'rudi',
+            'email' => 'dosenrudi@gmail.com',
+            'id_dosen' => 6,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'rina',
+            'email' => 'rinadosen@gmail.com',
+            'id_dosen' => 7,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'roni',
+            'email' => 'ronidosen@gmail.com',
+            'id_dosen' => 8,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'doni',
+            'email' => 'donidosen@gmail.com',
+            'id_dosen' => 9,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'dini',
+            'email' => 'dinidosen@gmail.com',
+            'id_dosen' => 10,
             'role' => 'dosen',
             'sub_role' => null,
             'email_verified_at' => now(),

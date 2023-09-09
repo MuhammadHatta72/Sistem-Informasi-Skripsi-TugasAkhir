@@ -87,15 +87,12 @@
                                                 @endif
                                             </td>
                                             <td class="d-flex">
-                                                <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn w-25"
-                                                        type="button" data-id="{{ $outline->id }}">
-                                                    <i class="fas fa-eye"></i> View
-                                                </button>
-                                                <a href="{{route('outline_KPS.edit', $outline) }}">
-                                                    <button class="badge bg-warning border-0 my-3 mx-3 text-white w-100" type="button">
+                                                @if($outline->status != 'Proses')
+                                                    <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn w-25"
+                                                            type="button" data-id="{{ $outline->id }}">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </button>
-                                                </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty

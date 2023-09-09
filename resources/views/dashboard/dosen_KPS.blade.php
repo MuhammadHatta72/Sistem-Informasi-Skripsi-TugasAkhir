@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ route('outline_KPS.index') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('outline.history') }}">History</a>
+                <a class="nav-link" href="{{ route('outline_KPS.history') }}">History</a>
             </li>
         </ul>
     </li>
