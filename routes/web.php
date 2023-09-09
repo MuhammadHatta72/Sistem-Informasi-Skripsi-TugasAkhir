@@ -57,9 +57,11 @@ Route::middleware('can:dosen')->group(function () {
         Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
         Route::resource('outline_KPS', OutlineKPSController::class);
         Route::post('outline_validasi', [OutlineKPSController::class, 'validasi'])->name('outline.validasi');
-        Route::get('/proposal/kps', [ProposalKPSController::class, 'index'])->name('proposal_kps.index');
         Route::get('/proposal/kps/show/{id}', [ProposalKPSController::class, 'show'])->name('proposal_kps.show');
         Route::post('/proposal/kps/validasi', [ProposalKPSController::class, 'validasi'])->name('proposal_kps.validasi');
+        Route::get('outline_history', [OutlineKPSController::class, 'history'])->name('outline.history');
+        Route::get('/proposal_kps', [ProposalKPSController::class, 'index'])->name('proposal_kps.index');
+        Route::post('/proposal_kps/{id}', [ProposalKPSController::class, 'show'])->name('proposal_kps.show');
     });
     Route::middleware('can:dosen_penilai')->group(function () {
         Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');

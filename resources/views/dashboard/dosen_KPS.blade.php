@@ -13,9 +13,9 @@
             <li>
                 <a class="nav-link" href="{{ route('outline_KPS.index') }}">Pengajuan</a>
             </li>
-            {{--            <li> --}}
-            {{--                <a class="nav-link" href="{{ route('outline.index') }}">History</a> --}}
-            {{--            </li> --}}
+            <li>
+                <a class="nav-link" href="{{ route('outline.history') }}">History</a>
+            </li>
         </ul>
     </li>
     <li
@@ -25,7 +25,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('proposal_kps.index') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('proposal.create') }}">Pengajuan</a>
             </li>
             <li>
                 <a class="nav-link" href="{{ route('proposal.index') }}">History</a>

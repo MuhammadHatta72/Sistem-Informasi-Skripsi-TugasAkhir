@@ -76,7 +76,7 @@
                             <label for="dosen1">Dosen Penilai 1</label>
                             <select class="form-control" id="dosen1" name="dosen1">
                                 @foreach($dosens as $dosen)
-                                    <option value="{{ $dosen->dosen->id }}">{{ $dosen->dosen->nama }}</option>
+                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -84,13 +84,17 @@
                             <label for="dosen2">Dosen Penilai 2</label>
                             <select class="form-control" id="dosen2" name="dosen2">
                                 @foreach($dosens as $dosen)
-                                    <option value="{{ $dosen->dosen->id }}">{{ $dosen->dosen->nama }}</option>
+                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
+                    @if($outline->status == 'Proses')
+                        <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
+                        <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
+                    @else
+                        <button type="button" class="btn btn-primary" onclick="setStatus('Revisi')">Edit</button>
+                    @endif
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>
