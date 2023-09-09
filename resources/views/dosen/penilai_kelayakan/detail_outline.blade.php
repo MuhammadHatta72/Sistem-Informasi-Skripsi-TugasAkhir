@@ -15,47 +15,23 @@
                     </div>
                 @endif
                 <!-- create a form to submit the outline data -->
-                <form method="POST" action="{{ route('outline_KPS.validasi') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('outline_dosen_penilai.validasi') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="status" id="status" value="">
                     <input type="hidden" name="id" value="{{ $outline->id }}">
+
                     <div class="row mb-3">
-                        <div class="col-lg-12 col-sm-12">
-                            <label for="nama_mahasiswa" class="form-label">Nama Mahasiswa</label>
-                            <input type="text" class="form-control @error('nama_mahasiswa') is-invalid @enderror"
-                                   id="nama_mahasiswa" name="nama_mahasiswa" value="{{ $outline->mahasiswa->nama }}"
-                                   readonly>
-                            @error('nama_mahasiswa')
+                        <div class="col-lg-6 col-sm-6">
+                            <label for="nama" class="form-label">Nama Mahasiswa</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                   id="nama" name="nama" value="{{ $outline->mahasiswa->nama }}" readonly>
+                            @error('nama')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-6 col-sm-4">
-                            <label for="dosen1_old" class="form-label">Dosen Penilai 1</label>
-                            <input type="text" class="form-control @error('dosen1_old') is-invalid @enderror"
-                                   id="dosen1_old" name="dosen1_old" value="{{ $outline->dosenPenilai1->nama }}" readonly>
-                            @error('dosen1_old')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="col-lg-6 col-sm-4">
-                            <label for="dosen2_old" class="form-label">Dosen Penilai 2</label>
-                            <input type="text" class="form-control @error('dosen2_old') is-invalid @enderror"
-                                   id="dosen2_old" name="dosen2_old" value="{{ $outline->dosenPenilai2->nama }}" readonly>
-                            @error('dosen2_old')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-12 col-sm-12">
+                        <div class="col-lg-6 col-sm-6">
                             <label for="judul" class="form-label">Judul Outline</label>
                             <input type="text" class="form-control @error('judul') is-invalid @enderror"
                                    id="judul" name="judul" value="{{ $outline->judul }}" readonly>
@@ -105,32 +81,41 @@
                             @enderror
                         </div>
                     </div>
+                    <hr>
                     <div class="row mb-3">
-                        <div class="col-lg-6 col-sm-4">
-                            <label for="dosen1">Dosen Penilai 1 Baru</label>
-                            <select class="form-control" id="dosen1" name="dosen1">
-                                @foreach($dosens as $dosen)
-                                    <option
-                                        value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $outline->id_dosen_penilai_1 ? 'selected' : '' }}>{{ $dosen->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-lg-6 col-sm-4">
-                            <label for="dosen2">Dosen Penilai 2 Baru</label>
-                            <select class="form-control" id="dosen2" name="dosen2">
-                                @foreach($dosens as $dosen)
-                                    <option
-                                        value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $outline->id_dosen_penilai_2 ? 'selected' : '' }}>{{ $dosen->nama }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-lg-12 col-sm-12">
+                            <label for="nilai" class="form-label">Nilai</label>
+                            <input type="number" class="form-control @error('nilai') is-invalid @enderror"
+                                   id="nilai" name="nilai" value="{{ $outline->nilai }}">
+                            @error('nilai')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
-                    @if($outline->status == 'Proses')
-                        <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
-                        <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
-                    @else
-                        <button type="button" class="btn btn-primary" onclick="setStatus('Revisi')">Edit</button>
-                    @endif
+{{--                    <div class="row mb-3">--}}
+{{--                        <div class="col-lg-6 col-sm-4">--}}
+{{--                            <label for="dosen1">Dosen Penilai 1</label>--}}
+{{--                            <select class="form-control" id="dosen1" name="dosen1">--}}
+{{--                                @foreach($dosens as $dosen)--}}
+{{--                                    <option--}}
+{{--                                        value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $outline->id_dosen_penilai_1 ? 'selected' : '' }}>{{ $dosen->nama }}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-6 col-sm-4">--}}
+{{--                            <label for="dosen2">Dosen Penilai 2</label>--}}
+{{--                            <select class="form-control" id="dosen2" name="dosen2">--}}
+{{--                                @foreach($dosens as $dosen)--}}
+{{--                                    <option--}}
+{{--                                        value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $outline->id_dosen_penilai_2 ? 'selected' : '' }}>{{ $dosen->nama }}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <button type="button" class="btn btn-primary" onclick="setStatus('Lulus')">Lulus</button>
+                    <button type="button" class="btn btn-danger" onclick="setStatus('Tidak Lulus')">Tidak Lulus</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>

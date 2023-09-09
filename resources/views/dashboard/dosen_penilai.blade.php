@@ -10,10 +10,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('outline.create') }}">Pengajuan</a>
-            </li>
-            <li>
-                <a class="nav-link" href="{{ route('outline.index') }}">History</a>
+                <a class="nav-link" href="{{ route('outline_dosen_penilai.index') }}">Penilaian</a>
             </li>
         </ul>
     </li>

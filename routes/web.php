@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Outline\OutlineDosenPenilaiKelayakanController;
 use App\Http\Controllers\Outline\OutlineKPSController;
 use App\Http\Controllers\Outline\OutlineMahasiswaController;
 use App\Http\Controllers\OutlineController;
@@ -57,7 +58,7 @@ Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:KPS')->group(function () {
         Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
         Route::resource('outline_KPS', OutlineKPSController::class);
-        Route::post('outline_validasi', [OutlineKPSController::class, 'validasi'])->name('outline.validasi');
+        Route::post('outline_KPS_validasi', [OutlineKPSController::class, 'validasi'])->name('outline_KPS.validasi');
 //        Route::get('/proposal/kps/show/{id}', [ProposalKPSController::class, 'show'])->name('proposal_kps.show');
         Route::post('/proposal/kps/validasi', [ProposalKPSController::class, 'validasi'])->name('proposal_kps.validasi');
         Route::get('outline_history', [OutlineKPSController::class, 'history'])->name('outline_KPS.history');
@@ -66,6 +67,9 @@ Route::middleware('can:dosen')->group(function () {
     });
     Route::middleware('can:dosen_penilai')->group(function () {
         Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');
+        Route::resource('outline_dosen_penilai', OutlineDosenPenilaiKelayakanController::class);
+        Route::post('outline_dosen_penilai_validasi', [OutlineDosenPenilaiKelayakanController::class, 'validasi'])->name('outline_dosen_penilai.validasi');
+
     });
     Route::middleware('can:dosen_penguji_proposal')->group(function () {
         Route::view('dashboard-dosen_penguji_proposal', 'dashboard.dosen_penguji_proposal')->name('dashboard.dosen_penguji_proposal');

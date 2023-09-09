@@ -15,7 +15,7 @@
                     </div>
                 @endif
                 <!-- create a form to submit the outline data -->
-                <form method="POST" action="{{ route('outline.validasi') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('outline_KPS.validasi') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="status" id="status" value="">
                     <input type="hidden" name="id" value="{{ $outline->id }}">

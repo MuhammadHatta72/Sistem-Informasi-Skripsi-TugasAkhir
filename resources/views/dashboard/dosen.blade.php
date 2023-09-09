@@ -12,7 +12,6 @@
             <a href="{{ route('home') }}" class="dropdown-item has-icon text-success">
                 <i class="fas fa-home"></i> Kembali ke Dashboard Utama
             </a>
-            <div class="dropdown-divider"></div>
         @endif
 
         @if ($subRole == 'KPS' && $currentRoute != 'dashboard.kps' && $currentRoute == 'home')
@@ -35,8 +34,8 @@
             <a href="{{ route('dashboard.dosen_penguji_skripsi') }}" class="dropdown-item has-icon text-success">
                 <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Penguji Skripsi
             </a>
-            <div class="dropdown-divider"></div>
         @endif
+        <div class="dropdown-divider"></div>
     @endif
     @parent
 @endsection

@@ -3,9 +3,14 @@
 @section('title', 'Dashboard Dosen')
 
 @section('sidebar')
-    @parent
+    <li class="menu-header">Menu</li>
+    <li class="nav-item {{ request()->is('dashboard-kps') ? 'active' : '' }}">
+        <a href="{{ route('dashboard.kps') }}" class="nav-link">
+            <i class="fas fa-poll-h"></i><span>Dashboard</span>
+        </a>
+    </li>
     <li
-        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
+        class="nav-item dropdown {{ request()->is('outline*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Outline</span>
         </a>
@@ -19,7 +24,7 @@
         </ul>
     </li>
     <li
-        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
+        class="nav-item dropdown {{ request()->is('proposal*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Proposal</span>
         </a>
@@ -33,7 +38,7 @@
         </ul>
     </li>
     <li
-        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
+        class="nav-item dropdown {{ request()->is('skripsi*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
         </a>

@@ -38,6 +38,8 @@ return new class extends Migration
                     'Proses',
                     'Diterima',
                     'Ditolak',
+                    'Lulus',
+                    'Tidak Lulus',
                 ]
             )->default('Proses');
              $table->integer('nilai1')->nullable();

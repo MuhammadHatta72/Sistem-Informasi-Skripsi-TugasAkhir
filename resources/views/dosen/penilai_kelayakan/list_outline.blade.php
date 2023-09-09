@@ -1,6 +1,6 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.dosen_penilai')
 
-@section('title', 'Dashboard Dosen')
+@section('title', 'Dashboard Dosen Penilai Kelayakan')
 
 @section('content')
     <!-- Modal -->
@@ -23,7 +23,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>History Pengajuan Outline</h1>
+            <h1>Penilaian Outline</h1>
         </div>
 
         @if ($errors->any())
@@ -48,7 +48,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data History Pengajuan Outline</h4>
+                            <h4>Data Outline</h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -70,29 +70,17 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Judul</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     @forelse($outlines as $outline)
                                         <tr>
                                             <td>{{ $outline->mahasiswa->nama }}</td>
                                             <td>{{ $outline->judul }}</td>
-                                            <td>
-                                                @if($outline->status == 'Proses')
-                                                    <span class="badge bg-warning text-white w-50">Proses</span>
-                                                @elseif($outline->status == 'Diterima')
-                                                    <span class="badge bg-success text-white w-50">Diterima</span>
-                                                @elseif($outline->status == 'Ditolak')
-                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
-                                                @endif
-                                            </td>
-                                            <td class="d-flex">
-                                                @if($outline->status != 'Proses')
-                                                    <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn w-50"
-                                                            type="button" data-id="{{ $outline->id }}">
-                                                        <i class="fas fa-edit"></i> Edit Dosen
-                                                    </button>
-                                                @endif
+                                            <td class="d-flex justify-content-center">
+                                                <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
+                                                        type="button" data-id="{{ $outline->id }}">
+                                                    <i class="fas fa-eye"></i> View
+                                                </button>
                                             </td>
                                         </tr>
                                     @empty
@@ -128,7 +116,7 @@
                 var outlineId = $(this).data('id');
 
                 $.ajax({
-                    url: '/outline_KPS/' + outlineId,
+                    url: '/outline_dosen_penilai/' + outlineId,
                     type: 'GET',
                     success: function (data) {
                         $('#modalContent').html(data);
