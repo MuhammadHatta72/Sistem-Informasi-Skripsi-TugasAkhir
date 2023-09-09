@@ -51,7 +51,15 @@
                                             <td>{{ $outline->bab1 }}</td>
                                             <td>{{ $outline->bab2 }}</td>
                                             <td>{{ $outline->bab3 }}</td>
-                                            <td>{{ $outline->status }}</td>
+                                            <td>
+                                                @if($outline->status == 'Proses')
+                                                    <span class="badge bg-warning text-white">Proses</span>
+                                                @elseif($outline->status == 'Diterima')
+                                                    <span class="badge bg-success text-white">Diterima</span>
+                                                @elseif($outline->status == 'Ditolak')
+                                                    <span class="badge bg-danger text-white">Ditolak</span>
+                                                @endif
+                                            </td>
                                             <td class="d-flex justify-content-center">
                                                 @if($outline->status == 'Proses' || $outline->status == 'Ditolak')
                                                     <a href="{{route('outline_mahasiswa.edit', $outline) }}">
