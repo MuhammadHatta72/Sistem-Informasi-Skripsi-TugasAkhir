@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Outline\OutlineKPSController;
 use App\Http\Controllers\Outline\OutlineMahasiswaController;
 use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\ProposalController;
@@ -52,8 +53,8 @@ Route::middleware('can:admin')->group(function () {
 Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:KPS')->group(function () {
         Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
-        Route::get('/kps_outline', [KPSController::class, 'index'])->name('KPSoutline.index');
-        Route::get('/outline_kps', [OutlineController::class, 'index'])->name('outline_kps.index');
+        Route::resource('outline_KPS', OutlineKPSController::class);
+        Route::post('outline_validasi', [OutlineKPSController::class, 'validasi'])->name('outline.validasi');
     });
     Route::middleware('can:dosen_penilai')->group(function () {
         Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');

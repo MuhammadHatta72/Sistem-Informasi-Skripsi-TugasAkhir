@@ -10,7 +10,7 @@ class Dosen extends Model
     use HasFactory;
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasOne(User::class, 'id_dosen');
     }
 
     public function outlines()

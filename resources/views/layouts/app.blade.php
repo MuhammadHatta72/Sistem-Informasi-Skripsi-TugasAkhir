@@ -59,33 +59,10 @@
 <!-- JS Libraies -->
 @stack('customJS')
 
+
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
-<script src="{{ asset('assets/js/dataTables.js') }}"></script>
-<script src="{{ asset('assets/js/dataPicker.js') }}"></script>
-<script src="{{ asset('assets/js/scriptAdmin.js') }}"></script>
-
-<!-- Page Specific JS File -->
-<script>
-    // Mendapatkan elemen dropdown
-    var wewenang = document.getElementById('wewenang');
-    // Mendapatkan elemen form tambahan
-    var additionalForm = document.getElementById('additional-form');
-
-    // Event listener untuk perubahan nilai dropdown
-    wewenang.addEventListener('change', function() {
-        // Jika nilai selected value adalah 'option2', tampilkan form tambahan
-        if (wewenang.value === '9') {
-            additionalForm.style.display = 'flex';
-        } else {
-            additionalForm.style.display = 'none';
-        }
-    });
-    if (wewenang.value === '9') {
-        additionalForm.style.display = 'flex';
-    }
-</script>
 </body>
 
 </html>
