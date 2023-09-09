@@ -15,11 +15,23 @@ class DosenSeeder extends Seeder
     {
         Dosen::create([
             'nik' => '1234567890',
-            'nama' => 'Soekarno',
+            'nama' => 'Joko',
         ]);
         Dosen::create([
             'nik' => '1234567891',
-            'nama' => 'Soeharto',
+            'nama' => 'Supri',
+        ]);
+        Dosen::create([
+            'nik' => '1234567892',
+            'nama' => 'Budi',
+        ]);
+        Dosen::create([
+            'nik' => '1234567893',
+            'nama' => 'Susi',
+        ]);
+        Dosen::create([
+            'nik' => '1234567894',
+            'nama' => 'Siti',
         ]);
     }
 }

@@ -64,10 +64,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('outline_pengajuan') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('outline_mahasiswa.create') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('outline.index') }}">History</a>
+                <a class="nav-link" href="{{ route('outline_mahasiswa.index') }}">History</a>
             </li>
         </ul>
     </li>

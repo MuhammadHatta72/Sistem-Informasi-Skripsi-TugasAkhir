@@ -82,5 +82,52 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password')
         ]);
+
+//      Seeder untuk dosen
+        User::create([
+            'name' => 'joko',
+            'email' => 'dosenjoko@gmail.com',
+            'id_dosen' => 1,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'supri',
+            'email' => 'dosensupri@gmail.com',
+            'id_dosen' => 2,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'budi',
+            'email' => 'dosenbudi@gmail.com',
+            'id_dosen' => 3,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'susi',
+            'email' => 'dosensusi@gmail.com',
+            'id_dosen' => 4,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'name' => 'siti',
+            'email' => 'dosensiti@gmail.com',
+            'id_dosen' => 5,
+            'role' => 'dosen',
+            'sub_role' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password')
+        ]);
     }
 }

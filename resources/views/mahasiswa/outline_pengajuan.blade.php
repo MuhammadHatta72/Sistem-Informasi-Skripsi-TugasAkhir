@@ -35,7 +35,7 @@
                                 </div>
                             @endif
                             <!-- create a form to submit the outline data -->
-                            <form method="POST" action="{{ route('outline.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('outline_mahasiswa.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="judul" class="form-label">Judul Outline</label>

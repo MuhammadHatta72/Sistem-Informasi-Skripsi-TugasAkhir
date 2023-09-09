@@ -35,14 +35,13 @@ return new class extends Migration
             $table->enum(
                 'status',
                 [
-                    'dikirim',
-                    'diproses',
-                    'diterima',
-                    'ditolak',
+                    'Proses',
+                    'Diterima',
+                    'Ditolak',
                 ]
-            )->default('dikirim');
-            // $table->integer('nilai1');
-            // $table->integer('nilai2');
+            )->default('Proses');
+             $table->integer('nilai1')->nullable();
+             $table->integer('nilai2')->nullable();
             $table->timestamps();
         });
     }
