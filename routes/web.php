@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Outline\OutlineMahasiswaController;
 use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\SkripsiController;
@@ -69,7 +70,7 @@ Route::middleware('can:dosen')->group(function () {
 });
 
 Route::middleware('can:mahasiswa')->group(function () {
-    Route::resource('outline', OutlineController::class);
+    Route::resource('outline_mahasiswa', OutlineMahasiswaController::class);
     Route::resource('proposal', ProposalController::class);
     Route::resource('skripsi', SkripsiController::class);
     Route::post('/outline_pengajuan', [OutlineController::class, 'store'])->name('outline.store');
