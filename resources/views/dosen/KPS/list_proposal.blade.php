@@ -1,12 +1,40 @@
-@extends('dashboard.mahasiswa')
+@extends('dashboard.dosen_KPS')
 
-@section('title', 'History Proposal')
+@section('title', 'Daftar Pengajuan Proposal')
 
 @section('content')
+    <!-- Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Proposal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="section">
         <div class="section-header">
-            <h1>History Pengajuan Proposal</h1>
+            <h1>Daftar Pengajuan Proposal</h1>
         </div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @if (session()->has('success'))
             <div class="alert alert-success col-lg-12" role="alert">
                 {{ session('success') }}
@@ -18,7 +46,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data History Pengajuan Proposal</h4>
+                            <h4>Data Pengajuan Proposal</h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -38,38 +66,20 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
+                                        <th>Nama</th>
                                         <th>Judul</th>
-                                        <th>Data 1</th>
-                                        <th>Data 2</th>
-                                        <th>Data 3</th>
-                                        <th>Status</th>
                                         <th>Action</th>
+                                    </tr>
                                     </tr>
                                     @forelse($proposals as $proposal)
                                         <tr>
+                                            <td>{{ $proposal->mahasiswa->nama }}</td>
                                             <td>{{ $proposal->judul }}</td>
-                                            <td>{{ $proposal->data1 }}</td>
-                                            <td>{{ $proposal->data2 }}</td>
-                                            <td>{{ $proposal->data3 }}</td>
-                                            <td>{{ $proposal->status }}</td>
                                             <td class="d-flex justify-content-center">
-                                                @if ($proposal->status == 'Proses' || $proposal->status == 'Ditolak')
-                                                    <a href="{{ route('proposal_mahasiswa.edit', $proposal) }}">
-                                                        <button class="badge bg-warning border-0 my-3 mx-3 text-white"
-                                                            type="button">
-                                                            <i class="fas fa-edit"></i> Edit
-                                                        </button>
-                                                    </a>
-                                                    <form action="{{ route('proposal_mahasiswa.destroy', $proposal) }}"
-                                                        method="POST" class="d-inline">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button class="badge bg-danger border-0 my-3 mx-3 text-white"
-                                                            onclick="return confirm('Yakin Menghapus Pengajuan ?')">
-                                                            <i class="fas fa-trash"></i> Delete
-                                                        </button>
-                                                    </form>
-                                                @endif
+                                                <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
+                                                    type="button" data-id="{{ $proposal->id }}">
+                                                    <i class="fas fa-eye"></i> View
+                                                </button>
                                             </td>
                                         </tr>
                                     @empty
@@ -77,6 +87,7 @@
                                             <td colspan="5" class="text-center">Tidak ada data</td>
                                         </tr>
                                     @endforelse
+
                                 </table>
                             </div>
                             <div class="float-right">
@@ -92,4 +103,30 @@
             </div>
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.viewBtn').click(function() {
+                var proposalId = $(this).data('id');
+
+                $.ajax({
+                    url: '/proposal/kps/show/' + proposalId, // Sesuaikan rute dengan yang benar
+                    type: 'GET',
+                    success: function(data) {
+                        $('#modalContent').html(data);
+                        $('#detailModal').modal('show');
+                    },
+                    error: function() {
+                        alert('Error fetching proposal detail');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
