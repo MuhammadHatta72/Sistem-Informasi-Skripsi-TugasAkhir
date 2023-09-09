@@ -73,7 +73,4 @@ Route::middleware('can:mahasiswa')->group(function () {
     Route::resource('outline_mahasiswa', OutlineMahasiswaController::class);
     Route::resource('proposal', ProposalController::class);
     Route::resource('skripsi', SkripsiController::class);
-    Route::post('/outline_pengajuan', [OutlineController::class, 'store'])->name('outline.store');
-    Route::view('mahasiswa.outline_pengajuan', 'mahasiswa.outline_pengajuan')->name('outline_pengajuan');
-    Route::get('/mahasiswa_outline', [OutlineController::class, 'index'])->name('mahasiswa_outline.index');
 });

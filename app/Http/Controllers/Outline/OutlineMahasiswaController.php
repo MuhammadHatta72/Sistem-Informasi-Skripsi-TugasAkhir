@@ -15,7 +15,8 @@ class OutlineMahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $outlines = Outline::where('id_mahasiswa', auth()->user()->mahasiswa->id)->paginate(5);
+        return view('mahasiswa.outline_history', compact('outlines'));
     }
 
     /**
@@ -23,7 +24,7 @@ class OutlineMahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa.outline_pengajuan');
     }
 
     /**
@@ -31,7 +32,25 @@ class OutlineMahasiswaController extends Controller
      */
     public function store(StoreOutlineMahasiswaRequest $request)
     {
-        //
+        $request->validated([
+            'judul' => 'required|string|max:255',
+            'bab1' => 'required|string',
+            'bab2' => 'required|string',
+            'bab3' => 'required|string',
+        ]);
+
+        $outline = new Outline();
+        $outline->id_mahasiswa = auth()->user()->mahasiswa->id;
+        $outline->judul = $request->judul;
+        $outline->id_dosen_penilai_1 = null;
+        $outline->id_dosen_penilai_2 = null;
+        $outline->id_jadwal = null;
+        $outline->bab1 = $request->bab1;
+        $outline->bab2 = $request->bab2;
+        $outline->bab3 = $request->bab3;
+        $outline->save();
+
+        return redirect(route('outline_mahasiswa.index'))->with('success', 'Outline berhasil diajukan!');
     }
 
     /**
