@@ -93,7 +93,7 @@
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-                                        {{-- {{ $proposals->withQueryString()->links() }} --}}
+                                        {{ $proposals->withQueryString()->links() }}
                                     </ul>
                                 </nav>
                             </div>
@@ -105,27 +105,19 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        $('.viewBtn').click(function() {
+            var proposalId = $(this).data('id');
+
+            $.ajax({
+                url: '/proposal/kps/' + proposalId, // Sesuaikan rute dengan yang benar
+                type: 'GET',
+                success: function(data) {
+                    $('#modalContent').html(data);
+                    $('#detailModal').modal('show');
+                },
+                error: function() {
+                    alert('Error fetching proposal detail');
                 }
-            });
-
-            $('.viewBtn').click(function() {
-                var proposalId = $(this).data('id');
-
-                $.ajax({
-                    url: '/proposal/kps/show/' + proposalId, // Sesuaikan rute dengan yang benar
-                    type: 'GET',
-                    success: function(data) {
-                        $('#modalContent').html(data);
-                        $('#detailModal').modal('show');
-                    },
-                    error: function() {
-                        alert('Error fetching proposal detail');
-                    }
-                });
             });
         });
     </script>
