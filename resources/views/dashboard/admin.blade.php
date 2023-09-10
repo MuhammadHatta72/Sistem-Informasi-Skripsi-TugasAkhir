@@ -4,7 +4,7 @@
 
 @section('sidebar')
     @parent
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+    {{-- <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Jadwal</span>
         </a>
@@ -32,10 +32,15 @@
                 <a class="nav-link" href="{{ route('outline.index') }}">Dosen Penguji</a>
             </li>
         </ul>
+    </li> --}}
+    <li class="nav-item {{ request()->is('surat-tugas') ? 'active' : '' }}">
+        <a href="{{ route('admin.surat_tugas') }}" class="nav-link">
+            <i class="fas fa-file"></i><span>Surat Tugas</span>
+        </a>
     </li>
-    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->is('') ? 'active' : '' }}">
         <a href="{{ route('home') }}" class="nav-link">
-            <i class="fas fa-poll-h"></i><span>Kelola Pengguna</span>
+            <i class="fas fa-user-times"></i><span>Kelola Pengguna</span>
         </a>
     </li>
 @endsection

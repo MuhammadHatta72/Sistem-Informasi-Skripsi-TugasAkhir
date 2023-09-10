@@ -12,7 +12,8 @@ class AuthServiceProvider extends ServiceProvider
     public static array $permissionRole = [
         'dashboard' => ['admin', 'dosen', 'mahasiswa'],
         'dosen' => ['dosen'],
-        'mahasiswa' => ['mahasiswa']
+        'mahasiswa' => ['mahasiswa'],
+        'admin' => ['admin']
     ];
 
     public static array $permissionSubRole = [
