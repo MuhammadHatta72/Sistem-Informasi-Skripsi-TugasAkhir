@@ -9,8 +9,7 @@
             <i class="fas fa-poll-h"></i><span>Dashboard</span>
         </a>
     </li>
-    <li
-        class="nav-item dropdown {{ request()->is('outline*') ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ request()->is('outline*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Outline</span>
         </a>
@@ -23,8 +22,7 @@
             </li>
         </ul>
     </li>
-    <li
-        class="nav-item dropdown {{ request()->is('proposal*') ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ request()->is('proposal*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Proposal</span>
         </a>
@@ -33,12 +31,11 @@
                 <a class="nav-link" href="{{ route('proposal_kps.index') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('proposal_kps.index') }}">History</a>
+                <a class="nav-link" href="{{ route('proposal_kps.history') }}">History</a>
             </li>
         </ul>
     </li>
-    <li
-        class="nav-item dropdown {{ request()->is('skripsi*') ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ request()->is('skripsi*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
         </a>
