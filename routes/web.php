@@ -8,6 +8,7 @@ use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\proposal\ProposalDosenPengujiProposalController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\SkripsiController;
+use App\Http\Controllers\Skripsi\SkripsiMahasiswaController;
 use App\Http\Controllers\KPS\KPSController;
 use App\Http\Controllers\proposal\ProposalPengajuanController;
 use App\Http\Controllers\proposal\ProposalKPSController;
@@ -52,8 +53,7 @@ Route::get('edit-profile', function () {
 })->name('profile.edit');
 
 Route::middleware('can:admin')->group(function () {
-    Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
-    Route::post('surat-tugas/{id}', [AdminController::class, 'print_surat_tugas'])->name('admin.print_surat_tugas');
+    Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas'); 
 });
 
 Route::middleware('can:dosen')->group(function () {
@@ -84,7 +84,7 @@ Route::middleware('can:dosen')->group(function () {
 
 Route::middleware('can:mahasiswa')->group(function () {
     Route::resource('outline_mahasiswa', OutlineMahasiswaController::class);
-    Route::resource('skripsi', SkripsiController::class);
+    Route::resource('skripsi', SkripsiMahasiswaController::class);
     Route::get('/proposal_pengajuan', [ProposalPengajuanController::class, 'index'])->name('proposal_pengajuan.index');
     Route::post('/proposal_pengajuan', [ProposalPengajuanController::class, 'store'])->name('proposal_pengajuan.store');
     Route::get('/proposal_pengajuan/create', [ProposalPengajuanController::class, 'create'])->name('proposal_pengajuan.create');

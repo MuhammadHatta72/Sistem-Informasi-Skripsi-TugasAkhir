@@ -8,6 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Skripsi extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id_mahasiswa',
+        'id_dosen_penguji_skripsi',
+        'id_dosen_pembimbing_1',
+        'id_dosen_pembimbing_2',
+        'id_jadwal',
+        'status',
+        'path_dokumen',
+        'nilai1',
+        'nilai2',
+        'nilai3',
+        'revisi'
+    ];
 
     public function mahasiswa()
     {

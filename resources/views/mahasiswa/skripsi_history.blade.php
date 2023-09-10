@@ -25,7 +25,7 @@
                             <div class="float-right">
                                 <form method="GET">
                                     <div class="input-group">
-                                        <input name="search" type="text" class="form-control" placeholder="Search nama kegiatan">
+                                        <input name="search" type="text" class="form-control" placeholder="Search nama skripsi">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -37,69 +37,36 @@
 
                             <div class="table-responsive">
                                 <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Judul</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                   @forelse($skripsis as $skripsi)
+                                   <tbody>
                                     <tr>
-                                        <th>Judul</th>
-                                        <th>lorem</th>
-                                        <th>lorem</th>
-                                        <th>lorem</th>
-                                        <th>lorem</th>
-                                        <th>lorem</th>
-                                        <th>lorem</th>
+                                        <td>{{$skripsi->judul}}</td>
+                                        <td>{{$skripsi->status}}</td>
+<td>
+
+</td>
                                     </tr>
-{{--                                    @forelse($peminjamans as $peminjaman)--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{ $peminjaman->kegiatan }}</td>--}}
-{{--                                            <td>{{ $peminjaman->saranaPrasarana->nama }}</td>--}}
-{{--                                            <td>{{ $peminjaman->tanggal_mulai }} sampai {{ $peminjaman->tanggal_selesai }}</td>--}}
-{{--                                            <td class="d-flex justify-content-center">--}}
-{{--                                                <a class="btn btn-primary border-0 my-3 mr-2" href="{{ asset('storage/' . $peminjaman->dokumen) }}" target="_blank">--}}
-{{--                                                    <i class="fas fa-file-alt"></i>--}}
-{{--                                                </a>--}}
-{{--                                            </td>--}}
-{{--                                            <td>{{ $peminjaman->status }}</td>--}}
-{{--                                            <td>--}}
-{{--                                                @if($peminjaman->catatan_admin == null)--}}
-{{--                                                    ---}}
-{{--                                                @else--}}
-{{--                                                    {{ $peminjaman->catatan_admin }}--}}
-{{--                                                @endif--}}
-{{--                                            </td>--}}
-{{--                                            <td class="d-flex justify-content-center">--}}
-{{--                                                @if($peminjaman->status == 'Proses' || $peminjaman->status == 'Ditolak')--}}
-{{--                                                    <a href="{{route('peminjaman-mahasiswa.edit', ['peminjaman_user' => $peminjaman->id]) }}">--}}
-{{--                                                        <button class="badge bg-warning border-0 my-3 mx-3 text-white" type="button">--}}
-{{--                                                            <i class="fas fa-edit"></i> Edit--}}
-{{--                                                        </button>--}}
-{{--                                                    </a>--}}
-{{--                                                    <form action="{{ route('peminjaman-mahasiswa.destroy', ['peminjaman_user' => $peminjaman->id]) }}" method="POST" class="d-inline">--}}
-{{--                                                        @method('DELETE')--}}
-{{--                                                        @csrf--}}
-{{--                                                        <button class="badge bg-danger border-0 my-3 mx-3 text-white" onclick="return confirm('Yakin Menghapus Peminjaman ?')">--}}
-{{--                                                            <i class="fas fa-trash"></i> Delete--}}
-{{--                                                        </button>--}}
-{{--                                                    </form>--}}
-{{--                                                @else--}}
-{{--                                                    <form action="{{ route('bukti.pdf') }}" method="POST" target="_blank">--}}
-{{--                                                        @csrf--}}
-{{--                                                        <input type="hidden" name="peminjaman_id" value="{{ $peminjaman->id }}">--}}
-{{--                                                        <button type="submit" class="badge bg-success border-0 mt-3 mr-2 text-white">--}}
-{{--                                                            <i class="fas fa-print"></i> Cetak Bukti Peminjaman--}}
-{{--                                                        </button>--}}
-{{--                                                    </form>--}}
-{{--                                                @endif--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                    @empty--}}
-{{--                                        <tr>--}}
-{{--                                            <td colspan="5" class="text-center">Tidak ada data</td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforelse--}}
+                                   </tbody>
+                                   @empty
+                                        <tr>
+                                             <td colspan="7" class="text-center p-5">
+                                                  Data tidak tersedia
+                                             </td>
+                                        </tr>
+                                   @endforelse
                                 </table>
                             </div>
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-{{--                                        {{ $peminjamans->withQueryString()->links() }}--}}
+{{--                                        {{ $skripsis->withQueryString()->links() }}--}}
                                     </ul>
                                 </nav>
                             </div>

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('skripsis', function (Blueprint $table) {
-            $table->id('id_skripsi');
-            $table->foreignId('id_mahasiswa')->constrained('mahasiswas');
-            $table->foreignId('id_dosen_penguji_skripsi')->constrained('dosens');
-            $table->foreignId('id_dosen_pembimbing_1')->constrained('dosens');
-            $table->foreignId('id_dosen_pembimbing_2')->constrained('dosens');
-            $table->foreignId('id_jadwal')->constrained('jadwals');
+            $table->id();
+            $table->unsignedBigInteger('id_mahasiswa');
+            $table->unsignedBigInteger('id_dosen_penguji_skripsi')->nulllable();
+            $table->unsignedBigInteger('id_dosen_pembimbing_1')->nulllable();
+            $table->unsignedBigInteger('id_dosen_pembimbing_2')->nulllable();
+            $table->unsignedBigInteger('id_jadwal')->nulllable();
 //            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
 //            $table->integer('dosen_id_penguji_skripsi')->foreign('id_dosen')->references('id_dosen')->on('dosens');
 //            $table->integer('dosen_id_pembimbing_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
@@ -34,10 +34,10 @@ return new class extends Migration
                 ]
             )->default('dikirim');
             $table->string('path_dokumen');
-            $table->integer('nilai1');
-            $table->integer('nilai2');
-            $table->integer('nilai3');
-            $table->string('revisi');
+            $table->integer('nilai1')->nullable();
+            $table->integer('nilai2')->nullable();
+            $table->integer('nilai3')->nullable();
+            $table->string('revisi')->nullable();
             $table->timestamps();
         });
     }
