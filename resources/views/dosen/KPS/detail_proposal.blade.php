@@ -1,4 +1,3 @@
-
 <div class="section-body">
     <div class="row">
         <div class="col-xl-12 mb-4">
@@ -36,10 +35,10 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
-                            <label for="bab1" class="form-label">Data 1</label>
-                            <textarea type="text" class="form-control @error('bab1') is-invalid @enderror" id="bab1" name="bab1"
+                            <label for="data1" class="form-label">Data 1</label>
+                            <textarea type="text" class="form-control @error('data1') is-invalid @enderror" id="data1" name="data1"
                                 style="height: 72px" readonly>{{ $proposal->data1 }}</textarea>
-                            @error('bab1')
+                            @error('data1')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -48,10 +47,10 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
-                            <label for="bab2" class="form-label">Data 2</label>
-                            <textarea type="text" class="form-control @error('bab2') is-invalid @enderror" id="bab2" name="bab2"
+                            <label for="data2" class="form-label">Data 2</label>
+                            <textarea type="text" class="form-control @error('data2') is-invalid @enderror" id="data2" name="data2"
                                 style="height: 72px" readonly>{{ $proposal->data2 }}</textarea>
-                            @error('bab2')
+                            @error('data2')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -60,10 +59,10 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
-                            <label for="bab3" class="form-label">Data 3</label>
-                            <textarea type="text" class="form-control @error('bab3') is-invalid @enderror" id="bab3" name="bab3"
+                            <label for="data3" class="form-label">Data 3</label>
+                            <textarea type="text" class="form-control @error('data3') is-invalid @enderror" id="data3" name="data3"
                                 style="height: 72px" readonly>{{ $proposal->data3 }}</textarea>
-                            @error('bab3')
+                            @error('data3')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -71,17 +70,25 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-lg-6 col-sm-4">
-                            <label for="dosen1">Dosen Penilai 1</label>
+                        <div class="col-lg-4 col-sm-4">
+                            <label for="dosen1">Dosen Penguji Proposal</label>
                             <select class="form-control" id="dosen1" name="dosen1">
                                 @foreach ($dosens as $dosen)
                                     <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-6 col-sm-4">
-                            <label for="dosen2">Dosen Penilai 2</label>
+                        <div class="col-lg-4 col-sm-4">
+                            <label for="dosen2">Dosen Pembimbing 1</label>
                             <select class="form-control" id="dosen2" name="dosen2">
+                                @foreach ($dosens as $dosen)
+                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-sm-4">
+                            <label for="dosen3">Dosen Pembimbing 2</label>
+                            <select class="form-control" id="dosen3" name="dosen3">
                                 @foreach ($dosens as $dosen)
                                     <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
