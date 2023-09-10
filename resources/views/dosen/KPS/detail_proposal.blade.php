@@ -78,7 +78,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-4 col-sm-4">
+                        {{-- <div class="col-lg-4 col-sm-4">
                             <label for="dosen2">Dosen Pembimbing 1</label>
                             <select class="form-control" id="dosen2" name="dosen2">
                                 @foreach ($dosens as $dosen)
@@ -93,7 +93,7 @@
                                     <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
                     <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>

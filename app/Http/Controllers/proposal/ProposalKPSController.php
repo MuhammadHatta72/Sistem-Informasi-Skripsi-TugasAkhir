@@ -29,19 +29,20 @@ class ProposalKPSController extends Controller
     public function validasi(Request $request)
     {
         if ($request->status == 'Diterima') {
-            if ($request->dosen1 == $request->dosen2 || $request->dosen1 == $request->dosen3 || $request->dosen2 == $request->dosen3) {
+            if ($request->dosen1 == $request) {
+                // dosen2 || $request->dosen1 == $request->dosen3 || $request->dosen2 == $request->dosen3
                 return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal, Dosen Pembimbing 1, dan Dosen Pembimbing 2 tidak boleh sama');
             }
             $request->validate([
                 'dosen1' => 'required',
-                'dosen2' => 'required',
-                'dosen3' => 'required',
+                // 'dosen2' => 'required',
+                // 'dosen3' => 'required',
             ]);
 
             $proposal = Proposal::find($request->id);
             $proposal->id_dosen_penguji_proposal = $request->dosen1;
-            $proposal->id_dosen_pembimbing_1 = $request->dosen2;
-            $proposal->id_dosen_pembimbing_2 = $request->dosen3;
+            // $proposal->id_dosen_pembimbing_1 = $request->dosen2;
+            // $proposal->id_dosen_pembimbing_2 = $request->dosen3;
             $proposal->status = $request->status;
             $proposal->save();
         } else if ($request->status == 'Ditolak') {

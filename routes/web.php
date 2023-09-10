@@ -54,7 +54,7 @@ Route::get('edit-profile', function () {
 })->name('profile.edit');
 
 Route::middleware('can:admin')->group(function () {
-    Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas'); 
+    Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
 });
 
 Route::middleware('can:dosen')->group(function () {
@@ -77,6 +77,7 @@ Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:dosen_penguji_proposal')->group(function () {
         Route::view('dashboard-dosen_penguji_proposal', 'dashboard.dosen_penguji_proposal')->name('dashboard.dosen_penguji_proposal');
         Route::resource('proposal_dosen_penguji', ProposalDosenPengujiProposalController::class);
+        Route::post('proposal_dosen_penguji_validasi', [ProposalDosenPengujiProposalController::class, 'validasi'])->name('proposal_dosen_penguji.validasi');
     });
     Route::middleware('can:dosen_pembimbing')->group(function () {
         Route::view('dashboard-dosen_pembimbing', 'dashboard.dosen_pembimbing')->name('dashboard.dosen_pembimbing');

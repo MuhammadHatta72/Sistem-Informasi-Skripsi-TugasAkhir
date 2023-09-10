@@ -34,6 +34,8 @@ return new class extends Migration
                     'diproses',
                     'diterima',
                     'ditolak',
+                    'Lulus',
+                    'Tidak Lulus',
                 ]
             )->default('dikirim');
             $table->integer('nilai1')->nullable();
