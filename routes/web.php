@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Outline\OutlineKPSController;
 use App\Http\Controllers\Outline\OutlineMahasiswaController;
@@ -51,6 +52,8 @@ Route::get('edit-profile', function () {
 })->name('profile.edit');
 
 Route::middleware('can:admin')->group(function () {
+    Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
+    Route::post('surat-tugas/{id}', [AdminController::class, 'print_surat_tugas'])->name('admin.print_surat_tugas');
 });
 
 Route::middleware('can:dosen')->group(function () {
