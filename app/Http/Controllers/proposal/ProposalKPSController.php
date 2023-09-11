@@ -26,12 +26,39 @@ class ProposalKPSController extends Controller
         return view('dosen.KPS.detail_proposal', compact('proposal', 'dosens'));
     }
 
+    // public function validasi(Request $request)
+    // {
+    //     if ($request->status == 'Diterima') {
+    //         if ($request->dosen1 == $request) {
+    //             // dosen2 || $request->dosen1 == $request->dosen3 || $request->dosen2 == $request->dosen3
+    //             return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal, Dosen Pembimbing 1, dan Dosen Pembimbing 2 tidak boleh sama');
+    //         }
+    //         $request->validate([
+    //             'dosen1' => 'required',
+    //             // 'dosen2' => 'required',
+    //             // 'dosen3' => 'required',
+    //         ]);
+
+    //         $proposal = Proposal::find($request->id);
+    //         $proposal->id_dosen_penguji_proposal = $request->dosen1;
+    //         // $proposal->id_dosen_pembimbing_1 = $request->dosen2;
+    //         // $proposal->id_dosen_pembimbing_2 = $request->dosen3;
+    //         $proposal->status = $request->status;
+    //         $proposal->save();
+    //     } else if ($request->status == 'Ditolak') {
+    //         $proposal = Proposal::find($request->id);
+    //         $proposal->status = $request->status;
+    //         $proposal->save();
+    //     }
+
+    //     return redirect()->route('proposal_kps.index')->with('success', 'Status berhasil diperbarui');
+    // }
+
     public function validasi(Request $request)
     {
         if ($request->status == 'Diterima') {
             if ($request->dosen1 == $request) {
-                // dosen2 || $request->dosen1 == $request->dosen3 || $request->dosen2 == $request->dosen3
-                return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal, Dosen Pembimbing 1, dan Dosen Pembimbing 2 tidak boleh sama');
+                return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal tidak boleh sama');
             }
             $request->validate([
                 'dosen1' => 'required',
@@ -45,6 +72,10 @@ class ProposalKPSController extends Controller
             // $proposal->id_dosen_pembimbing_2 = $request->dosen3;
             $proposal->status = $request->status;
             $proposal->save();
+
+            $dosen1 = User::where('id_dosen', $request->dosen1)->first();
+            $dosen1->sub_role = 'dosen_penguji_proposal';
+            $dosen1->save();
         } else if ($request->status == 'Ditolak') {
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;
@@ -53,6 +84,7 @@ class ProposalKPSController extends Controller
 
         return redirect()->route('proposal_kps.index')->with('success', 'Status berhasil diperbarui');
     }
+
 
     public function history()
     {

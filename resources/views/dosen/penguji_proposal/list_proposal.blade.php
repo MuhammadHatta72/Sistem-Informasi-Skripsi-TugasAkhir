@@ -76,7 +76,7 @@
                                             <td>{{ $proposal->judul }}</td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $proposal->id_proposal }}">
+                                                    type="button" data-id="{{ $proposal->id }}">
                                                     <i class="fas fa-eye"></i> View
                                                 </button>
                                             </td>

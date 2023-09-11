@@ -18,6 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_dosen_pembimbing_1')->nullable();
             $table->unsignedBigInteger('id_dosen_pembimbing_2')->nullable();
             $table->foreignId('id_jadwal')->nullable();
+            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas');
+            $table->foreign('id_dosen_penguji_proposal')->references('id')->on('dosens');
+            // $table->foreign('id_dosen_penilai_2')->references('id')->on('dosens');
             //            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
             //            $table->integer('dosen_id_penguji_proposal')->foreign('id_dosen')->references('id_dosen')->on('dosens');
             //            $table->integer('dosen_id_pembimbing_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
