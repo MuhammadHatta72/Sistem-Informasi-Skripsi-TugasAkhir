@@ -14,16 +14,15 @@ return new class extends Migration
         Schema::create('skripsis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_mahasiswa');
+            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas');
             $table->unsignedBigInteger('id_dosen_penguji_skripsi')->nulllable();
+            $table->foreign('id_dosen_penguji_skripsi')->references('id')->on('dosens');
             $table->unsignedBigInteger('id_dosen_pembimbing_1')->nulllable();
+            $table->foreign('id_dosen_pembimbing_1')->references('id')->on('dosens');
             $table->unsignedBigInteger('id_dosen_pembimbing_2')->nulllable();
+            $table->foreign('id_dosen_pembimbing_2')->references('id')->on('dosens');
             $table->unsignedBigInteger('id_jadwal')->nulllable();
-//            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
-//            $table->integer('dosen_id_penguji_skripsi')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-//            $table->integer('dosen_id_pembimbing_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-//            $table->integer('dosen_id_pembimbing_2')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-//            $table->integer('jadwal_id')->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
-            $table->string('judul');
+            $table->foreign('id_jadwal')->references('id')->on('jadwals');
             $table->enum(
                 'status',
                 [
@@ -33,7 +32,9 @@ return new class extends Migration
                     'ditolak',
                 ]
             )->default('dikirim');
-            $table->string('path_dokumen');
+            $table->string('file_1');
+            $table->string('file_2');
+            $table->string('file_3');
             $table->integer('nilai1')->nullable();
             $table->integer('nilai2')->nullable();
             $table->integer('nilai3')->nullable();

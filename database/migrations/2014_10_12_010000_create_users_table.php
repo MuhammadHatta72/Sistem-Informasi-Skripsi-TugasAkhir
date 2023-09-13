@@ -17,7 +17,10 @@ return new class extends Migration
             $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas');
             $table->unsignedBigInteger('id_dosen')->nullable();
             $table->foreign('id_dosen')->references('id')->on('dosens');
-            $table->string('name');
+            $table->unsignedBigInteger('id_admin')->nullable();
+            $table->foreign('id_admin')->references('id')->on('admins');
+            $table->unsignedBigInteger('id_prodi')->nullable();
+            $table->foreign('id_prodi')->references('id')->on('prodis');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

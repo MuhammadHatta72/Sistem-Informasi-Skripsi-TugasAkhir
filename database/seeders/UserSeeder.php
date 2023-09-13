@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
     {
 //        User::factory(10)->create();
         User::create([
-            'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'role' => 'admin',
             'sub_role' => null,
@@ -24,7 +23,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'Mahasiswa',
             'email' => 'mahasiswa@gmail.com',
             'id_mahasiswa' => 1,
             'role' => 'mahasiswa',
@@ -33,7 +31,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'Dosen Biasa',
             'email' => 'dosenbiasa@gmail.com',
             'id_dosen' => null,
             'role' => 'dosen',
@@ -42,7 +39,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'KPS',
             'email' => 'kps@gmail.com',
             'id_dosen' => null,
             'role' => 'dosen',
@@ -51,7 +47,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'Dosen Penilai',
             'email' => 'dosenpenilai@gmail.com',
             'role' => 'dosen',
             'sub_role' => 'dosen_penilai',
@@ -59,7 +54,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'Dosen Penguji Proposal',
             'email' => 'dosenpengujiproposal@gmail.com',
             'role' => 'dosen',
             'sub_role' => 'dosen_penguji_proposal',
@@ -67,7 +61,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'Dosen Pembimbing',
             'email' => 'dosenpembimbing@gmail.com',
             'role' => 'dosen',
             'sub_role' => 'dosen_pembimbing',
@@ -75,7 +68,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'Dosen Penguji Skripsi',
             'email' => 'dosenpengujiskripsi@gmail.com',
             'role' => 'dosen',
             'sub_role' => 'dosen_penguji_skripsi',
@@ -85,7 +77,6 @@ class UserSeeder extends Seeder
 
 //      Seeder untuk dosen
         User::create([
-            'name' => 'joko',
             'email' => 'dosenjoko@gmail.com',
             'id_dosen' => 1,
             'role' => 'dosen',
@@ -94,7 +85,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'supri',
             'email' => 'dosensupri@gmail.com',
             'id_dosen' => 2,
             'role' => 'dosen',
@@ -103,7 +93,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'budi',
             'email' => 'dosenbudi@gmail.com',
             'id_dosen' => 3,
             'role' => 'dosen',
@@ -112,7 +101,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'susi',
             'email' => 'dosensusi@gmail.com',
             'id_dosen' => 4,
             'role' => 'dosen',
@@ -121,7 +109,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'siti',
             'email' => 'dosensiti@gmail.com',
             'id_dosen' => 5,
             'role' => 'dosen',
@@ -130,7 +117,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'rudi',
             'email' => 'dosenrudi@gmail.com',
             'id_dosen' => 6,
             'role' => 'dosen',
@@ -139,7 +125,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'rina',
             'email' => 'rinadosen@gmail.com',
             'id_dosen' => 7,
             'role' => 'dosen',
@@ -148,7 +133,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'roni',
             'email' => 'ronidosen@gmail.com',
             'id_dosen' => 8,
             'role' => 'dosen',
@@ -157,7 +141,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'doni',
             'email' => 'donidosen@gmail.com',
             'id_dosen' => 9,
             'role' => 'dosen',
@@ -166,7 +149,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'dini',
             'email' => 'dinidosen@gmail.com',
             'id_dosen' => 10,
             'role' => 'dosen',

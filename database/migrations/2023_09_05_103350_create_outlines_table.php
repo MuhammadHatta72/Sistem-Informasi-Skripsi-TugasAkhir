@@ -20,18 +20,21 @@ return new class extends Migration
             $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas');
             $table->foreign('id_dosen_penilai_1')->references('id')->on('dosens');
             $table->foreign('id_dosen_penilai_2')->references('id')->on('dosens');
+            $table->unsignedBigInteger('id_bidang_1')->nullable();
+            $table->foreign('id_bidang_1')->references('id')->on('bidangs');
+            $table->unsignedBigInteger('id_bidang_2')->nullable();
+            $table->foreign('id_bidang_2')->references('id')->on('bidangs');
             $table->foreign('id_jadwal')->references('id')->on('jadwals');
-//            $table->foreignId('id_dosen_penilai_1')->constrained('dosens')->nullable();
-//            $table->foreignId('id_dosen_penilai_2')->constrained('dosens')->nullable();
-//            $table->foreignId('id_jadwal')->constrained('jadwals')->nullable();
-            //            $table->integer('mahasiswa_id')->foreign('id_mahasiswa')->references('id_mahasiswa')->on('mahasiswas');
-            //            $table->integer('dosen_id_penilai_1')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-            //            $table->integer('dosen_id_penilai_2')->foreign('id_dosen')->references('id_dosen')->on('dosens');
-            //            $table->integer('jadwal_id')->foreign('id_jadwal')->references('id_jadwal')->on('jadwals');
-            $table->string('judul');
-            $table->string('bab1');
-            $table->string('bab2');
-            $table->string('bab3');
+            $table->string('judul_1');
+            $table->string('judul_2');
+            $table->string('pendahuluan_1');
+            $table->string('pendahuluan_2');
+            $table->string('teori_1');
+            $table->string('teori_2');
+            $table->string('metpen_1');
+            $table->string('metpen_2');
+            $table->enum('pilihan', ['1', '2']);
+            $table->string('revisi')->nullable();
             $table->enum(
                 'status',
                 [
@@ -42,8 +45,6 @@ return new class extends Migration
                     'Tidak Lulus',
                 ]
             )->default('Proses');
-             $table->integer('nilai1')->nullable();
-             $table->integer('nilai2')->nullable();
             $table->timestamps();
         });
     }
