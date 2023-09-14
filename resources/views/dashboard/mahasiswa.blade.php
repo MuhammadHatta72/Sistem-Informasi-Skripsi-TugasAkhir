@@ -88,6 +88,20 @@
     <li
         class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-calendar-check"></i><span>Bimbingan Skripsi</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('proposal_pengajuan.create') }}">Pengajuan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('proposal_pengajuan.index') }}">History</a>
+            </li>
+        </ul>
+    </li>
+    <li
+        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
         </a>
         <ul class="dropdown-menu">
