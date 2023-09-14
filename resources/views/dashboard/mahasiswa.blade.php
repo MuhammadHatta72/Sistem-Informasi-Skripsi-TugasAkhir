@@ -60,7 +60,7 @@
     <li
         class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Outline</span>
+            <i class="fas fa-sticky-note"></i><span>Outline</span>
         </a>
         <ul class="dropdown-menu">
             <li>
@@ -74,7 +74,7 @@
     <li
         class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Ujian Proposal</span>
+            <i class="fas fa-file-alt"></i><span>Ujian Proposal</span>
         </a>
         <ul class="dropdown-menu">
             <li>
@@ -88,7 +88,7 @@
     <li
         class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Bimbingan Skripsi</span>
+            <i class="fas fa-chalkboard-teacher"></i><span>Bimbingan Skripsi</span>
         </a>
         <ul class="dropdown-menu">
             <li>
@@ -102,7 +102,7 @@
     <li
         class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
+            <i class="fas fa-scroll"></i><span>Ujian Skripsi</span>
         </a>
         <ul class="dropdown-menu">
             <li>
