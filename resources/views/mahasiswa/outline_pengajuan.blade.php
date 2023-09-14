@@ -16,23 +16,9 @@
                         <h4>Form Pengajuan Outline</h4>
                     </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <!-- display any success message -->
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                         <form method="POST" action="{{ route('outline_mahasiswa.store') }}"
                               enctype="multipart/form-data">
+                            @csrf
                             <ul class="nav nav-pills" id="myTab3" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#outline1"
@@ -75,7 +61,7 @@
                                                       class="form-control @error('pendahuluan1') is-invalid @enderror"
                                                       id="pendahuluan1" name="pendahuluan1"
                                                       style="height: 72px">{{ old('pendahuluan1') }}</textarea>
-                                            @error('pendahuluan')
+                                            @error('pendahuluan1')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -175,9 +161,9 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>

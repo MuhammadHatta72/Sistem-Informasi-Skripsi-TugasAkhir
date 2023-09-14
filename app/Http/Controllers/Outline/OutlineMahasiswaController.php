@@ -40,22 +40,19 @@ class OutlineMahasiswaController extends Controller
      */
     public function store(StoreOutlineMahasiswaRequest $request)
     {
-        $request->validated([
-            'judul' => 'required|string|max:255',
-            'bab1' => 'required|string',
-            'bab2' => 'required|string',
-            'bab3' => 'required|string',
-        ]);
-
         $outline = new Outline();
         $outline->id_mahasiswa = auth()->user()->mahasiswa->id;
-        $outline->judul = $request->judul;
-        $outline->id_dosen_penilai_1 = null;
-        $outline->id_dosen_penilai_2 = null;
-        $outline->id_jadwal = null;
-        $outline->bab1 = $request->bab1;
-        $outline->bab2 = $request->bab2;
-        $outline->bab3 = $request->bab3;
+        $outline->id_bidang_1 = $request->bidang1;
+        $outline->id_bidang_2 = $request->bidang2;
+        $outline->judul_1 = $request->judul1;
+        $outline->judul_2 = $request->judul2;
+        $outline->pendahuluan_1 = $request->pendahuluan1;
+        $outline->pendahuluan_2 = $request->pendahuluan2;
+        $outline->teori_1 = $request->teori1;
+        $outline->teori_2 = $request->teori2;
+        $outline->metpen_1 = $request->metpen1;
+        $outline->metpen_2 = $request->metpen2;
+        $outline->status = 'Pengajuan';
         $outline->save();
 
         return redirect(route('outline_mahasiswa.index'))->with('success', 'Outline berhasil diajukan!');

@@ -38,13 +38,16 @@ return new class extends Migration
             $table->enum(
                 'status',
                 [
-                    'Proses',
-                    'Diterima',
-                    'Ditolak',
-                    'Lulus',
-                    'Tidak Lulus',
+                    'Pengajuan',
+                    'Diterima KPS',
+                    'Diterima DosenPenilai1',
+                    'Diterima DosenPenilai2',
+                    'Ditolak KPS',
+                    'Ditolak DosenPenilai1',
+                    'Ditolak DosenPenilai2',
+                    'Lulus'
                 ]
-            )->default('Proses');
+            )->default('Pengajuan');
             $table->timestamps();
         });
     }

@@ -23,7 +23,17 @@ class StoreOutlineMahasiswaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'judul1' => 'required',
+            'judul2' => 'required',
+            'bidang1' => 'required',
+            'bidang2' => 'required',
+            'pendahuluan1' => 'required',
+            'pendahuluan2' => 'required',
+            'pendahuluan3' => 'required',
+            'teori1' => 'required',
+            'teori2' => 'required',
+            'metpen1' => 'required',
+            'metpen2' => 'required',
         ];
     }
 }
