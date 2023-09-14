@@ -25,7 +25,7 @@
                             <div class="float-right">
                                 <form method="GET">
                                     <div class="input-group">
-                                        <input name="search" type="text" class="form-control" placeholder="Search nama kegiatan">
+                                        <input name="search" type="text" class="form-control" placeholder="Search nama judul">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -38,30 +38,34 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
-                                        <th>Judul</th>
-                                        <th>Data 1</th>
-                                        <th>Data 2</th>
-                                        <th>Data 3</th>
+                                        <th>Judul 1</th>
+                                        <th>Judul 2</th>
+                                        <th>Dosen Penilai 1</th>
+                                        <th>Dosen Penilai 2</th>
+                                        <th>Revisi</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     @forelse($outlines as $outline)
                                         <tr>
-                                            <td>{{ $outline->judul }}</td>
-                                            <td>{{ $outline->bab1 }}</td>
-                                            <td>{{ $outline->bab2 }}</td>
-                                            <td>{{ $outline->bab3 }}</td>
+                                            <td>{{ $outline->judul_1 }}</td>
+                                            <td>{{ $outline->judul_2 }}</td>
                                             <td>
-                                                @if($outline->status == 'Proses')
-                                                    <span class="badge bg-warning text-white">Proses</span>
-                                                @elseif($outline->status == 'Diterima')
-                                                    <span class="badge bg-success text-white">Diterima</span>
-                                                @elseif($outline->status == 'Ditolak')
-                                                    <span class="badge bg-danger text-white">Ditolak</span>
+                                                {{ $outline->dosenPenilai1->nama ?? '-' }}
+                                            </td>
+                                            <td>{{ $outline->dosenPenilai2->nama ?? '-' }}</td>
+                                            <td>{{ $outline->revisi ?? '-'}}</td>
+                                            <td>
+                                                @if($outline->status == 'Lulus')
+                                                    <span class="badge bg-success text-white">{{ $outline->status }}</span>
+                                                @elseif($outline->status == 'Ditolak*')
+                                                    <span class="badge bg-danger text-white">{{ $outline->status }}</span>
+                                                @else
+                                                    <span class="badge bg-warning text-white">{{ $outline->status }}</span>
                                                 @endif
                                             </td>
                                             <td class="d-flex justify-content-center">
-                                                @if($outline->status == 'Proses' || $outline->status == 'Ditolak')
+                                                @if($outline->status == 'Pengajuan' || $outline->status == 'Ditolak*')
                                                     <a href="{{route('outline_mahasiswa.edit', $outline) }}">
                                                         <button class="badge bg-warning border-0 my-3 mx-3 text-white" type="button">
                                                             <i class="fas fa-edit"></i> Edit

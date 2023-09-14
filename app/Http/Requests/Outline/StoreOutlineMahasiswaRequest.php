@@ -29,7 +29,6 @@ class StoreOutlineMahasiswaRequest extends FormRequest
             'bidang2' => 'required',
             'pendahuluan1' => 'required',
             'pendahuluan2' => 'required',
-            'pendahuluan3' => 'required',
             'teori1' => 'required',
             'teori2' => 'required',
             'metpen1' => 'required',
