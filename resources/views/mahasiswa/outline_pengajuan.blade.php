@@ -10,77 +10,176 @@
         </div>
 
         <div class="section-body ">
-            <div class="row">
-                <div class="col-xl-12 mb-4">
-                    <!-- Dashboard example card 1-->
-                    <a class="card lift h-100">
-                        <div class="card-header bg-whitesmoke">
-                            <h4>Form Pengajuan Outline</h4>
-                        </div>
-                        <div class="card-body d-flex justify-content-center flex-column">
-                            <!-- display any errors -->
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            <!-- display any success message -->
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            <!-- create a form to submit the outline data -->
-                            <form method="POST" action="{{ route('outline_mahasiswa.store') }}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="judul" class="form-label">Judul Outline</label>
-                                    <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                        id="judul" name="judul" value="{{ old('judul') }}">
-                                    @error('judul')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+            <div class="col-12 col-sm-5 col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-whitesmoke">
+                        <h4>Form Pengajuan Outline</h4>
+                    </div>
+                    <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <!-- display any success message -->
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('outline_mahasiswa.store') }}"
+                              enctype="multipart/form-data">
+                            <ul class="nav nav-pills" id="myTab3" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#outline1"
+                                       role="tab" aria-controls="home" aria-selected="true">Outline Pertama</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#outline2" role="tab"
+                                       aria-controls="profile" aria-selected="false">Outline Kedua</a>
+                                </li>
+                            </ul>
+                            <hr>
+                            <div class="tab-content" id="myTabContent2">
+                                <div class="tab-pane fade show active align-content-start" id="outline1" role="tabpanel"
+                                     aria-labelledby="outline1">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="judul1" class="form-label">Judul Outline</label>
+                                            <input type="text" class="form-control @error('judul1') is-invalid @enderror"
+                                                   id="judul1" name="judul1" value="{{ old('judul1') }}">
+                                            @error('judul1')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="bab1" class="form-label">Data 1</label>
-                                    <textarea type="text" class="form-control @error('bab1') is-invalid @enderror" id="bab1" name="bab1"
-                                        style="height: 72px">{{ old('bab1') }}</textarea>
-                                    @error('bab1')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                        <div class="col-lg-6 col-sm-4">
+                                            <label for="bidang1">Bidang</label>
+                                            <select class="form-control" id="bidang1" name="bidang1">
+                                                @foreach($bidangs as $id => $nama)
+                                                    <option
+                                                        value="{{ $id }}">{{ $nama }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="bab2" class="form-label">Data 2</label>
-                                    <textarea type="text" class="form-control @error('bab2') is-invalid @enderror" id="bab2" name="bab2"
-                                        style="height: 72px">{{ old('bab2') }}</textarea>
-                                    @error('bab2')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="pendahuluan1" class="form-label">Ringkasan Pendahuluan</label>
+                                            <textarea type="text"
+                                                      class="form-control @error('pendahuluan1') is-invalid @enderror"
+                                                      id="pendahuluan1" name="pendahuluan1"
+                                                      style="height: 72px">{{ old('pendahuluan1') }}</textarea>
+                                            @error('pendahuluan')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="bab3" class="form-label">Data 3</label>
-                                    <textarea type="text" class="form-control @error('bab3') is-invalid @enderror" id="bab3" name="bab3"
-                                        style="height: 72px">{{ old('bab3') }}</textarea>
-                                    @error('bab3')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="teori1" class="form-label">Kajian Teori</label>
+                                            <textarea type="text"
+                                                      class="form-control @error('teori1') is-invalid @enderror"
+                                                      id="teori1" name="teori1"
+                                                      style="height: 72px">{{ old('teori1') }}</textarea>
+                                            @error('teori1')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
-                                    @enderror
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="metpen1" class="form-label">Metode Penelitian</label>
+                                            <textarea type="text"
+                                                      class="form-control @error('metpen1') is-invalid @enderror"
+                                                      id="metpen1" name="metpen1"
+                                                      style="height: 72px">{{ old('metpen1') }}</textarea>
+                                            @error('metpen1')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </a>
+                                <div class="tab-pane fade" id="outline2" role="tabpanel" aria-labelledby="outline2">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="judul2" class="form-label">Judul Outline</label>
+                                            <input type="text" class="form-control @error('judul2') is-invalid @enderror"
+                                                   id="judul2" name="judul2" value="{{ old('judul2') }}">
+                                            @error('judul2')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg-6 col-sm-4">
+                                            <label for="bidang2">Bidang</label>
+                                            <select class="form-control" id="bidang2" name="bidang2">
+                                                @foreach($bidangs as $id => $nama)
+                                                    <option
+                                                        value="{{ $id }}">{{ $nama }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="pendahuluan2" class="form-label">Ringkasan Pendahuluan</label>
+                                            <textarea type="text"
+                                                      class="form-control @error('pendahuluan2') is-invalid @enderror"
+                                                      id="pendahuluan2" name="pendahuluan2"
+                                                      style="height: 72px">{{ old('pendahuluan2') }}</textarea>
+                                            @error('pendahuluan2')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="teori2" class="form-label">Kajian Teori</label>
+                                            <textarea type="text"
+                                                      class="form-control @error('teori2') is-invalid @enderror"
+                                                      id="teori2" name="teori2"
+                                                      style="height: 72px">{{ old('teori2') }}</textarea>
+                                            @error('teori2')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="metpen2" class="form-label">Metode Penelitian</label>
+                                            <textarea type="text"
+                                                      class="form-control @error('metpen2') is-invalid @enderror"
+                                                      id="metpen2" name="metpen2"
+                                                      style="height: 72px">{{ old('metpen2') }}</textarea>
+                                            @error('metpen2')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

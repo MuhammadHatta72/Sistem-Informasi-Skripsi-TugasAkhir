@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Outline;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Outline\StoreOutlineMahasiswaRequest;
 use App\Http\Requests\Outline\UpdateOutlineMahasiswaRequest;
+use App\Models\Bidang;
 use App\Models\Outline;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OutlineMahasiswaController extends Controller
 {
@@ -24,7 +27,12 @@ class OutlineMahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.outline_pengajuan');
+        $bidangs = DB::table('bidangs')
+            ->join('prodi_bidang', 'bidangs.id', '=', 'prodi_bidang.id_bidang')
+            ->where('prodi_bidang.id_prodi', '=', auth()->user()->mahasiswa->id_prodi)
+            ->pluck('bidangs.nama', 'bidangs.id');
+
+        return view('mahasiswa.outline_pengajuan', compact('bidangs'));
     }
 
     /**
