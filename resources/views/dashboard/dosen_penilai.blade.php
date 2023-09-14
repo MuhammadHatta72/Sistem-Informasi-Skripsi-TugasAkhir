@@ -6,7 +6,7 @@
     @parent
     <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Outline</span>
+            <i class="fas fa-sticky-note"></i><span>Outline</span>
         </a>
         <ul class="dropdown-menu">
             <li>
