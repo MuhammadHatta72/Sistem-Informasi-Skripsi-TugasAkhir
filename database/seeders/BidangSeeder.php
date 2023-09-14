@@ -16,5 +16,24 @@ class BidangSeeder extends Seeder
         Bidang::create([
             'nama' => 'Teknologi Informasi',
         ]);
+        Bidang::create([
+            'nama' => 'Akuntansi dummy bidang D3 satu',
+        ]);
+        Bidang::create([
+            'nama' => 'Akuntansi dummy bidang D4 satu',
+        ]);
+        Bidang::create([
+            'nama' => 'Akuntansi dummy bidang D3 dua',
+        ]);
+        Bidang::create([
+            'nama' => 'Akuntansi dummy bidang D4 dua',
+        ]);
+        Bidang::create([
+            'nama' => 'Akuntansi dummy bidang D3 tiga',
+        ]);
+        Bidang::create([
+            'nama' => 'Akuntansi dummy bidang D4 tiga',
+        ]);
+
     }
 }
