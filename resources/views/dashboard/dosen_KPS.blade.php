@@ -11,7 +11,7 @@
     </li>
     <li class="nav-item dropdown {{ request()->is('outline*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Outline</span>
+            <i class="fas fa-sticky-note"></i><span>Outline</span>
         </a>
         <ul class="dropdown-menu">
             <li>
@@ -24,7 +24,7 @@
     </li>
     <li class="nav-item dropdown {{ request()->is('proposal*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Ujian Proposal</span>
+            <i class="fas fa-file-alt"></i><span>Ujian Proposal</span>
         </a>
         <ul class="dropdown-menu">
             <li>
@@ -35,9 +35,22 @@
             </li>
         </ul>
     </li>
+    <li class="nav-item dropdown {{ request()->is('bimbingan*') ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-chalkboard-teacher"></i><span>Bimbingan Skripsi</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('skripsi.create') }}">Pengajuan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('skripsi.index') }}">History</a>
+            </li>
+        </ul>
+    </li>
     <li class="nav-item dropdown {{ request()->is('skripsi*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
+            <i class="fas fa-scroll"></i><span>Ujian Skripsi</span>
         </a>
         <ul class="dropdown-menu">
             <li>
