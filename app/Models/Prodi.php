@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prodi extends Model
 {
-    use HasFactory;
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

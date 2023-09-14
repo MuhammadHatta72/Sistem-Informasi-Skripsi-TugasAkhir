@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bidang extends Model
 {
-    use HasFactory;
 
     public function prodi(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
