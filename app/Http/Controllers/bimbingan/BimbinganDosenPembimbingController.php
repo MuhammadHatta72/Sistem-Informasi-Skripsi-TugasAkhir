@@ -7,7 +7,7 @@ use App\Models\Bimbingan;
 use Illuminate\Http\Request;
 use App\Models\Dosen;
 
-class BimbinganDosenPembimbingBimbinganController extends Controller
+class BimbinganDosenPembimbingController extends Controller
 {
     /**
      * Display a listing of the resource.

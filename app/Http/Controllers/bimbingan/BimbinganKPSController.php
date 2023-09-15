@@ -74,7 +74,7 @@ class BimbinganKPSController extends Controller
             $bimbingan->save();
 
             $dosen1 = User::where('id_dosen', $request->dosen1)->first();
-$dosen1->sub_role = 'dosen_pembimbing';
+            $dosen1->sub_role = 'dosen_pembimbing';
             $dosen1->save();
         } else if ($request->status == 'Ditolak') {
             $bimbingan = Bimbingan::find($request->id);
