@@ -48,4 +48,20 @@ class Dosen extends Model
     {
         return $this->hasMany(Proposal::class, 'id_dosen_pembimbing_2');
     }
+
+    public function pembimbingBimbingan()
+    {
+        return $this->hasMany(Bimbingan::class, 'id_dosen_pembimbing_bimbingan');
+    }
+
+    public function bimbinganPembimbing1()
+    {
+        return $this->hasMany(Bimbingan::class, 'id_dosen_pembimbing_1');
+    }
+
+    public function bimbinganPembimbing2()
+    {
+        return $this->hasMany(Bimbingan::class, 'id_dosen_pembimbing_2');
+    }
+
 }
