@@ -6,14 +6,14 @@
     @parent
     <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Ujian Skripsi</span>
+            <i class="fas fa-calendar-check"></i><span>Ujian Bimbingan</span>
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('skripsi.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('bimbingan_dosen_pembimbing.index') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('skripsi.index') }}">History</a>
+                <a class="nav-link" href="{{ route('bimbingan_dosen_pembimbing.index') }}">History</a>
             </li>
         </ul>
     </li>
@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="me-3">
-                                    <div><h5>Proposal Valid</h5></div>
+                                    <div><h5>Bimbingan Valid</h5></div>
                                     <div class="display-4 text-white">1</div>
                                 </div>
                                 <i class="fas fa-clipboard-check" style="font-size:xx-large"></i>
@@ -50,7 +50,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="me-3">
-                                    <div><h5>Proposal Proses</h5></div>
+                                    <div><h5>Bimbingan Proses</h5></div>
                                     <div class="display-4 text-white">1</div>
                                 </div>
                                 <i class="fas fa-envelope-open-text" style="font-size:xx-large"></i>
@@ -68,7 +68,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="me-3">
-                                    <div><h5>Pemintaan Validasi Proposal</h5></div>
+                                    <div><h5>Pemintaan Validasi Bimbingan>
                                     <div class="display-4 text-white">1</div>
                                 </div>
                                 <i class="fas fa-clipboard-check" style="font-size:xx-large"></i>

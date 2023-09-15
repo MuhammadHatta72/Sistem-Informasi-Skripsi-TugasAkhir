@@ -92,10 +92,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('proposal_pengajuan.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('bimbingan_pengajuan.create') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('proposal_pengajuan.index') }}">History</a>
+                <a class="nav-link" href="{{ route('bimbingan_pengajuan.index') }}">History</a>
             </li>
         </ul>
     </li>

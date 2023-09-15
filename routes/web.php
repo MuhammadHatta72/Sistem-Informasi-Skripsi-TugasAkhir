@@ -8,6 +8,9 @@ use App\Http\Controllers\Outline\OutlineMahasiswaController;
 use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\proposal\ProposalDosenPengujiProposalController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\Bimbingan\BimbinganDosenPembimbingController;
+use App\Http\Controllers\BimbinganController;
+use App\Http\Controllers\Bimbingan\BimbinganPengajuanController;
 use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\Skripsi\SkripsiMahasiswaController;
 use App\Http\Controllers\KPS\KPSController;
@@ -87,6 +90,8 @@ Route::middleware('can:dosen')->group(function () {
 
     Route::middleware('can:dosen_pembimbing')->group(function () {
         Route::view('dashboard-dosen_pembimbing', 'dashboard.dosen_pembimbing')->name('dashboard.dosen_pembimbing');
+        Route::resource('bimbingan_dosen_pembimbing', BimbinganDosenPembimbingController::class);
+        Route::post('bimbingan_dosen_pembimbing_validasi', [BimbinganDosenPembimbingController::class, 'validasi'])->name('proposal_pembimbing.validasi');
     });
 
     Route::middleware('can:dosen_penguji_skripsi')->group(function () {
@@ -100,4 +105,8 @@ Route::middleware('can:mahasiswa')->group(function () {
     Route::get('/proposal_pengajuan', [ProposalPengajuanController::class, 'index'])->name('proposal_pengajuan.index');
     Route::post('/proposal_pengajuan', [ProposalPengajuanController::class, 'store'])->name('proposal_pengajuan.store');
     Route::get('/proposal_pengajuan/create', [ProposalPengajuanController::class, 'create'])->name('proposal_pengajuan.create');
+
+    Route::get('/bimbingan_pengajuan', [BimbinganPengajuanController::class, 'index'])->name('bimbingan_pengajuan.index');
+    Route::post('/bimbingan_pengajuan', [BimbinganPengajuanController::class, 'store'])->name('bimbingan_pengajuan.store');
+    Route::get('/bimbingan_pengajuan/create', [BimbinganPengajuanController::class, 'create'])->name('bimbingan_pengajuan.create');
 });
