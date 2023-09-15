@@ -11,7 +11,7 @@ class Bimbingan extends Model
 
     protected $fillable = [
         'id_mahasiswa',
-        'id_dosen_pembimbing_bimbingan',
+        'id_dosen_pembimbing',
         'id_dosen_pembimbing_1',
         'id_dosen_pembimbing_2',
         'id_jadwal',
@@ -31,7 +31,7 @@ class Bimbingan extends Model
 
     public function dosenPengujBimbingan()
     {
-        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_bimbingan');
+        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing');
     }
 
     public function dosenPembimbing1()

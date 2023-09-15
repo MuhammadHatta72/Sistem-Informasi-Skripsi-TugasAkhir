@@ -85,10 +85,10 @@ Route::middleware('can:dosen')->group(function () {
         Route::post('proposal_dosen_penguji_validasi', [ProposalDosenPengujiProposalController::class, 'validasi'])->name('proposal_dosen_penguji.validasi');
     });
 
-    Route::middleware('can:dosen_pembimbing_bimbingan')->group(function () {
-        Route::view('dashboard-dosen_pembimbing_bimbingan', 'dashboard.dosen_pembimbing_bimbingan')->name('dashboard.dosen_pembimbing_bimbingan');
+    Route::middleware('can:dosen_pembimbing')->group(function () {
+        Route::view('dashboard-dosen_pembimbing', 'dashboard.dosen_pembimbing')->name('dashboard.dosen_pembimbing');
         Route::resource('bimbingan_dosen_pembimbing', ProposalDosenPembimbingBimbinganController::class);
-        Route::post('bimbingan_dosen_pembimbing_validasi', [ProposalDosenPembimbingBimbinganController::class, 'validasi'])->name('proposal_pembimbing_bimbingan.validasi');
+        Route::post('bimbingan_dosen_pembimbing_validasi', [ProposalDosenPembimbingBimbinganController::class, 'validasi'])->name('proposal_pembimbing.validasi');
     });
 
     Route::middleware('can:dosen_penguji_skripsi')->group(function () {

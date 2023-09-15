@@ -40,7 +40,7 @@ class BimbinganKPSController extends Controller
     //         ]);
 
     //         $bimbingan = Bimbingan::find($request->id);
-    //         $bimbingan->id_dosen_pembimbing_bimbingan = $request->dosen1;
+    //         $bimbingan->id_dosen_pembimbing = $request->dosen1;
     //         // $bimbingan->id_dosen_pembimbing_1 = $request->dosen2;
     //         // $bimbingan->id_dosen_pembimbing_2 = $request->dosen3;
     //         $bimbingan->status = $request->status;
@@ -67,14 +67,14 @@ class BimbinganKPSController extends Controller
             ]);
 
             $bimbingan = Bimbingan::find($request->id);
-            $bimbingan->id_dosen_pembimbing_bimbingan = $request->dosen1;
+            $bimbingan->id_dosen_pembimbing = $request->dosen1;
             // $bimbingan->id_dosen_pembimbing_1 = $request->dosen2;
             // $bimbingan->id_dosen_pembimbing_2 = $request->dosen3;
             $bimbingan->status = $request->status;
             $bimbingan->save();
 
             $dosen1 = User::where('id_dosen', $request->dosen1)->first();
-            $dosen1->sub_role = 'dosen_pembimbing_bimbingan';
+$dosen1->sub_role = 'dosen_pembimbing';
             $dosen1->save();
         } else if ($request->status == 'Ditolak') {
             $bimbingan = Bimbingan::find($request->id);
