@@ -15,7 +15,7 @@ class BimbinganDosenPembimbingBimbinganController extends Controller
     public function index()
     {
         $bimbingans = Bimbingan::where('status', '!=', 'Ditolak')->paginate(10);
-        return view('dosen.pembimbing_bimbingan.list_bimbingan', compact('bimbingans'));
+        return view('dosen.penguji_bimbingan.list_bimbingan', compact('bimbingans'));
     }
 
     /**
