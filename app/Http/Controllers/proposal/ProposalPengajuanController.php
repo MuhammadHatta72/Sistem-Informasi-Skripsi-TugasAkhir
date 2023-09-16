@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proposal;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 
 class ProposalPengajuanController extends Controller
 {
@@ -37,7 +39,7 @@ class ProposalPengajuanController extends Controller
         $proposal->id_mahasiswa = Auth::user()->mahasiswa->id;
         $proposal->judul = $request->input('judul');
         $proposal->kategori = $request->input('kategori');
-        $proposal->file = $request->file('file')->store('proposal');
+        $proposal->file = $request->file('file')->store('assets/proposal', 'public');
 
 
         $proposal->save();
@@ -54,13 +56,32 @@ class ProposalPengajuanController extends Controller
         return response()->download($templateFile, 'template_proposal.docx', $headers);
     }
 
+    // public function file()
+    // {
+    //     $file = public_path() . "/proposal";
+    //     $proposal = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
+    //     $file = $proposal->file;
+    //     $headers = array(
+    //         'Content-Type: application/pdf',
+    //     );
+    //     return response()->download(storage_path("app/$file"), 'proposal_mahasiswa.pdf', $headers);
+    // }
+
     public function file()
     {
         $proposal = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
-        $file = $proposal->file;
-        $headers = array(
-            'Content-Type: application/pdf',
-        );
-        return response()->download(storage_path("app/$file"), 'proposal.pdf', $headers);
+
+        if ($proposal) {
+            $file = $proposal->file;
+            $headers = [
+                'Content-Type: application/pdf',
+            ];
+
+            $filePath = storage_path("app/public/{$file}");
+
+            return response()->download($filePath, 'proposal_mahasiswa.pdf', $headers);
+        } else {
+            return abort(404);
+        }
     }
 }
