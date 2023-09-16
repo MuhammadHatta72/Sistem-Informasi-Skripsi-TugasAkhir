@@ -17,6 +17,7 @@ use App\Http\Controllers\Bimbingan\BimbinganPengajuanController;
 use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\Skripsi\SkripsiMahasiswaController;
 use App\Http\Controllers\Skripsi\SkripsiAdminController;
+use App\Http\Controllers\Skripsi\SkripsiKPSController;
 use App\Http\Controllers\KPS\KPSController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -61,9 +62,7 @@ Route::get('edit-profile', function () {
 Route::middleware('can:admin')->group(function () {
     Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
     Route::post('surat-tugas', [AdminController::class, 'surat_tugas_store'])->name('admin.print_surat_tugas');
-
-
-    Route::resource('persetujuan-skripsi', SkripsiAdminController::class);
+    Route::resource('skripsi-admin', SkripsiAdminController::class);
     Route::resource('proposal_admin', ProposalAdminController::class);
     Route::get('/proposal_download/{proposalId}', [ProposalAdminController::class, 'download'])->name('proposal_admin.download');
     Route::post('/proposal/admin/validasi', [ProposalAdminController::class, 'validasi'])->name('proposal_admin.validasi');
@@ -81,6 +80,9 @@ Route::middleware('can:dosen')->group(function () {
         Route::resource('proposal_kps', ProposalKPSController::class);
         //        Route::post('/proposal_kps/{id}', [ProposalKPSController::class, 'show'])->name('proposal_kps.show');
         Route::get('/proposal_history', [ProposalKPSController::class, 'history'])->name('proposal_kps.history');
+        Route::resource('skripsi-kps', SkripsiKPSController::class);
+        Route::get('/skripsi-history-kps', [SkripsiKPSController::class, 'history'])->name('skripsi-kps.history');
+        Route::get('/skripsi-history-detail-kps', [SkripsiKPSController::class, 'historyShow'])->name('skripsi-kps.history-detail');
     });
 
     Route::middleware('can:dosen_penilai')->group(function () {

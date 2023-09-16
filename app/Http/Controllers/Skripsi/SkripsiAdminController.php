@@ -59,7 +59,7 @@ class SkripsiAdminController extends Controller
         $skripsi->status = $request->status;
         $skripsi->save();
 
-        return redirect()->route('persetujuan-skripsi.index');
+        return redirect()->route('skripsi-admin.index');
     }
 
     /**

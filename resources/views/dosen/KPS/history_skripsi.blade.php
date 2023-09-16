@@ -1,11 +1,11 @@
-@extends('dashboard.admin')
+@extends('dashboard.dosen_KPS')
 
-@section('title', 'Pengajuan Skripsi Mahasiswa')
+@section('title', 'History Pengajuan Skripsi Mahasiswa')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Pengajuan Skripsi Mahasiswa</h1>
+            <h1>History Pengajuan Skripsi Mahasiswa</h1>
         </div>
         @if(session()->has('success'))
             <div class="alert alert-success col-lg-12" role="alert">
@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data Pengajuan Skripsi Mahasiswa </h4>
+                            <h4>Data History Pengajuan Skripsi Mahasiswa </h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -50,7 +50,7 @@
                                         <td><span class="badge badge-info text-white">{{ $skripsi->mahasiswa->nim }}</span></td>
                                         <td>{{ $skripsi->mahasiswa->nama }}</td>
                                         <td>
-                                            <a href="{{ route('skripsi-admin.show', $skripsi->id) }}" class="btn btn-warning">Detail</a>
+                                            <a href="{{ route('skripsi-kps.history-detail', $skripsi->id) }}" class="btn btn-warning">Detail</a>
                                         </td>
                                     </tr>
                                    </tbody>
