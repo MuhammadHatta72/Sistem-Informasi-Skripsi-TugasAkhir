@@ -34,13 +34,13 @@
                             </div>
                         @endif
                             <div class="card-body d-flex justify-content-center flex-column">
-                                <form method="POST" action="{{ route('bimbingan_pengajuan.store') }}"
+                                <form method="POST" action="{{ route('bimbingan_pengajuan.store')}}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="judul" class="form-label">Judul Bimbingan</label>
+                                        <label for="judul" class="form-label">Judul Skripsi</label>
                                         <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                            id="judul" name="judul" value="{{ old('judul') }}" readonly>
+                                            id="judul" name="judul" value="{{ old('judul') }}">
                                         @error('judul')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label for="proposalbimbingan" class="form-label">Proposal yang telah disetujui</label>
                                         <input type="file" accept=".pdf" class="form-control @error('proposalbimbingan') is-invalid @enderror"
-                                            id="proposalbimbingan" name="proposalbimbingan">
+                                            id="proposalbimbingan" name="proposalbimbingan" value="{{ old('judul') }}">
                                         @error('proposalbimbingan')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

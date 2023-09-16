@@ -101,6 +101,7 @@ Route::middleware('can:dosen')->group(function () {
 
 Route::middleware('can:mahasiswa')->group(function () {
     Route::resource('outline_mahasiswa', OutlineMahasiswaController::class);
+    Route::resource('bimbingan_pengajuan', BimbinganPengajuanController::class);
     Route::resource('skripsi', SkripsiMahasiswaController::class);
     Route::get('/proposal_pengajuan', [ProposalPengajuanController::class, 'index'])->name('proposal_pengajuan.index');
     Route::post('/proposal_pengajuan', [ProposalPengajuanController::class, 'store'])->name('proposal_pengajuan.store');
