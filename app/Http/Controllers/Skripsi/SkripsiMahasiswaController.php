@@ -17,18 +17,27 @@ class SkripsiMahasiswaController extends Controller
 
     public function create(Request $request)
     {
-        return view('mahasiswa.skripsi_pengajuan');
+        $data = [
+            'status_bimbingan' => true
+        ];
+        return view('mahasiswa.skripsi_pengajuan', $data);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
-            'path_dokumen' => 'required|string',
+            'skla' => 'required|mimes:pdf|max:20000',
+            'skkm' => 'required|mimes:pdf|max:20000',
+            'kompen' => 'required|mimes:pdf|max:20000'
         ], [
-            'judul.required' => 'Judul skripsi wajib diisi.',
-            'path_dokumen.required' => 'Path dokumen wajib diisi.',
+            'skla.required' => 'SKLA wajib diisi',
+            'skla.mimes' => 'Format file salah',
+            'skkm.required' => 'SKKM wajib diisi',
+            'skkm.mimes' => 'Format file salah',
+            'kompen.required' => 'Kompen wajib diisi',
+            'kompen.mimes' => 'Format file salah',
         ]);
+        dd($request);
 
         $skripsi = new Skripsi();
         $skripsi->id_mahasiswa = Auth::user()->mahasiswa->id;
