@@ -7,6 +7,8 @@ use App\Http\Controllers\Outline\OutlineKPSController;
 use App\Http\Controllers\Outline\OutlineMahasiswaController;
 use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\proposal\ProposalDosenPengujiProposalController;
+use App\Http\Controllers\proposal\ProposalPengajuanController;
+use App\Http\Controllers\proposal\ProposalKPSController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\Bimbingan\BimbinganDosenPembimbingController;
 use App\Http\Controllers\BimbinganController;
@@ -14,8 +16,6 @@ use App\Http\Controllers\Bimbingan\BimbinganPengajuanController;
 use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\Skripsi\SkripsiMahasiswaController;
 use App\Http\Controllers\KPS\KPSController;
-use App\Http\Controllers\proposal\ProposalPengajuanController;
-use App\Http\Controllers\proposal\ProposalKPSController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -59,7 +59,6 @@ Route::get('edit-profile', function () {
 Route::middleware('can:admin')->group(function () {
     Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
     Route::post('surat-tugas', [AdminController::class, 'surat_tugas_store'])->name('admin.print_surat_tugas');
-
 });
 
 Route::middleware('can:dosen')->group(function () {
@@ -105,6 +104,8 @@ Route::middleware('can:mahasiswa')->group(function () {
     Route::get('/proposal_pengajuan', [ProposalPengajuanController::class, 'index'])->name('proposal_pengajuan.index');
     Route::post('/proposal_pengajuan', [ProposalPengajuanController::class, 'store'])->name('proposal_pengajuan.store');
     Route::get('/proposal_pengajuan/create', [ProposalPengajuanController::class, 'create'])->name('proposal_pengajuan.create');
+    Route::get('/file_template', [ProposalPengajuanController::class, 'download'])->name('file_template.download');
+    Route::get('/file_proposal', [ProposalPengajuanController::class, 'file'])->name('file_proposal.download');
 
     Route::get('/bimbingan_pengajuan', [BimbinganPengajuanController::class, 'index'])->name('bimbingan_pengajuan.index');
     Route::post('/bimbingan_pengajuan', [BimbinganPengajuanController::class, 'store'])->name('bimbingan_pengajuan.store');

@@ -8,74 +8,76 @@
             <h1>Pengajuan Proposal</h1>
         </div>
 
-        <div class="section-body ">
+        <div class="section-body">
             <div class="row">
                 <div class="col-xl-12 mb-4">
                     <!-- Dashboard example card 1-->
-                    <a class="card lift h-100">
+                    <div class="card lift h-100">
                         <div class="card-header bg-whitesmoke">
                             <h4>Form Pengajuan Proposal</h4>
                         </div>
-{{--                        @if ()--}}
-{{--                            Anda belum memiliki outline yang valid--}}
-{{--                        @else--}}
-                        <!-- display any success message -->
+                        <!-- Display any success message -->
                         @if (session('success'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success mt-3 ml-3 mr-3">
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <div class="card-body d-flex justify-content-center flex-column">
-                            <form method="POST" action="{{ route('proposal_pengajuan.store') }}"
-                                enctype="multipart/form-data">
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('proposal_pengajuan.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="judul" class="form-label">Judul Proposal</label>
-                                    <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                        id="judul" name="judul" value="{{ old('judul') }}">
+                                    <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
                                     @error('judul')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="data1" class="form-label">Data 1</label>
-                                    <textarea type="text" class="form-control @error('data1') is-invalid @enderror" id="data1" name="data1"
-                                        style="height: 72px"></textarea>
-                                    @error('data1')
+                                    <label for="kategori" class="form-label">Kategori</label>
+                                    <select class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori">
+                                        <option value="1">Pasar Modal</option>
+                                        <option value="2">Saham</option>
+                                    </select>
+                                    @error('kategori')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="data2" class="form-label">Data 2</label>
-                                    <textarea type="text" class="form-control @error('data2') is-invalid @enderror" id="data2" name="data2"
-                                        style="height: 72px"></textarea>
-                                    @error('data2')
+                                    <label for="file" class="form-label">Template Proposal</label><br>
+                                    <a href="{{ route('file_template.download') }}" class="btn btn-success">Unduh Template</a>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="file" class="form-label">File</label>
+                                    <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" value="{{ old('file') }}">
+                                    @error('file')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="mb-3">
-                                    <label for="data3" class="form-label">Data 3</label>
-                                    <textarea type="text" class="form-control @error('data3') is-invalid @enderror" id="data3" name="data3"
-                                        style="height: 72px"></textarea>
-                                    @error('data3')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
-{{--                         @endif--}}
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 @endsection
+
+
+
+
+{{--                        @if ()--}}
+{{--                            Anda belum memiliki outline yang valid--}}
+{{--                        @else--}}
+                        <!-- display any success message -->
+{{--                         @endif--}}

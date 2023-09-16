@@ -39,18 +39,19 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <th>Judul</th>
-                                        <th>Data 1</th>
-                                        <th>Data 2</th>
-                                        <th>Data 3</th>
+                                        <th>Kategori</th>
+                                        <th>File</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     @forelse($proposals as $proposal)
                                         <tr>
                                             <td>{{ $proposal->judul }}</td>
-                                            <td>{{ $proposal->data1 }}</td>
-                                            <td>{{ $proposal->data2 }}</td>
-                                            <td>{{ $proposal->data3 }}</td>
+                                            <td>{{ $proposal->kategori }}</td>
+                                            <td>
+                                                <a href="{{ route('file_proposal.download', $proposal) }}"
+                                                    class="btn btn-success">Unduh File</a>
+                                            </td>
                                             <td>{{ $proposal->status }}</td>
                                             <td class="d-flex justify-content-center">
                                                 @if ($proposal->status == 'Proses' || $proposal->status == 'Ditolak')
