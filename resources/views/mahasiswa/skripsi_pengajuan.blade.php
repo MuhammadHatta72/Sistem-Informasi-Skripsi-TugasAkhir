@@ -14,9 +14,9 @@
                     <!-- Dashboard example card 1-->
                     <a class="card lift h-100">
                         <div class="card-header bg-whitesmoke"><h4>Form Pengajuan Skripsi</h4></div>
-                        @if(!$status_bimbingan)
+                        @if(!$status_bimbingan || $jumlah_pengajuan_dieksekusi > 0)
                         <div class="card-body d-flex justify-content-center flex-column">
-                            <p>Anda belum melakukan <b>Bimbingan Skripsi</b></p>
+                            <p>Anda belum melakukan <b>Bimbingan Skripsi</b> atau Anda telah mengirimkan <b>Skripsi</b> sebelumnya</p>
                         </div>
                         @else
                         @if ($errors->any())

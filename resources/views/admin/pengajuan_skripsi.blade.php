@@ -1,11 +1,11 @@
-@extends('dashboard.mahasiswa')
+@extends('dashboard.admin')
 
-@section('title', 'History Skripsi')
+@section('title', 'Pengajuan Skripsi Mahasiswa')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>History Pengajuan Skripsi</h1>
+            <h1>Pengajuan Skripsi Mahasiswa</h1>
         </div>
         @if(session()->has('success'))
             <div class="alert alert-success col-lg-12" role="alert">
@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data History Pengajuan Skripsi </h4>
+                            <h4>Data Pengajuan Skripsi Mahasiswa </h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -39,31 +39,19 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Status</th>
-                                            <th>Nilai 1</th>
-                                            <th>Nilai 2</th>
-                                            <th>Nilai 3</th>
-                                            <th>Action</th>
+                                            <th>NIM</th>
+                                            <th>Nama</th>
+                                            <th>Opsi</th>
                                         </tr>
                                     </thead>
                                    @forelse($skripsis as $skripsi)
                                    <tbody>
                                     <tr>
+                                        <td><span class="badge badge-info text-white">{{ $skripsi->mahasiswa->nim }}</span></td>
+                                        <td>{{ $skripsi->mahasiswa->nama }}</td>
                                         <td>
-                                            @if($skripsi->status == 'dikirim')
-                                            <span class="badge badge-info">Dikirim</span>
-                                            @elseif($skripsi->status == 'diproses')
-                                            <span class="badge badge-warning">Diproses</span>
-                                            @elseif($skripsi->status == 'ditolak')
-                                            <span class="badge badge-danger">Ditolak</span>
-                                            @else
-                                            <span class="badge badge-success">Diterima</span>
-                                            @endif
+                                            <a href="{{ route('persetujuan-skripsi.show', $skripsi->id) }}" class="btn btn-warning">Detail</a>
                                         </td>
-                                        <td>{{$skripsi->nilai1 == null ? 'Proses' : $skripsi->nilai1}}</td>
-                                        <td>{{$skripsi->nilai2 == null ? 'Proses' : $skripsi->nilai2}}</td>
-                                        <td>{{$skripsi->nilai3 == null ? 'Proses' : $skripsi->nilai3}}</td>
-                                        <td><a class="btn btn-primary" href="{{ route('skripsi.show', $skripsi) }}">Detail</a></td>
                                     </tr>
                                    </tbody>
                                    @empty
