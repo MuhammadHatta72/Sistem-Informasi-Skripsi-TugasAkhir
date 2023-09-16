@@ -19,24 +19,22 @@
                 <a class="nav-link" href="{{ route('outline.index') }}">Skripsi</a>
             </li>
         </ul>
-    </li>
-    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
-        <a href="#" class="nav-link has-dropdown">
-            <i class="fas fa-calendar-check"></i><span>Cetak Surat Perintah</span>
-        </a>
-        <ul class="dropdown-menu">
-            <li>
-                <a class="nav-link" href="{{ route('outline.create') }}">Dosen Pembimbing</a>
-            </li>
-            <li>
-                <a class="nav-link" href="{{ route('outline.index') }}">Dosen Penguji</a>
-            </li>
-        </ul>
-    </li> --}}
+    </li>--}}
+    {{-- <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}"> --}}
     <li class="nav-item {{ request()->is('surat-tugas') ? 'active' : '' }}">
         <a href="{{ route('admin.surat_tugas') }}" class="nav-link">
             <i class="fas fa-file"></i><span>Surat Tugas</span>
         </a>
+    </li>
+    <li class="nav-item dropdown}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-calendar-check"></i><span>Persetujuan</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('persetujuan-skripsi.index') }}">Skripsi</a>
+            </li>
+        </ul>
     </li>
     <li class="nav-item {{ request()->is('') ? 'active' : '' }}">
         <a href="{{ route('home') }}" class="nav-link">

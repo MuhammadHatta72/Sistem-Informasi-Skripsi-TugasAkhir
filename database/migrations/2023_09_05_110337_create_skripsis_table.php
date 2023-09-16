@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_mahasiswa');
             $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas');
-            $table->unsignedBigInteger('id_dosen_penguji_skripsi')->nulllable();
+            $table->unsignedBigInteger('id_dosen_penguji_skripsi')->nullable();
             $table->foreign('id_dosen_penguji_skripsi')->references('id')->on('dosens');
-            $table->unsignedBigInteger('id_dosen_pembimbing_1')->nulllable();
+            $table->unsignedBigInteger('id_dosen_pembimbing_1')->nullable();
             $table->foreign('id_dosen_pembimbing_1')->references('id')->on('dosens');
-            $table->unsignedBigInteger('id_dosen_pembimbing_2')->nulllable();
+            $table->unsignedBigInteger('id_dosen_pembimbing_2')->nullable();
             $table->foreign('id_dosen_pembimbing_2')->references('id')->on('dosens');
-            $table->unsignedBigInteger('id_jadwal')->nulllable();
+            $table->unsignedBigInteger('id_jadwal')->nullable();
             $table->foreign('id_jadwal')->references('id')->on('jadwals');
             $table->enum(
                 'status',

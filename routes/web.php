@@ -13,6 +13,7 @@ use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\Bimbingan\BimbinganPengajuanController;
 use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\Skripsi\SkripsiMahasiswaController;
+use App\Http\Controllers\Skripsi\SkripsiAdminController;
 use App\Http\Controllers\KPS\KPSController;
 use App\Http\Controllers\proposal\ProposalPengajuanController;
 use App\Http\Controllers\proposal\ProposalKPSController;
@@ -60,6 +61,7 @@ Route::middleware('can:admin')->group(function () {
     Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
     Route::post('surat-tugas', [AdminController::class, 'surat_tugas_store'])->name('admin.print_surat_tugas');
 
+    Route::resource('persetujuan-skripsi', SkripsiAdminController::class);
 });
 
 Route::middleware('can:dosen')->group(function () {
