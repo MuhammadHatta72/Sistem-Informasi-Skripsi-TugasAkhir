@@ -9,6 +9,7 @@ use App\Http\Controllers\OutlineController;
 use App\Http\Controllers\proposal\ProposalDosenPengujiProposalController;
 use App\Http\Controllers\proposal\ProposalPengajuanController;
 use App\Http\Controllers\proposal\ProposalKPSController;
+use App\Http\Controllers\proposal\ProposalAdminController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\Bimbingan\BimbinganDosenPembimbingController;
 use App\Http\Controllers\BimbinganController;
@@ -59,6 +60,8 @@ Route::get('edit-profile', function () {
 Route::middleware('can:admin')->group(function () {
     Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
     Route::post('surat-tugas', [AdminController::class, 'surat_tugas_store'])->name('admin.print_surat_tugas');
+    Route::resource('proposal_admin', ProposalAdminController::class);
+    Route::get('/proposal_download/{proposalId}', [ProposalAdminController::class, 'download'])->name('proposal_admin.download');
 });
 
 Route::middleware('can:dosen')->group(function () {
