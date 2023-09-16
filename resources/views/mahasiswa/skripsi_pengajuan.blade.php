@@ -14,11 +14,11 @@
                     <!-- Dashboard example card 1-->
                     <a class="card lift h-100">
                         <div class="card-header bg-whitesmoke"><h4>Form Pengajuan Skripsi</h4></div>
-                        {{-- @if(true)
+                        @if(!$status_bimbingan)
                         <div class="card-body d-flex justify-content-center flex-column">
-                            <p>Anda belum memiliki proposal yang valid</p>
+                            <p>Anda belum melakukan <b>Bimbingan Skripsi</b></p>
                         </div>
-                        @else --}}
+                        @else
                         @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -37,7 +37,7 @@
                                 <form method="POST" action="{{ route('skripsi.store') }}"
                                       enctype="multipart/form-data">
                                     @csrf
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label for="judul" class="form-label">Judul Skripsi</label>
                                         <input type="text" class="form-control @error('judul') is-invalid @enderror"
                                                id="judul" name="judul" value="{{ old('judul') }}" placeholder="Masukkan Judul Skripsi Anda">
@@ -46,19 +46,35 @@
                                             {{ $message }}
                                         </div>
                                         @enderror
-                                    </div>
-                                    {{-- <div class="mb-3">
-                                        <label for="file_skripsi" class="form-label">Upload File</label>
-                                        <textarea type="text" class="form-control @error('file_skripsi') is-invalid @enderror"
-                                                  id="file_skripsi"
-                                                  style="height: 72px"></textarea>
-                                        @error('file_skripsi')
+                                    </div> --}}
+                                    <div class="form-group">
+                                        <label>SKLA</label>
+                                        <input type="file" accept=".pdf" class="form-control" name="skla">
+                                        @error('skla')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
-                                    </div> --}}
-                                    <div class="mb-3">
+                                      </div>
+                                      <div class="form-group">
+                                        <label>SKKM</label>
+                                        <input type="file" accept=".pdf" class="form-control" name="skkm">
+                                        @error('skkm')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                      </div>
+                                      <div class="form-group">
+                                        <label>Kompen</label>
+                                        <input type="file" accept=".pdf" class="form-control" name="kompen">
+                                        @error('kompen')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                      </div>
+                                    {{-- <div class="mb-3">
                                         <label for="path_dokumen" class="form-label">Path Dokumen</label>
                                         <textarea type="text" class="form-control @error('path_dokumen') is-invalid @enderror"
                                                   id="path_dokumen"
@@ -68,12 +84,11 @@
                                             {{ $message }}
                                         </div>
                                         @enderror
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div> --}}
+                                    <button type="submit" onClick="return confirm('Pastikan data yang dikirim benar !')" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                        {{-- @endif --}}
+                        @endif
                     </a>
                 </div>
             </div>
