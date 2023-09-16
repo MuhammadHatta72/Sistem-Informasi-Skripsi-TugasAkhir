@@ -54,10 +54,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('skripsi.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('skripsi-kps.index') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('skripsi.index') }}">History</a>
+                <a class="nav-link" href="{{ route('skripsi-kps.history') }}">History</a>
             </li>
         </ul>
     </li>

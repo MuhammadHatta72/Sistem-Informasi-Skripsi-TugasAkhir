@@ -29,6 +29,7 @@ return new class extends Migration
                     'dikirim',
                     'diproses',
                     'diterima',
+                    'dinilai',
                     'ditolak',
                 ]
             )->default('dikirim');

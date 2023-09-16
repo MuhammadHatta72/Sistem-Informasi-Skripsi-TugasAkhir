@@ -32,7 +32,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('persetujuan-skripsi.index') }}">Skripsi</a>
+                <a class="nav-link" href="{{ route('skripsi-admin.index') }}">Skripsi</a>
             </li>
         </ul>
     </li>

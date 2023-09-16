@@ -1,4 +1,4 @@
-@extends('dashboard.admin')
+@extends('dashboard.dosen_KPS')
 
 @section('title', 'Pengajuan Skripsi Mahasiswa')
 
@@ -50,7 +50,7 @@
                                         <td><span class="badge badge-info text-white">{{ $skripsi->mahasiswa->nim }}</span></td>
                                         <td>{{ $skripsi->mahasiswa->nama }}</td>
                                         <td>
-                                            <a href="{{ route('skripsi-admin.show', $skripsi->id) }}" class="btn btn-warning">Detail</a>
+                                            <a href="{{ route('skripsi-kps.show', $skripsi->id) }}" class="btn btn-warning">Detail</a>
                                         </td>
                                     </tr>
                                    </tbody>

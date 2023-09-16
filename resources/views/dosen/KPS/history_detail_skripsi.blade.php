@@ -1,21 +1,28 @@
 <!-- outline_pengajuan.blade.php -->
-@extends('dashboard.admin')
+@extends('dashboard.dosen_KPS')
 
-@section('title', 'Detail Pengajuan Skripsi')
+@section('title', 'History Detail Pengajuan Skripsi')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Pengajuan Skripsi</h1>
+            <h1>History Pengajuan Skripsi</h1>
         </div>
 
         <div class="section-body ">
             <div class="col-12 col-sm-5 col-lg-12">
                 <div class="card">
                     <div class="card-header bg-whitesmoke">
-                        <h4>Detail Pengajuan Skripsi</h4>
+                        <h4>History Detail Pengajuan Skripsi</h4>
                     </div>
                     <div class="card-body">
+                        <a href="{{ route('skripsi-kps.index') }}" class="btn btn-warning">Kembali</a>
+                        <ul class="list-group list-group-flush my-4">
+                            <li class="list-group-item">Status : {{$skripsi->status}}</li>
+                            <li class="list-group-item">Nilai 1 : {{$skripsi->nilai1 == null ? 'Nilai belum diberikan' : $skripsi->nilai1}}</li>
+                            <li class="list-group-item">Nilai 2 : {{$skripsi->nilai2 == null ? 'Nilai belum diberikan' : $skripsi->nilai2}}</li>
+                            <li class="list-group-item">Nilai 3 : {{$skripsi->nilai3 == null ? 'Nilai belum diberikan' : $skripsi->nilai3}}</li>
+                          </ul>
                             <ul class="nav nav-pills" id="tabPengajuan" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#skla1"
@@ -87,20 +94,7 @@
                             </div>
 
                             <hr>
-                            <div style="display: flex; gap:10px;">
-                                <form method="POST" action="{{ route('skripsi-admin.update', $skripsi->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="status" value="ditolak">
-                                    <button type="submit" onClick="return confirm('Apakah yakin menolak pengajuan skripsi ?')" class="btn btn-danger">Tolak Pengajuan</button>
-                                </form>
-                                <form method="POST" action="{{ route('skripsi-admin.update', $skripsi->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="status" value="diproses">
-                                    <button type="submit" onClick="return confirm('Apakah yakin menerima pengajuan skripsi ?')" class="btn btn-success">Terima Pengajuan</button>
-                                </form>
-                            </div>
+                            <a href="{{ route('skripsi-kps.index') }}" class="btn btn-warning">Kembali</a>
                     </div>
                 </div>
             </div>
