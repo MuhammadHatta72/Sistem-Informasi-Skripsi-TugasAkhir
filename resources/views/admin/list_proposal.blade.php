@@ -94,7 +94,7 @@
                                             </td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $proposal->id_proposal }}">
+                                                    type="button" data-id="{{ $proposal->id }}">
                                                     <i class="fas fa-eye"></i> View
                                                 </button>
                                             </td>
@@ -133,7 +133,7 @@
                 var proposalId = $(this).data('id');
 
                 $.ajax({
-                    url: '/proposal_kps/1',
+                    url: '/proposal_admin/' + proposalId,
                     type: 'GET',
                     success: function(data) {
                         $('#modalContent').html(data);

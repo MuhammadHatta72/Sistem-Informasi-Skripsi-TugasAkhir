@@ -60,8 +60,10 @@ Route::get('edit-profile', function () {
 Route::middleware('can:admin')->group(function () {
     Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
     Route::post('surat-tugas', [AdminController::class, 'surat_tugas_store'])->name('admin.print_surat_tugas');
+
     Route::resource('proposal_admin', ProposalAdminController::class);
     Route::get('/proposal_download/{proposalId}', [ProposalAdminController::class, 'download'])->name('proposal_admin.download');
+    Route::post('/proposal/admin/validasi', [ProposalAdminController::class, 'validasi'])->name('proposal_admin.validasi');
 });
 
 Route::middleware('can:dosen')->group(function () {
