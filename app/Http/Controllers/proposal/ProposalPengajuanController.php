@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proposal;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 
 class ProposalPengajuanController extends Controller
 {
@@ -15,7 +17,7 @@ class ProposalPengajuanController extends Controller
         return view('mahasiswa.proposal_history', compact('proposals'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('mahasiswa.proposal_pengajuan');
     }
@@ -24,25 +26,62 @@ class ProposalPengajuanController extends Controller
     {
         $request->validate([
             'judul' => 'required|string|max:255',
-            'data1' => 'required|string',
-            'data2' => 'required|string',
-            'data3' => 'required|string',
+            'kategori' => 'required|string|max:255',
+            'file' => 'required|mimes:doc,docx,pdf|max:2048',
+
         ], [
             'judul.required' => 'Judul proposal wajib diisi.',
-            'data1.required' => 'Data 1 wajib diisi.',
-            'data2.required' => 'Data 2 wajib diisi.',
-            'data3.required' => 'Data 3 wajib diisi.',
+            'kategori.required' => 'Kategori proposal wajib diisi.',
+            'file.required' => 'File proposal wajib diisi.',
         ]);
 
         $proposal = new Proposal();
         $proposal->id_mahasiswa = Auth::user()->mahasiswa->id;
         $proposal->judul = $request->input('judul');
-        $proposal->data1 = $request->input('data1');
-        $proposal->data2 = $request->input('data2');
-        $proposal->data3 = $request->input('data3');
+        $proposal->kategori = $request->input('kategori');
+        $proposal->file = $request->file('file')->store('assets/proposal', 'public');
+
 
         $proposal->save();
 
         return redirect()->route('proposal_pengajuan.index')->with('success', 'Proposal berhasil diajukan');
+    }
+
+    public function download()
+    {
+        $templateFile = public_path() . "/template/template_proposal.docx";
+        $headers = array(
+            'Content-Type: application/docx',
+        );
+        return response()->download($templateFile, 'template_proposal.docx', $headers);
+    }
+
+    // public function file()
+    // {
+    //     $file = public_path() . "/proposal";
+    //     $proposal = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
+    //     $file = $proposal->file;
+    //     $headers = array(
+    //         'Content-Type: application/pdf',
+    //     );
+    //     return response()->download(storage_path("app/$file"), 'proposal_mahasiswa.pdf', $headers);
+    // }
+
+    public function file()
+    {
+        $proposal = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
+
+        if ($proposal) {
+            $file = $proposal->file;
+            $headers = [
+                'Content-Type: application/pdf',
+            ];
+
+            $filePath = storage_path("app/public/{$file}");
+
+            return response()->download($filePath, 'proposal_mahasiswa.pdf', $headers);
+        } else {
+            return abort(404);
+        }
     }
 }

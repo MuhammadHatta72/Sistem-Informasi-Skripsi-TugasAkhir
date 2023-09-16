@@ -11,27 +11,18 @@ class Bimbingan extends Model
 
     protected $fillable = [
         'id_mahasiswa',
-        'id_dosen_pembimbing',
         'id_dosen_pembimbing_1',
         'id_dosen_pembimbing_2',
+        'id_dosen_pembimbing_intern',
         'id_jadwal',
         'judul',
-        'data1',
-        'data2',
-        'data3',
+        'proposalbimbingan',
         'status',
-        'nilai1',
-        'revisi',
     ];
 
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');
-    }
-
-    public function dosenPengujBimbingan()
-    {
-        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing');
     }
 
     public function dosenPembimbing1()
@@ -42,6 +33,11 @@ class Bimbingan extends Model
     public function dosenPembimbing2()
     {
         return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_2');
+    }
+
+    public function dosenPembimbingIntern()
+    {
+        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_intern');
     }
 
     // public function jadwal()
