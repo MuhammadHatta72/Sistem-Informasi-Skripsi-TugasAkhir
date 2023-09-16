@@ -35,7 +35,7 @@
                 <a class="nav-link" href="{{ route('skripsi-admin.index') }}">Skripsi</a>
             </li>
         </ul>
-    </li> --}}
+    </li>
     <li
         class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
