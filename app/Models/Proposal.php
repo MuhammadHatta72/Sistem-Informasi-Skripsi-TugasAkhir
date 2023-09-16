@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use App\Models\Jadwal;
+use App\Models\KPS;
+use App\Models\User;
 
 class Proposal extends Model
 {
@@ -12,14 +17,14 @@ class Proposal extends Model
     protected $table = 'proposals';
     protected $fillable = [
         'id_mahasiswa',
+        'id_admin',
         'id_dosen_penguji_proposal',
         'id_dosen_pembimbing_1',
         'id_dosen_pembimbing_2',
         'id_jadwal',
         'judul',
-        'data1',
-        'data2',
-        'data3',
+        'kategori',
+        'file',
         'status',
         'nilai1',
         'revisi',
@@ -28,6 +33,11 @@ class Proposal extends Model
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'id_admin');
     }
 
     public function dosenPengujiProposal()

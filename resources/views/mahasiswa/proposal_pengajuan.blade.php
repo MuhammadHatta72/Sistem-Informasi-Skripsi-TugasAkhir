@@ -37,10 +37,7 @@
 
                                 <div class="mb-3">
                                     <label for="kategori" class="form-label">Kategori</label>
-                                    <select class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori">
-                                        <option value="1">Pasar Modal</option>
-                                        <option value="2">Saham</option>
-                                    </select>
+                                    <input type="text" class="form-control @error('ketegori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori') }}">
                                     @error('kategori')
                                         <div class="invalid-feedback">
                                             {{ $message }}

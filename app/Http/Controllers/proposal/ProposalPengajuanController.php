@@ -59,7 +59,7 @@ class ProposalPengajuanController extends Controller
         $proposal = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
         $file = $proposal->file;
         $headers = array(
-            'Content-Type: application/docx',
+            'Content-Type: application/pdf',
         );
         return response()->download(storage_path("app/$file"), 'proposal.pdf', $headers);
     }
