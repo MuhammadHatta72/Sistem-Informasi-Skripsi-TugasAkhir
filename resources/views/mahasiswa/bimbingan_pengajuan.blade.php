@@ -14,9 +14,9 @@
                     <!-- Dashboard example card 1-->
                     <a class="card lift h-100">
                         <div class="card-header bg-whitesmoke"><h4>Form Pengajuan Bimbingan</h4></div>
-                        @if(!$status_proposal)
+                        @if(!$status_proposal || $jumlah_pengajuan_dieksekusi > 0)
                         <div class="card-body d-flex justify-content-center flex-column">
-                            <p>Anda belum melakukan <b>Ujian Proposal</b></p>
+                            <p>Anda belum melakukan <b>Ujian Proposal</b> atau Anda telah mengirimkan <b>Bimbingan</b> sebelumnya</p>
                         </div>
                         @else
                         @if ($errors->any())
@@ -47,7 +47,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    <div class="mb-3">
                                         <label for="proposalbimbingan" class="form-label">Proposal yang telah disetujui</label>
                                         <input type="file" accept=".pdf" class="form-control @error('proposalbimbingan') is-invalid @enderror"
                                             id="proposalbimbingan" name="proposalbimbingan" value="{{ old('judul') }}">
@@ -57,10 +57,10 @@
                                             </div>
                                         @enderror
                                       </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit"  onClick="return confirm('Pastikan data yang dikirim benar !')" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                        @endif--
+                        @endif
                     </a>
                 </div>
             </div>

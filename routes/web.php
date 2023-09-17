@@ -14,6 +14,8 @@ use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\Bimbingan\BimbinganDosenPembimbingController;
 use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\Bimbingan\BimbinganPengajuanController;
+use App\Http\Controllers\Bimbingan\BimbinganAdminController;
+use App\Http\Controllers\Bimbingan\BimbinganKPSController;
 use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\Skripsi\SkripsiMahasiswaController;
 use App\Http\Controllers\Skripsi\SkripsiAdminController;
@@ -63,6 +65,7 @@ Route::middleware('can:admin')->group(function () {
     Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
     Route::post('surat-tugas', [AdminController::class, 'surat_tugas_store'])->name('admin.print_surat_tugas');
     Route::resource('skripsi-admin', SkripsiAdminController::class);
+    Route::resource('bimbingan-admin', BimbinganAdminController::class);
     Route::resource('proposal_admin', ProposalAdminController::class);
     Route::get('/proposal_download/{proposalId}', [ProposalAdminController::class, 'download'])->name('proposal_admin.download');
     Route::post('/proposal/admin/validasi', [ProposalAdminController::class, 'validasi'])->name('proposal_admin.validasi');
@@ -80,6 +83,9 @@ Route::middleware('can:dosen')->group(function () {
         Route::resource('proposal_kps', ProposalKPSController::class);
         //        Route::post('/proposal_kps/{id}', [ProposalKPSController::class, 'show'])->name('proposal_kps.show');
         Route::get('/proposal_history', [ProposalKPSController::class, 'history'])->name('proposal_kps.history');
+        Route::resource('bimbingan-kps', BimbinganKPSController::class);
+        Route::get('/bimbingan-history', [BimbinganKPSController::class, 'history'])->name('bimbingan-kps.history');
+        Route::get('/bimbingan-history-detail-kps', [BimbinganKPSController::class, 'historyShow'])->name('bimbingan-kps.history-detail');
         Route::resource('skripsi-kps', SkripsiKPSController::class);
         Route::get('/skripsi-history-kps', [SkripsiKPSController::class, 'history'])->name('skripsi-kps.history');
         Route::get('/skripsi-history-detail-kps', [SkripsiKPSController::class, 'historyShow'])->name('skripsi-kps.history-detail');

@@ -66,19 +66,16 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
+                                        <th>NIM</th>
                                         <th>Nama</th>
-                                        <th>Judul</th>
-                                        <th>Action</th>
+                                        <th>Opsi</th>
                                     </tr>
                                 @forelse($bimbingans as $bimbingan)
                                         <tr>
+                                            <td><span class="badge badge-info text-white">{{ $bimbingan->mahasiswa->nim }}</span></td>
                                             <td>{{ $bimbingan->mahasiswa->nama }}</td>
-                                            <td>{{ $bimbingan->judul }}</td>
-                                            <td class="d-flex justify-content-center">
-                                                <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $bimbingan->id_bimbingan }}">
-                                                    <i class="fas fa-eye"></i> View
-                                                </button>
+                                            <td>
+                                                <a href="{{ route('bimbingan-kps.show', $bimbingan->id) }}" class="btn btn-warning">Detail</a>
                                             </td>
                                         </tr>
                                     @empty
