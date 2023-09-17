@@ -65,12 +65,12 @@
                                             <span class="badge badge-warning">Diterima KPS</span>
                                             @elseif($bimbingan->status == 'ditolak kps')
                                             <span class="badge badge-warning">Ditolak KPS</span>
-                                            @elseif($bimbingan->status == 'diproses')
-                                            <span class="badge badge-warning">Diproses</span>
-                                            @elseif($bimbingan->status == 'ditolak')
-                                            <span class="badge badge-danger">Ditolak</span>
+                                            @elseif($bimbingan->status == 'diproses dosen pembimbing')
+                                            <span class="badge badge-warning">Diproses Dosen Pembimbing</span>
+                                            @elseif($bimbingan->status == 'ditolak dosen pembimbing')
+                                            <span class="badge badge-danger">Ditolak Dosen Pembimbing</span>
                                             @elseif($bimbingan->status == 'lulus bimbingan')
-                                            <span class="badge badge-warning">Lulus Bimbingan</span>
+                                            <span class="badge badge-success">Lulus Bimbingan</span>
                                             @else
                                             <span class="badge badge-success">Diterima</span>
                                             @endif

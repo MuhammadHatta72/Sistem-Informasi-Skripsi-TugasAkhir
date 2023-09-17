@@ -68,7 +68,7 @@
                                     <tr>
                                         <th>NIM</th>
                                         <th>Nama</th>
-                                        <th>Opsi</th>
+                                        <th>Action</th>
                                     </tr>
                                 @forelse($bimbingans as $bimbingan)
                                         <tr>

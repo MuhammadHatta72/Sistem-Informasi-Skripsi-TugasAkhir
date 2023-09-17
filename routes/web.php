@@ -94,7 +94,6 @@ Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:dosen_penilai')->group(function () {
         Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');
         Route::resource('outline_dosen_penilai', OutlineDosenPenilaiKelayakanController::class);
-        Route::post('outline_dosen_penilai_validasi', [OutlineDosenPenilaiKelayakanController::class, 'validasi'])->name('outline_dosen_penilai.validasi');
     });
 
     Route::middleware('can:dosen_penguji_proposal')->group(function () {
@@ -106,7 +105,7 @@ Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:dosen_pembimbing')->group(function () {
         Route::view('dashboard-dosen_pembimbing', 'dashboard.dosen_pembimbing')->name('dashboard.dosen_pembimbing');
         Route::resource('bimbingan_dosen_pembimbing', BimbinganDosenPembimbingController::class);
-        Route::post('bimbingan_dosen_pembimbing_validasi', [BimbinganDosenPembimbingController::class, 'validasi'])->name('proposal_pembimbing.validasi');
+        Route::post('bimbingan_dosen_pembimbing', [BimbinganDosenPembimbingController::class, 'update'])->name('bimbingan_dosen_pembimbing.update');
     });
 
     Route::middleware('can:dosen_penguji_skripsi')->group(function () {
