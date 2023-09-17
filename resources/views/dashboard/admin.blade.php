@@ -32,10 +32,13 @@
         </a>
         <ul class="dropdown-menu">
             <li>
+                <a class="nav-link" href="{{ route('bimbingan-admin.index') }}">Bimbingan</a>
+            </li>
+            <li>
                 <a class="nav-link" href="{{ route('skripsi-admin.index') }}">Skripsi</a>
             </li>
         </ul>
-    </li> --}}
+    </li>
     <li
         class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
@@ -49,11 +52,6 @@
                 <a class="nav-link" href="{{ route('proposal_pengajuan.index') }}">History</a>
             </li>
         </ul>
-    </li>
-    <li class="nav-item {{ request()->is('surat-tugas') ? 'active' : '' }}">
-        <a href="{{ route('admin.surat_tugas') }}" class="nav-link">
-            <i class="fas fa-file"></i><span>Surat Tugas</span>
-        </a>
     </li>
     <li class="nav-item {{ request()->is('') ? 'active' : '' }}">
         <a href="{{ route('home') }}" class="nav-link">
