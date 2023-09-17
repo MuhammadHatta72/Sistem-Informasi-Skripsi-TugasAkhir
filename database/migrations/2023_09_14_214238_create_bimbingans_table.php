@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreign('id_dosen_pembimbing_1')->references('id')->on('dosens');
             $table->unsignedBigInteger('id_dosen_pembimbing_2')->nullable();
             $table->foreign('id_dosen_pembimbing_2')->references('id')->on('dosens');
-            $table->unsignedBigInteger('id_dosen_pembimbing_intern')->nullable();
-            $table->foreign('id_dosen_pembimbing_intern')->references('id')->on('dosens');
+            $table->unsignedBigInteger('id_dosen_pembimbing_abstrak')->nullable();
+            $table->foreign('id_dosen_pembimbing_abstrak')->references('id')->on('dosens');
             $table->unsignedBigInteger('id_jadwal')->nullable();
             $table->foreign('id_jadwal')->references('id')->on('jadwals');
             $table->string('judul');
@@ -29,11 +29,13 @@ return new class extends Migration
                 'status',
                 [
                     'dikirim',
-                    'diproses',
-                    'diterima',
-                    'ditolak',
-                    'lulus',
-                    'tidak Lulus',
+                    'diterima admin',
+                    'ditolak admin',
+                    'diterima kps',
+                    'ditolak kps',
+                    'diproses dosen pembimbing',
+                    'ditolak dosen pembimbing',
+                    'lulus bimbingan',
                 ]
             )->default('dikirim');
             $table->timestamps();

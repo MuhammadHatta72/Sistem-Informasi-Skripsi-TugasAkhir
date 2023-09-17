@@ -14,7 +14,7 @@ class BimbinganKPSController extends Controller
 {
     public  function index()
     {
-        $bimbingans = Bimbingan::where('status', 'diproses')->paginate(10);
+        $bimbingans = Bimbingan::where('status', 'diterima admin')->paginate(10);
 
         return view('dosen.KPS.list_bimbingan', compact('bimbingans'));
     }
@@ -48,18 +48,18 @@ class BimbinganKPSController extends Controller
         $request->validate([
             'dosen_pembimbing_1' => 'required',
             'dosen_pembimbing_2' => 'required',
-            'dosen_pembimbing_intern' => 'required',
+            'dosen_pembimbing_abstrak' => 'required',
         ], [
             'dosen_pembimbing_1.required' => 'Dosen pembimbing 1 wajib diisi',
             'dosen_pembimbing_2.required' => 'Dosen pembimbing 2 wajib diisi',
-            'dosen_pembimbimng_intern' => 'Dosen pembimbing intern wajib diisi',
+            'dosen_pembimbing_abstrak.required' => 'Dosen pembimbing Abstrak wajib diisi',
         ]);
 
         $bimbingan = Bimbingan::find($id);
         $bimbingan->id_dosen_pembimbing_1 = $request->dosen_pembimbing_1;
         $bimbingan->id_dosen_pembimbing_2 = $request->dosen_pembimbing_2;
-        $bimbingan->id_dosen_pembimbing_intern = $request->dosen_pembimbing_intern;
-        $bimbingan->status = 'dikirim';
+        $bimbingan->id_dosen_pembimbing_abstrak = $request->dosen_pembimbing_abstrak;
+        $bimbingan->status = 'diterima kps';
         $bimbingan->save();
 
         return redirect()->route('bimbingan-kps.index')->with('success', 'Status berhasil diperbarui');
@@ -75,7 +75,7 @@ class BimbinganKPSController extends Controller
 
     public function history()
     {
-        $bimbingans = Bimbingan::where('status', 'diproses')->get();
+        $bimbingans = Bimbingan::where('status', 'diterima kps')->get();
         return view('dosen.KPS.history_bimbingan', compact('bimbingans'));
     }
 

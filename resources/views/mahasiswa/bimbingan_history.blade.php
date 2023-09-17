@@ -42,7 +42,7 @@
                                             <th>Judul</th>
                                             <th>Dosen Pembimbing 1</th>
                                             <th>Dosen Pembimbing 2</th>
-                                            <th>Dosen Pembimbing Intern</th>
+                                            <th>Dosen Pembimbing Abstrak</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -51,23 +51,31 @@
                                    <tbody>
                                     <tr>
                                         <td>{{$bimbingan->judul}}</td>
-                                        <td>{{ $bimbingan->id_dosen_pembimbing1->nama ?? '-' }}</td>
-                                        <td>{{ $bimbingan->id_dosen_pembimbing2->nama ?? '-' }}</td>
-                                        <td>{{ $bimbingan->id_dosen_pembimbing_intern->nama ?? '-' }}</td>
+                                        <td>{{ $bimbingan->dosenPembimbing1->nama ?? '-' }}</td>
+                                        <td>{{ $bimbingan->dosenPembimbing2->nama ?? '-' }}</td>
+                                        <td>{{ $bimbingan->dosenPembimbingAbstrak->nama ?? '-' }}</td>
                                         <td>
                                             @if($bimbingan->status == 'dikirim')
                                             <span class="badge badge-info">Dikirim</span>
+                                            @elseif($bimbingan->status == 'diterima admin')
+                                            <span class="badge badge-warning">Diterima Admin</span>
+                                            @elseif($bimbingan->status == 'ditolak admin')
+                                            <span class="badge badge-warning">Ditolak Admin</span>
+                                            @elseif($bimbingan->status == 'diterima kps')
+                                            <span class="badge badge-warning">Diterima KPS</span>
+                                            @elseif($bimbingan->status == 'ditolak kps')
+                                            <span class="badge badge-warning">Ditolak KPS</span>
                                             @elseif($bimbingan->status == 'diproses')
                                             <span class="badge badge-warning">Diproses</span>
                                             @elseif($bimbingan->status == 'ditolak')
                                             <span class="badge badge-danger">Ditolak</span>
+                                            @elseif($bimbingan->status == 'lulus bimbingan')
+                                            <span class="badge badge-warning">Lulus Bimbingan</span>
                                             @else
                                             <span class="badge badge-success">Diterima</span>
                                             @endif
                                         </td>
-                                        <td><a class="btn btn-primary"
-                                            {{-- href="{{ route('bimbingan.show', $bimbingan) }}" --}}
-                                            >Detail</a></td>
+                                        <td><a class="btn btn-primary" href="{{ route('bimbingan_pengajuan.show', $bimbingan) }}">Detail</a></td>
                                     </tr>
                                    </tbody>
                                    @empty

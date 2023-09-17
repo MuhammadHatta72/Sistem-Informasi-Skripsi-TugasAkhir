@@ -22,7 +22,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>Penilaian Bimbingan</h1>
+            <h1>Pengajuan Bimbingan</h1>
         </div>
 
         @if ($errors->any())
@@ -91,7 +91,7 @@
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-                                        {{ $bimbingan->withQueryString()->links() }}
+                                        {{-- {{ $bimbingan->withQueryString()->links() }} --}}
                                     </ul>
                                 </nav>
                             </div>

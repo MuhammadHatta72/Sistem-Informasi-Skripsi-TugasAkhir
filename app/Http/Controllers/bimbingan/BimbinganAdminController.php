@@ -5,6 +5,11 @@ namespace App\Http\Controllers\bimbingan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bimbingan;
+use App\Models\Dosen;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Mahasiswa;
 
 class BimbinganAdminController extends Controller
 {
@@ -59,7 +64,7 @@ class BimbinganAdminController extends Controller
         $bimbingan->status = $request->status;
         $bimbingan->save();
 
-        return redirect()->route('bimbingan-admin.index');
+        return redirect()->route('bimbingan-admin.index')->with('success', 'Status berhasil diperbarui');
     }
 
     /**
