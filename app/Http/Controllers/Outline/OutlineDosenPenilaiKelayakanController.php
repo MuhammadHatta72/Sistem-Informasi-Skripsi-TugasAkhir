@@ -74,23 +74,23 @@ class OutlineDosenPenilaiKelayakanController extends Controller
 
         $request->validate([
             'status' => 'required',
-            'nilai' => 'required',
         ]);
 
         $outline = Outline::findOrFail($request->id);
-        if (auth()->user()->dosen->id == $outline->id_dosen_penilai_1) {
-            $outline->nilai1 = $request->nilai;
-        } else if (auth()->user()->dosen->id == $outline->id_dosen_penilai_2) {
-            $outline->nilai2 = $request->nilai;
-        }
-
-//            check previous status
-        if ($outline->status == 'Tidak Lulus' || $request->status == 'Tidak Lulus') {
-            $outline->status = 'Tidak Lulus';
-        } else {
+        if ($outline->id_dosen_penilai_1 == auth()->user()->id_dosen) {
+            $outline->status1 = $request->status;
+            $outline->status = $request->status;
+        } else if ($outline->id_dosen_penilai_2 == auth()->user()->id_dosen) {
+            $outline->status2 = $request->status;
             $outline->status = $request->status;
         }
 
+        if ($outline->status1 == 'Diterima DosenPenilai1' && $outline->status2 == 'Diterima DosenPenilai2') {
+            $outline->status = 'Lulus';
+        } else if ($outline->status1 == 'Ditolak DosenPenilai1' || $outline->status2 == 'Ditolak DosenPenilai2') {
+            $outline->status = 'Ditolak';
+        }
+        $outline->revisi = $request->revisi;
         $outline->save();
 
         return redirect()->route('outline_dosen_penilai.index')->with('success', 'Berhasil memvalidasi outline');

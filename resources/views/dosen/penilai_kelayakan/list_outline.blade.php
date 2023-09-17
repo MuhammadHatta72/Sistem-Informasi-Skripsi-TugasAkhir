@@ -69,13 +69,15 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <th>Nama</th>
+                                        <th>Bidang</th>
                                         <th>Judul</th>
                                         <th>Action</th>
                                     </tr>
                                     @forelse($outlines as $outline)
                                         <tr>
                                             <td>{{ $outline->mahasiswa->nama }}</td>
-                                            <td>{{ $outline->judul }}</td>
+                                            <td>{{ $outline->pilihan == 1 ? $outline->bidang1->nama : $outline->bidang2->nama }}</td>
+                                            <td>{{ $outline->pilihan == 1 ? $outline->judul_1 : $outline->judul_2 }}</td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
                                                         type="button" data-id="{{ $outline->id }}">

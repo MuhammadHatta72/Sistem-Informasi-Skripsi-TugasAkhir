@@ -36,6 +36,20 @@ return new class extends Migration
             $table->enum('pilihan', ['1', '2']);
             $table->string('revisi')->nullable();
             $table->enum(
+                'status1',
+                [
+                    'Diterima DosenPenilai1',
+                    'Ditolak DosenPenilai1',
+                ]
+            );
+            $table->enum(
+                'status2',
+                [
+                    'Diterima DosenPenilai2',
+                    'Ditolak DosenPenilai2',
+                ]
+            );
+            $table->enum(
                 'status',
                 [
                     'Pengajuan',

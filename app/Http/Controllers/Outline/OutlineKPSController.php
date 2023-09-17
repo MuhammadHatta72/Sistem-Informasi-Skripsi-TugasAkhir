@@ -144,7 +144,7 @@ class OutlineKPSController extends Controller
 
             $outline->id_dosen_penilai_1 = $request->dosen1;
             $outline->id_dosen_penilai_2 = $request->dosen2;
-
+            $outline->pilihan = $request->pilihan;
             $outline->save();
             $dosen1->save();
             $dosen2->save();

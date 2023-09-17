@@ -94,6 +94,7 @@ Route::middleware('can:dosen')->group(function () {
     Route::middleware('can:dosen_penilai')->group(function () {
         Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');
         Route::resource('outline_dosen_penilai', OutlineDosenPenilaiKelayakanController::class);
+        Route::post('outline_dosen_penilai', [OutlineDosenPenilaiKelayakanController::class, 'validasi'])->name('outline_dosen_penilai.validasi');
     });
 
     Route::middleware('can:dosen_penguji_proposal')->group(function () {
