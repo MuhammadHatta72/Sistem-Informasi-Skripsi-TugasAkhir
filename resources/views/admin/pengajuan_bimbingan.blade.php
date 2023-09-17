@@ -1,11 +1,11 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.admin')
 
-@section('title', 'History Pengajuan Bimbingan Mahasiswa')
+@section('title', 'Pengajuan Bimbingan Mahasiswa')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>History Pengajuan Bimbingan Mahasiswa</h1>
+            <h1>Pengajuan Bimbingan Mahasiswa</h1>
         </div>
         @if(session()->has('success'))
             <div class="alert alert-success col-lg-12" role="alert">
@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data History Pengajuan Bimbingan Mahasiswa </h4>
+                            <h4>Data Pengajuan Bimbingan Mahasiswa </h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -50,7 +50,7 @@
                                         <td><span class="badge badge-info text-white">{{ $bimbingan->mahasiswa->nim }}</span></td>
                                         <td>{{ $bimbingan->mahasiswa->nama }}</td>
                                         <td>
-                                            <a href="{{ route('bimbingan-kps.history-detail', $bimbingan->id) }}" class="btn btn-warning">Detail</a>
+                                            <a href="{{ route('bimbingan-admin.show', $bimbingan->id) }}" class="btn btn-warning">Detail</a>
                                         </td>
                                     </tr>
                                    </tbody>
