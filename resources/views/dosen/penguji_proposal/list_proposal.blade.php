@@ -1,6 +1,6 @@
 @extends('dashboard.dosen_penguji_proposal')
 
-@section('title', 'Dashboard Dosen Penguji Proposal')
+@section('title', 'Daftar Ujian Proposal Mahasiswa')
 
 @section('content')
     <!-- Modal -->
@@ -22,7 +22,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>Penilaian Proposal</h1>
+            <h1>Daftar Ujian Proposal</h1>
         </div>
 
         @if ($errors->any())
@@ -46,7 +46,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data Proposal</h4>
+                            <h4>Data Ujian Proposal</h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -68,12 +68,31 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Judul</th>
+                                        <th>File</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     @forelse($proposals as $proposal)
                                         <tr>
                                             <td>{{ $proposal->mahasiswa->nama }}</td>
                                             <td>{{ $proposal->judul }}</td>
+                                            <td>
+                                                <a href="{{ route('proposal_dosen_penguji.download', $proposal) }}"
+                                                    class="btn btn-success">Unduh File</a>
+                                            </td>
+                                            <td>
+                                                @if ($proposal->status == 'dikirim')
+                                                    <span class="badge bg-warning text-white w-50">Dikirim</span>
+                                                @elseif($proposal->status == 'diproses')
+                                                    <span class="badge bg-info text-white w-50">Diproses</span>
+                                                @elseif($proposal->status == 'diterima')
+                                                    <span class="badge bg-success text-white w-50">Diterima</span>
+                                                @elseif ($proposal->status == 'lulus')
+                                                    <span class="badge bg-primary text-white w-50">Lulus</span>
+                                                @elseif($proposal->status == 'ditolak')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
+                                                @endif
+                                            </td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
                                                     type="button" data-id="{{ $proposal->id }}">
@@ -86,6 +105,7 @@
                                             <td colspan="5" class="text-center">Tidak ada data</td>
                                         </tr>
                                     @endforelse
+
                                 </table>
                             </div>
                             <div class="float-right">
@@ -127,5 +147,4 @@
             });
         });
     </script>
-
 @endsection

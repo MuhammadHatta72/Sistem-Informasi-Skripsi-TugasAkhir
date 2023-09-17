@@ -29,7 +29,7 @@ class ProposalKPSController extends Controller
     public function validasi(Request $request)
     {
         if ($request->status == 'Diterima') {
-            if ($request->dosen1 == $request->dosen2) {
+            if ($request->dosen1 === $request->dosen2) {
                 return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal tidak boleh sama');
             }
             $request->validate([

@@ -52,9 +52,23 @@
                                                 <a href="{{ route('file_proposal.download', $proposal) }}"
                                                     class="btn btn-success">Unduh File</a>
                                             </td>
-                                            <td>{{ $proposal->status }}</td>
+                                            <td>
+                                                @if ($proposal->status == 'dikirim')
+                                                    <span class="badge bg-warning text-white w-50">Dikirim</span>
+                                                @elseif($proposal->status == 'diproses')
+                                                    <span class="badge bg-info text-white w-50">Diproses</span>
+                                                @elseif($proposal->status == 'diterima')
+                                                    <span class="badge bg-success text-white w-50">Diterima</span>
+                                                @elseif ($proposal->status == 'Lulus')
+                                                    <span class="badge bg-primary text-white w-50">Lulus</span>
+                                                @elseif ($proposal->status == 'Tidak Lulus')
+                                                    <span class="badge bg-danger text-white w-50">Tidak Lulus</span>
+                                                @elseif($proposal->status == 'ditolak')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
+                                                @endif
+                                            </td>
                                             <td class="d-flex justify-content-center">
-                                                @if ($proposal->status == 'Proses' || $proposal->status == 'Ditolak')
+                                                @if ($proposal->status == 'Ditolak')
                                                     <a href="{{ route('proposal_mahasiswa.edit', $proposal) }}">
                                                         <button class="badge bg-warning border-0 my-3 mx-3 text-white"
                                                             type="button">
@@ -83,7 +97,7 @@
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-                                        {{-- {{ $proposals->withQueryString()->links() }} --}}
+                                        {{ $proposals->withQueryString()->links() }}
                                     </ul>
                                 </nav>
                             </div>

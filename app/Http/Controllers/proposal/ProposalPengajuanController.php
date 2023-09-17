@@ -13,7 +13,7 @@ class ProposalPengajuanController extends Controller
 {
     public function index()
     {
-        $proposals = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->get();
+        $proposals = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->paginate(10);
         return view('mahasiswa.proposal_history', compact('proposals'));
     }
 

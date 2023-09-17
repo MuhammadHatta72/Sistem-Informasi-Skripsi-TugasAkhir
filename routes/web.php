@@ -85,10 +85,10 @@ Route::middleware('can:dosen')->group(function () {
         Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
         Route::resource('outline_KPS', OutlineKPSController::class);
         Route::post('outline_KPS_validasi', [OutlineKPSController::class, 'validasi'])->name('outline_KPS.validasi');
+        Route::get('outline_history', [OutlineKPSController::class, 'history'])->name('outline_KPS.history');
 
         // Route Proposal
         Route::post('/proposal/kps/validasi', [ProposalKPSController::class, 'validasi'])->name('proposal_kps.validasi');
-        Route::get('outline_history', [OutlineKPSController::class, 'history'])->name('outline_KPS.history');
         Route::resource('proposal_kps', ProposalKPSController::class);
         Route::get('/proposal_history', [ProposalKPSController::class, 'history'])->name('proposal_kps.history');
         Route::get('/proposal_kps_download/{proposalId}', [ProposalKPSController::class, 'download'])->name('proposal_kps.download');
@@ -115,6 +115,7 @@ Route::middleware('can:dosen')->group(function () {
         Route::view('dashboard-dosen_penguji_proposal', 'dashboard.dosen_penguji_proposal')->name('dashboard.dosen_penguji_proposal');
         Route::resource('proposal_dosen_penguji', ProposalDosenPengujiProposalController::class);
         Route::post('proposal_dosen_penguji_validasi', [ProposalDosenPengujiProposalController::class, 'validasi'])->name('proposal_dosen_penguji.validasi');
+        Route::get('/proposal_dosen_penguji_download/{proposalId}', [ProposalDosenPengujiProposalController::class, 'download'])->name('proposal_dosen_penguji.download');
     });
 
     Route::middleware('can:dosen_pembimbing')->group(function () {
