@@ -82,15 +82,14 @@
                                             </td>
                                             <td>
                                                 @if ($proposal->status == 'dikirim')
-                                                    <span class="badge bg-warning text-white w-50">Proses</span>
+                                                    <span class="badge bg-warning text-white w-50">Dikirim</span>
                                                 @elseif($proposal->status == 'diproses')
-                                                    <span class="badge bg-info text-white w-50">Diterima</span>
+                                                    <span class="badge bg-info text-white w-50">Diproses</span>
                                                 @elseif($proposal->status == 'diterima')
                                                     <span class="badge bg-success text-white w-50">Diterima</span>
                                                 @elseif($proposal->status == 'ditolak')
                                                     <span class="badge bg-danger text-white w-50">Ditolak</span>
                                                 @endif
-                                            </td>
                                             </td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"

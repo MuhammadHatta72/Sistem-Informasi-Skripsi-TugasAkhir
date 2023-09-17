@@ -61,7 +61,7 @@
                                 File</a>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
+                    <button type="button" class="btn btn-primary" onclick="setStatus('Diproses')">Terima</button>
                     <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
