@@ -1,22 +1,22 @@
 <!-- outline_pengajuan.blade.php -->
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.mahasiswa')
 
-@section('title', 'History Detail Pengajuan Bimbingan')
+@section('title', 'Detail Pengajuan Bimbingan')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>History Pengajuan Bimbingan</h1>
+            <h1>Pengajuan Bimbingan</h1>
         </div>
 
         <div class="section-body ">
             <div class="col-12 col-sm-5 col-lg-12">
                 <div class="card">
                     <div class="card-header bg-whitesmoke">
-                        <h4>History Detail Pengajuan Bimbingan</h4>
+                        <h4>Detail Pengajuan Bimbingan</h4>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('bimbingan-kps.index') }}" class="btn btn-warning">Kembali</a>
+                        <a href="{{ route('bimbingan_pengajuan.index') }}" class="btn btn-warning">Kembali</a>
                         <ul class="list-group list-group-flush my-4">
                             <li class="list-group-item">Status : {{$bimbingan->status}}</li>
                           </ul>
@@ -49,7 +49,6 @@
                             </div>
 
                             <hr>
-                            <a href="{{ route('bimbingan-kps.index') }}" class="btn btn-warning">Kembali</a>
                     </div>
                 </div>
             </div>
