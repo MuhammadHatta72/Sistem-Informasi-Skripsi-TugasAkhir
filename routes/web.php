@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Outline\OutlineAdminController;
 use App\Http\Controllers\Outline\OutlineDosenPenilaiKelayakanController;
 use App\Http\Controllers\Outline\OutlineKPSController;
 use App\Http\Controllers\Outline\OutlineMahasiswaController;
@@ -69,6 +70,8 @@ Route::middleware('can:admin')->group(function () {
     Route::resource('proposal_admin', ProposalAdminController::class);
     Route::get('/proposal_download/{proposalId}', [ProposalAdminController::class, 'download'])->name('proposal_admin.download');
     Route::post('/proposal/admin/validasi', [ProposalAdminController::class, 'validasi'])->name('proposal_admin.validasi');
+    Route::resource('outline_admin', OutlineAdminController::class);
+
 });
 
 Route::middleware('can:dosen')->group(function () {
