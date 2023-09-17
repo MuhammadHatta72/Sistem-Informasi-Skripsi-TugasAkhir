@@ -14,7 +14,7 @@ class ProposalKPSController extends Controller
 {
     public  function index()
     {
-        $proposals = Proposal::where('status', 'dikirim')->paginate(10);
+        $proposals = Proposal::where('status', 'diproses')->paginate(10);
 
         return view('dosen.KPS.list_proposal', compact('proposals'));
     }
@@ -26,56 +26,31 @@ class ProposalKPSController extends Controller
         return view('dosen.KPS.detail_proposal', compact('proposal', 'dosens'));
     }
 
-    // public function validasi(Request $request)
-    // {
-    //     if ($request->status == 'Diterima') {
-    //         if ($request->dosen1 == $request) {
-    //             // dosen2 || $request->dosen1 == $request->dosen3 || $request->dosen2 == $request->dosen3
-    //             return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal, Dosen Pembimbing 1, dan Dosen Pembimbing 2 tidak boleh sama');
-    //         }
-    //         $request->validate([
-    //             'dosen1' => 'required',
-    //             // 'dosen2' => 'required',
-    //             // 'dosen3' => 'required',
-    //         ]);
-
-    //         $proposal = Proposal::find($request->id);
-    //         $proposal->id_dosen_penguji_proposal = $request->dosen1;
-    //         // $proposal->id_dosen_pembimbing_1 = $request->dosen2;
-    //         // $proposal->id_dosen_pembimbing_2 = $request->dosen3;
-    //         $proposal->status = $request->status;
-    //         $proposal->save();
-    //     } else if ($request->status == 'Ditolak') {
-    //         $proposal = Proposal::find($request->id);
-    //         $proposal->status = $request->status;
-    //         $proposal->save();
-    //     }
-
-    //     return redirect()->route('proposal_kps.index')->with('success', 'Status berhasil diperbarui');
-    // }
-
     public function validasi(Request $request)
     {
         if ($request->status == 'Diterima') {
-            if ($request->dosen1 == $request) {
+            if ($request->dosen1 === $request->dosen2) {
                 return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal tidak boleh sama');
             }
             $request->validate([
                 'dosen1' => 'required',
-                // 'dosen2' => 'required',
+                'dosen2' => 'required',
                 // 'dosen3' => 'required',
             ]);
 
             $proposal = Proposal::find($request->id);
-            $proposal->id_dosen_penguji_proposal = $request->dosen1;
-            // $proposal->id_dosen_pembimbing_1 = $request->dosen2;
-            // $proposal->id_dosen_pembimbing_2 = $request->dosen3;
+            $proposal->id_dosen_penguji_proposal_1 = $request->dosen1;
+            $proposal->id_dosen_penguji_proposal_2 = $request->dosen2;
             $proposal->status = $request->status;
             $proposal->save();
 
             $dosen1 = User::where('id_dosen', $request->dosen1)->first();
             $dosen1->sub_role = 'dosen_penguji_proposal';
             $dosen1->save();
+
+            $dosen2 = User::where('id_dosen', $request->dosen2)->first();
+            $dosen2->sub_role = 'dosen_penguji_proposal';
+            $dosen2->save();
         } else if ($request->status == 'Ditolak') {
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;
@@ -90,5 +65,15 @@ class ProposalKPSController extends Controller
     {
         $proposals = Proposal::paginate(10);
         return view('dosen.KPS.history_proposal', compact('proposals'));
+    }
+
+    public function download($id)
+    {
+        $proposal = Proposal::find($id);
+        $file = $proposal->file;
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return response()->download(storage_path("app/public/$file"), 'proposal_mahasiswa.pdf', $headers);
     }
 }

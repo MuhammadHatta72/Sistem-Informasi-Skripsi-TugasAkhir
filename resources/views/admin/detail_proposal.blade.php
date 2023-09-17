@@ -50,18 +50,18 @@
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <label for="file" class="form-label">File Proposal</label>
-                            <iframe src="{{ asset('storage/assets/proposal/' . $proposal->id) }}" width="100%"
+                            <iframe src="{{ asset('storage/assets/proposal/' . $proposal->file) }}" width="100%"
                                 height="600px" frameborder="0"></iframe>
-
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <a href="{{ route('proposal_admin.download', $proposal) }}" class="btn btn-success">Unduh
                                 File</a>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
+                    <button type="button" class="btn btn-primary" onclick="setStatus('Diproses')">Terima</button>
                     <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>

@@ -29,7 +29,7 @@ class ProposalAdminController extends Controller
 
     public function validasi(Request $request)
     {
-        if ($request->status == 'Diterima') {
+        if ($request->status == 'Diproses') {
             $request->validate([
                 'status' => 'required',
             ]);

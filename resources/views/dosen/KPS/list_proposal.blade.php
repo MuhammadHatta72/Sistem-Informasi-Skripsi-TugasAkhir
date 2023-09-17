@@ -68,15 +68,32 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Judul</th>
+                                        <th>File</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     @forelse($proposals as $proposal)
                                         <tr>
                                             <td>{{ $proposal->mahasiswa->nama }}</td>
                                             <td>{{ $proposal->judul }}</td>
+                                            <td>
+                                                <a href="{{ route('proposal_kps.download', $proposal) }}"
+                                                    class="btn btn-success">Unduh File</a>
+                                            </td>
+                                            <td>
+                                                @if ($proposal->status == 'dikirim')
+                                                    <span class="badge bg-warning text-white w-50">Dikirim</span>
+                                                @elseif($proposal->status == 'diproses')
+                                                    <span class="badge bg-info text-white w-50">Diproses</span>
+                                                @elseif($proposal->status == 'diterima')
+                                                    <span class="badge bg-success text-white w-50">Diterima</span>
+                                                @elseif($proposal->status == 'ditolak')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
+                                                @endif
+                                            </td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $proposal->id_proposal }}">
+                                                    type="button" data-id="{{ $proposal->id }}">
                                                     <i class="fas fa-eye"></i> View
                                                 </button>
                                             </td>
@@ -104,24 +121,24 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            $('.viewBtn').click(function () {
+            $('.viewBtn').click(function() {
                 var proposalId = $(this).data('id');
 
                 $.ajax({
-                    url: '/proposal_kps/1',
+                    url: '/proposal_kps/' + proposalId,
                     type: 'GET',
-                    success: function (data) {
+                    success: function(data) {
                         $('#modalContent').html(data);
                         $('#detailModal').modal('show');
                     },
-                    error: function () {
+                    error: function() {
                         alert('Error fetching proposal detail');
                     }
                 });
