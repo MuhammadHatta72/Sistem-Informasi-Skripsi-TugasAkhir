@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Bimbingan;
 use Illuminate\Http\Request;
 use App\Models\Dosen;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BimbinganDosenPembimbingController extends Controller
 {
@@ -14,8 +16,10 @@ class BimbinganDosenPembimbingController extends Controller
      */
     public function index()
     {
-        $bimbingans = Bimbingan::where('status', '!=', 'Ditolak')->paginate(10);
-        return view('dosen.penguji_bimbingan.list_bimbingan', compact('bimbingans'));
+        $bimbingans = Bimbingan::where('status', 'diterima kps')
+        ->orWhere('status', 'diproses dosen pembimbing')
+        ->paginate(10);
+        return view('dosen.pembimbing.list_bimbingan', compact('bimbingans'));
     }
 
     /**
@@ -40,21 +44,13 @@ class BimbinganDosenPembimbingController extends Controller
     public function show(string $id)
     {
         $bimbingan = Bimbingan::findOrFail($id);
-        return view('dosen.pembimbing_bimbingan.detail_bimbingan', compact('bimbingan'));
+        return view('dosen.pembimbing.detail_bimbingan', compact('bimbingan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
     {
         //
     }
@@ -67,13 +63,9 @@ class BimbinganDosenPembimbingController extends Controller
         //
     }
 
-    public function validasi(Request $request)
+    public function update(Request $request, string $id)
     {
-        $request->validate([
-            'status' => 'required',
-        ]);
-
-        $bimbingan = Bimbingan::findOrFail($request->id);
+        $bimbingan = Bimbingan::find($id);
         $bimbingan->status = $request->status;
         $bimbingan->save();
 

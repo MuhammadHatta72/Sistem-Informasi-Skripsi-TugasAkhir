@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\bimbingan;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Outline\StoreOutlineMahasiswaRequest;
-use App\Http\Requests\Outline\UpdateOutlineMahasiswaRequest;
+use App\Http\Requests\Bimbingan\UpdateBimbinganPengajuanRequest;
+use App\Http\Requests\Bimbingan\StoreBimbinganPengajuanRequest;
 use Illuminate\Http\Request;
 use App\Models\Bimbingan;
 use Illuminate\Support\Facades\Auth;
