@@ -10,7 +10,6 @@ use App\Models\Outline;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Table;
 
 class OutlineKPSController extends Controller
 {
