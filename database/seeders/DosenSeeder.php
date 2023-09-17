@@ -53,5 +53,10 @@ class DosenSeeder extends Seeder
             'nik' => '1234567899',
             'nama' => 'Dini',
         ]);
+
+        Dosen::create([
+            'nik' => '1234567890',
+            'nama' => 'KPS',
+        ]);
     }
 }

@@ -60,4 +60,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Dosen::class, 'id_dosen');
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'id_admin');
+    }
 }
