@@ -12,4 +12,9 @@ class Bidang extends Model
     {
         return $this->belongsToMany(Prodi::class, 'prodi_bidang', 'id_bidang', 'id_prodi');
     }
+
+    public function outline(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Outline::class, 'id_bidang');
+    }
 }
