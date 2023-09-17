@@ -9,6 +9,8 @@ use App\Models\Dosen;
 use App\Models\Outline;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Table;
 
 class OutlineKPSController extends Controller
 {
@@ -17,7 +19,7 @@ class OutlineKPSController extends Controller
      */
     public function index()
     {
-        $outlines = Outline::where('status', 'Proses')->paginate(5);
+        $outlines = Outline::where('status', 'Pengajuan')->paginate(5);
         return view('dosen.KPS.list_outline', compact('outlines'));
     }
 
@@ -43,14 +45,35 @@ class OutlineKPSController extends Controller
     public function show($id)
     {
 //        check if source route is from history or not
+        $dosens = Dosen::join('users', 'users.id_dosen', '=', 'dosens.id')
+            ->where(function($query) {
+                $query->where('sub_role', null)
+                    ->orWhere('sub_role', ' ')
+                    ->orWhere('sub_role', 'dosen_penilai');
+            })
+            ->get();
+
+        $listDosen = [];
+        $slots = [];
+
+        foreach($dosens as $dosen) {
+            $countPenilai = DB::table('outlines')
+                ->where('id_dosen_penilai_1', $dosen->id_dosen)
+                ->orWhere('id_dosen_penilai_2', $dosen->id_dosen)
+                ->count();
+
+            if($countPenilai <= $dosen->limit_subrole) {
+                $listDosen[] = $dosen;
+                $slots[] = $dosen->limit_subrole - $countPenilai;
+            }
+        }
+
+        $outline = Outline::find($id);
+
         if (str_contains(url()->previous(), 'history')) {
-            $outline = Outline::find($id);
-            $dosens = Dosen::join('users', 'users.id_dosen', '=', 'dosens.id')->where('sub_role', '')->orWhere('sub_role', null)->get();
-            return view('dosen.KPS.history_detail_outline', compact('outline', 'dosens'));
+            return view('dosen.KPS.history_detail_outline', compact('outline', 'listDosen', 'slots'));
         } else {
-            $outline = Outline::find($id);
-            $dosens = Dosen::join('users', 'users.id_dosen', '=', 'dosens.id')->where('sub_role', '')->orWhere('sub_role', null)->get();
-            return view('dosen.KPS.detail_outline', compact('outline', 'dosens'));
+            return view('dosen.KPS.detail_outline', compact('outline', 'listDosen', 'slots'));
         }
     }
 
@@ -80,69 +103,56 @@ class OutlineKPSController extends Controller
 
     public function validasi(Request $request)
     {
-        if (str_contains(url()->previous(), 'history')) {
-            if ($request->status == 'Revisi') {
-                if ($request->dosen1 == $request->dosen2) {
-                    return redirect()->route('outline_KPS.index')->with('error', 'Dosen penilai tidak boleh sama');
-                }
-                $request->validate([
-                    'dosen1' => 'required',
-                    'dosen2' => 'required',
-                ]);
-                $outline = Outline::find($request->id);
-                $outline->status = 'Diterima';
+        if ($request->status == 'Ditolak') {
+            $outline = Outline::find($request->id);
+            $outline->status = $request->status;
+            $outline->save();
+        } else if ($request->status == 'Diterima KPS' || $request->status == 'Revisi') {
+            $request->validate([
+                'dosen1' => 'required|different:dosen2', // Memastikan dosen1 berbeda dengan dosen2
+                'dosen2' => 'required',
+            ], [
+                'dosen1.different' => 'Dosen 1 tidak boleh sama dengan Dosen 2.', // Pesan khusus untuk validasi ini
+            ]);
+
+            $outline = Outline::find($request->id);
+            $outline->status = $request->status;
+
+            $dosen1 = User::where('id_dosen', $request->dosen1)->first();
+            $dosen2 = User::where('id_dosen', $request->dosen2)->first();
+
+            if ($dosen1->sub_role == null || $dosen1->sub_role == '') {
+                $dosen1->sub_role = 'dosen_penilai';
+            }
+            if ($dosen2->sub_role == null || $dosen2->sub_role == ''){
+                $dosen2->sub_role = 'dosen_penilai';
+            }
+
+            $countPenilai = DB::table('outlines')
+                ->where('id_dosen_penilai_1', $outline->id_dosen_penilai_1)
+                ->orWhere('id_dosen_penilai_2', $outline->id_dosen_penilai_2)
+                ->count();
+
+            if($countPenilai == 1 and $request->status == 'Revisi') {
                 $dosen1_old = User::where('id_dosen', $outline->id_dosen_penilai_1)->first();
                 $dosen2_old = User::where('id_dosen', $outline->id_dosen_penilai_2)->first();
                 $dosen1_old->sub_role = null;
                 $dosen2_old->sub_role = null;
                 $dosen1_old->save();
                 $dosen2_old->save();
-                $dosen1 = User::where('id_dosen', $request->dosen1)->first();
-
-                $dosen2 = User::where('id_dosen', $request->dosen2)->first();
-                $dosen1->sub_role = 'dosen_penilai';
-                $dosen2->sub_role = 'dosen_penilai';
-
-                $outline->id_dosen_penilai_1 = $request->dosen1;
-                $outline->id_dosen_penilai_2 = $request->dosen2;
-                $outline->save();
-                $dosen1->save();
-                $dosen2->save();
-            } else if ($request->status == 'Ditolak') {
-                $outline = Outline::find($request->id);
-                $outline->status = $request->status;
-                $outline->save();
             }
 
+            $outline->id_dosen_penilai_1 = $request->dosen1;
+            $outline->id_dosen_penilai_2 = $request->dosen2;
+
+            $outline->save();
+            $dosen1->save();
+            $dosen2->save();
+        }
+
+        if (str_contains(url()->previous(), 'history')) {
             return redirect()->route('outline_KPS.history')->with('success', 'Status berhasil diperbarui');
         } else {
-            if ($request->status == 'Diterima') {
-                if ($request->dosen1 == $request->dosen2) {
-                    return redirect()->route('outline_KPS.index')->with('error', 'Dosen penilai tidak boleh sama');
-                }
-                $request->validate([
-                    'dosen1' => 'required',
-                    'dosen2' => 'required',
-                ]);
-                $outline = Outline::find($request->id);
-                $outline->status = $request->status;
-
-                $dosen1 = User::where('id_dosen', $request->dosen1)->first();
-                $dosen2 = User::where('id_dosen', $request->dosen2)->first();
-                $dosen1->sub_role = 'dosen_penilai';
-                $dosen2->sub_role = 'dosen_penilai';
-
-                $outline->id_dosen_penilai_1 = $request->dosen1;
-                $outline->id_dosen_penilai_2 = $request->dosen2;
-                $outline->save();
-                $dosen1->save();
-                $dosen2->save();
-            } else if ($request->status == 'Ditolak') {
-                $outline = Outline::find($request->id);
-                $outline->status = $request->status;
-                $outline->save();
-            }
-
             return redirect()->route('outline_KPS.index')->with('success', 'Status berhasil diperbarui');
         }
 
