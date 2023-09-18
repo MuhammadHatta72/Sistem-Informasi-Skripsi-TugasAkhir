@@ -1,4 +1,4 @@
-@extends('dashboard.dosen_pembimbing')
+@extends('dashboard.dosen')
 
 @section('title', 'Dashboard Dosen Pembimbing Bimbingan')
 

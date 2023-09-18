@@ -22,8 +22,8 @@ class ProposalKPSController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
-        $dosens = Dosen::join('users', 'users.id_dosen', '=', 'dosens.id')->where('sub_role', '')->orWhere('sub_role', null)->get();
-        return view('dosen.KPS.detail_proposal', compact('proposal', 'dosens'));
+        [$listDosen, $slots] = limit();
+        return view('dosen.KPS.detail_proposal', compact('proposal', 'listDosen', 'slots'));
     }
 
     public function validasi(Request $request)
@@ -43,14 +43,6 @@ class ProposalKPSController extends Controller
             $proposal->id_dosen_penguji_proposal_2 = $request->dosen2;
             $proposal->status = $request->status;
             $proposal->save();
-
-            $dosen1 = User::where('id_dosen', $request->dosen1)->first();
-            $dosen1->sub_role = 'dosen_penguji_proposal';
-            $dosen1->save();
-
-            $dosen2 = User::where('id_dosen', $request->dosen2)->first();
-            $dosen2->sub_role = 'dosen_penguji_proposal';
-            $dosen2->save();
         } else if ($request->status == 'Ditolak') {
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;

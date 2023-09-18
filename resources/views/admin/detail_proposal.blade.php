@@ -50,7 +50,7 @@
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <label for="file" class="form-label">File Proposal</label>
-                            <iframe src="{{ asset('storage/assets/proposal/' . $proposal->file) }}" width="100%"
+                            <iframe src="{{ asset('storage/' . $proposal->file) }}" width="100%"
                                 height="600px" frameborder="0"></iframe>
                         </div>
                     </div>

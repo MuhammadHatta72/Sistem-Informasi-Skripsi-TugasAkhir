@@ -79,7 +79,7 @@
                         <div class="col-lg-4 col-sm-4">
                             <label for="dosen1">Dosen Penguji Proposal 1</label>
                             <select class="form-control" id="dosen1" name="dosen1">
-                                @foreach ($dosens as $dosen)
+                                @foreach ($listDosen as $dosen)
                                     <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>
@@ -88,7 +88,7 @@
                         <div class="col-lg-4 col-sm-4">
                             <label for="dosen2">Dosen Penguji Proposal 2</label>
                             <select class="form-control" id="dosen2" name="dosen2">
-                                @foreach ($dosens as $dosen)
+                                @foreach ($listDosen as $dosen)
                                     <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
                                 @endforeach
                             </select>

@@ -1,10 +1,11 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.kps')
 
 @section('title', 'Dashboard Dosen')
 
 @section('content')
     <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,7 +54,7 @@
                                 <form method="GET">
                                     <div class="input-group">
                                         <input name="search" type="text" class="form-control"
-                                            placeholder="Search nama kegiatan">
+                                               placeholder="Search nama kegiatan">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -89,8 +90,8 @@
                                             <td class="d-flex">
                                                 @if ($proposal->status != 'Proses')
                                                     <button
-                                                        class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn w-50"
-                                                        type="button" data-id="{{ $proposal->id }}">
+                                                            class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn w-50"
+                                                            type="button" data-id="{{ $proposal->id }}">
                                                         <i class="fas fa-edit"></i> Edit Dosen
                                                     </button>
                                                 @endif
@@ -118,24 +119,24 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            $('.viewBtn').click(function() {
+            $('.viewBtn').click(function () {
                 var proposalId = $(this).data('id');
 
                 $.ajax({
                     url: '/outline_KPS/' + proposalId,
                     type: 'GET',
-                    success: function(data) {
+                    success: function (data) {
                         $('#modalContent').html(data);
                         $('#detailModal').modal('show');
                     },
-                    error: function() {
+                    error: function () {
                         alert('Error fetching proposal detail');
                     }
                 });

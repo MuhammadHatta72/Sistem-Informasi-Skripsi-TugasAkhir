@@ -1,5 +1,5 @@
 <!-- bimbingan_pengajuan.blade.php -->
-@extends('dashboard.dosen_pembimbing')
+@extends('dashboard.dosen')
 
 @section('title', 'Detail Pengajuan Bimbingan')
 

@@ -61,6 +61,11 @@
             </li>
         </ul>
     </li>
+    <li class="nav-item {{ request()->is('dashboard-kps') ? 'active' : '' }}">
+        <a href="{{ route('dashboard.kps') }}" class="nav-link">
+            <i class="fas fa-poll-h"></i><span>Rekap</span>
+        </a>
+    </li>
 @endsection
 
 @section('content')

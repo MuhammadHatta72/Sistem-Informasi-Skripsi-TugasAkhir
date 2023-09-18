@@ -6,8 +6,7 @@
                       enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="status" id="status" value="">
-                    <input type="hidden" name="pilihan" id="pilihan" value="">
-                    <input type="hidden" name="id" value="{{ $outline->id }}">
+                        <input type="hidden" name="id" value="{{ $outline->id }}">
                     <ul class="nav nav-pills" id="myTab3" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#outline1"
@@ -182,8 +181,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary me-2" onclick="setStatus('Diterima KPS', '1')">Terima Outline 1</button>
-                    <button type="button" class="btn btn-primary mx-2" onclick="setStatus('Diterima KPS', '2')">Terima Outline 2</button>
+                    <button type="button" class="btn btn-primary mx-2" onclick="setStatus('Diterima KPS')">Terima</button>
                     <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak KPS')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
@@ -192,9 +190,8 @@
     </div>
 </div>
 <script>
-    function setStatus(status, pilihan) {
+    function setStatus(status) {
         document.getElementById('status').value = status;
-        document.getElementById('pilihan').value = pilihan;
         document.getElementById('submitButton').click();
     }
 </script>

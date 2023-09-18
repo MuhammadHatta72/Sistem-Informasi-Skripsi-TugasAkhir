@@ -1,4 +1,4 @@
-@extends('dashboard.dosen_penguji_proposal')
+@extends('dashboard.dosen')
 
 @section('title', 'Daftar Ujian Proposal Mahasiswa')
 

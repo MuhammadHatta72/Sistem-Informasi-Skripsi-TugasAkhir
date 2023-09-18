@@ -1,10 +1,11 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.kps')
 
 @section('title', 'Daftar Pengajuan Bimbingan')
 
 @section('content')
     <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,7 +54,7 @@
                                 <form method="GET">
                                     <div class="input-group">
                                         <input name="search" type="text" class="form-control"
-                                            placeholder="Search nama kegiatan">
+                                               placeholder="Search nama kegiatan">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -70,12 +71,15 @@
                                         <th>Nama</th>
                                         <th>Action</th>
                                     </tr>
-                                @forelse($bimbingans as $bimbingan)
+                                    @forelse($bimbingans as $bimbingan)
                                         <tr>
-                                            <td><span class="badge badge-info text-white">{{ $bimbingan->mahasiswa->nim }}</span></td>
+                                            <td>
+                                                <span class="badge badge-info text-white">{{ $bimbingan->mahasiswa->nim }}</span>
+                                            </td>
                                             <td>{{ $bimbingan->mahasiswa->nama }}</td>
                                             <td>
-                                                <a href="{{ route('bimbingan-kps.show', $bimbingan->id) }}" class="btn btn-warning">Detail</a>
+                                                <a href="{{ route('bimbingan-kps.show', $bimbingan->id) }}"
+                                                   class="btn btn-warning">Detail</a>
                                             </td>
                                         </tr>
                                     @empty

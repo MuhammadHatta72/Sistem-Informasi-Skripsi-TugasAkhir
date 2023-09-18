@@ -16,7 +16,7 @@ return new class extends Migration
 //            $table->foreignId('id_user')->constrained('users');
             $table->integer('nik');
             $table->string('nama');
-            $table->integer('limit_subrole')->default(5);
+            $table->integer('limit')->default(5);
             $table->timestamps();
         });
     }

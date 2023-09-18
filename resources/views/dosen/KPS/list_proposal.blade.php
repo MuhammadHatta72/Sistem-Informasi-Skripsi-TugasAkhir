@@ -1,10 +1,11 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.kps')
 
 @section('title', 'Daftar Pengajuan Proposal')
 
 @section('content')
     <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,7 +54,7 @@
                                 <form method="GET">
                                     <div class="input-group">
                                         <input name="search" type="text" class="form-control"
-                                            placeholder="Search nama kegiatan">
+                                               placeholder="Search nama kegiatan">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -78,7 +79,7 @@
                                             <td>{{ $proposal->judul }}</td>
                                             <td>
                                                 <a href="{{ route('proposal_kps.download', $proposal) }}"
-                                                    class="btn btn-success">Unduh File</a>
+                                                   class="btn btn-success">Unduh File</a>
                                             </td>
                                             <td>
                                                 @if ($proposal->status == 'dikirim')
@@ -93,7 +94,7 @@
                                             </td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $proposal->id }}">
+                                                        type="button" data-id="{{ $proposal->id }}">
                                                     <i class="fas fa-eye"></i> View
                                                 </button>
                                             </td>
@@ -121,24 +122,24 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            $('.viewBtn').click(function() {
+            $('.viewBtn').click(function () {
                 var proposalId = $(this).data('id');
 
                 $.ajax({
                     url: '/proposal_kps/' + proposalId,
                     type: 'GET',
-                    success: function(data) {
+                    success: function (data) {
                         $('#modalContent').html(data);
                         $('#detailModal').modal('show');
                     },
-                    error: function() {
+                    error: function () {
                         alert('Error fetching proposal detail');
                     }
                 });

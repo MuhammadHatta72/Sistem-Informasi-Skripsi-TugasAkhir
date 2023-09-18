@@ -22,4 +22,9 @@ class DashboardController extends Controller
     {
         return view('dashboard.mahasiswa');
     }
+
+    public function kps()
+    {
+        return view('dashboard.kps');
+    }
 }

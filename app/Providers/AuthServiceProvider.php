@@ -10,18 +10,11 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     public static array $permissionRole = [
-        'dashboard' => ['admin', 'dosen', 'mahasiswa'],
+        'dashboard' => ['admin', 'dosen', 'mahasiswa', 'kps'],
         'dosen' => ['dosen'],
         'mahasiswa' => ['mahasiswa'],
-        'admin' => ['admin']
-    ];
-
-    public static array $permissionSubRole = [
-        'KPS' => ['KPS'],
-        'dosen_penilai' => ['dosen_penilai'],
-        'dosen_penguji_proposal' => ['dosen_penguji_proposal'],
-        'dosen_pembimbing' => ['dosen_pembimbing'],
-        'dosen_penguji_skripsi' => ['dosen_penguji_skripsi'],
+        'admin' => ['admin'],
+        'kps' => ['kps'],
     ];
 
     /**
@@ -41,7 +34,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         $this->definePermissions(self::$permissionRole, 'role');
-        $this->definePermissions(self::$permissionSubRole, 'sub_role');
     }
 
     /**

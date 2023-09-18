@@ -5,6 +5,7 @@ namespace App\Http\Controllers\bimbingan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bimbingan\UpdateBimbinganPengajuanRequest;
 use App\Http\Requests\Bimbingan\StoreBimbinganPengajuanRequest;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 use App\Models\Bimbingan;
 use Illuminate\Support\Facades\Auth;
@@ -20,18 +21,8 @@ class BimbinganPengajuanController extends Controller
 
     public function create(Request $request)
     {
-        $jumlah_pengajuan_dieksekusi = Bimbingan::where([
-            ['id_mahasiswa', Auth::user()->mahasiswa->id],
-            ['status', '<>' ,'ditolak admin'],
-            ['status', '<>' ,'ditolak kps'],
-            ['status', '<>' ,'ditolak dosen pembimbing'],
-            ['status', '<>' ,'lulus bimbingan'],
-        ])->count();
-        $data = [
-            'status_proposal' => true,
-            'jumlah_pengajuan_dieksekusi' => $jumlah_pengajuan_dieksekusi,
-        ];
-        return view('mahasiswa.bimbingan_pengajuan', $data);
+        $proposal = Proposal::where('id_mahasiswa', auth()->user()->id_mahasiswa)->where('status', 'lulus')->first();
+        return view('mahasiswa.bimbingan_pengajuan', compact('proposal'));
     }
 
     public function show(String  $id)
