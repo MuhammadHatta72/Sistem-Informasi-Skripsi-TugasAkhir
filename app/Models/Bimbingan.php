@@ -35,9 +35,9 @@ class Bimbingan extends Model
         return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_2');
     }
 
-    public function dosenPembimbingIntern()
+    public function dosenPembimbingAbstrak()
     {
-        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_intern');
+        return $this->belongsTo(Dosen::class, 'id_dosen_pembimbing_abstrak');
     }
 
     // public function jadwal()
