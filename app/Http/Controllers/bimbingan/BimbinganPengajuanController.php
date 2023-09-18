@@ -22,8 +22,10 @@ class BimbinganPengajuanController extends Controller
     {
         $jumlah_pengajuan_dieksekusi = Bimbingan::where([
             ['id_mahasiswa', Auth::user()->mahasiswa->id],
-            ['status', '<>' ,'ditolak'],
-
+            ['status', '<>' ,'ditolak admin'],
+            ['status', '<>' ,'ditolak kps'],
+            ['status', '<>' ,'ditolak dosen pembimbing'],
+            ['status', '<>' ,'lulus bimbingan'],
         ])->count();
         $data = [
             'status_proposal' => true,
