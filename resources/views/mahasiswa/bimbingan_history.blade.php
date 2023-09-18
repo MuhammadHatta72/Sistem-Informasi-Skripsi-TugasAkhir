@@ -60,11 +60,11 @@
                                             @elseif($bimbingan->status == 'diterima admin')
                                             <span class="badge badge-warning">Diterima Admin</span>
                                             @elseif($bimbingan->status == 'ditolak admin')
-                                            <span class="badge badge-warning">Ditolak Admin</span>
+                                            <span class="badge badge-danger">Ditolak Admin</span>
                                             @elseif($bimbingan->status == 'diterima kps')
                                             <span class="badge badge-warning">Diterima KPS</span>
                                             @elseif($bimbingan->status == 'ditolak kps')
-                                            <span class="badge badge-warning">Ditolak KPS</span>
+                                            <span class="badge badge-danger">Ditolak KPS</span>
                                             @elseif($bimbingan->status == 'diproses dosen pembimbing')
                                             <span class="badge badge-warning">Diproses Dosen Pembimbing</span>
                                             @elseif($bimbingan->status == 'ditolak dosen pembimbing')
