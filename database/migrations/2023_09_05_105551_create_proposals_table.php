@@ -26,6 +26,33 @@ return new class extends Migration
             $table->string('kategori');
             $table->string('file');
             $table->enum(
+                'status1',
+                [
+                    'Diterima DosenPenguji1',
+                    'Ditolak DosenPenguji1',
+                ]
+            )->nullable();
+            $table->enum(
+                'status2',
+                [
+                    'Diterima DosenPenguji2',
+                    'Ditolak DosenPenguji2',
+                ]
+            )->nullable();
+//            $table->enum(
+//                'status',
+//                [
+//                    'Pengajuan',
+//                    'Diterima KPS',
+//                    'Diterima DosenPenilai1',
+//                    'Diterima DosenPenilai2',
+//                    'Ditolak KPS',
+//                    'Ditolak DosenPenilai1',
+//                    'Ditolak DosenPenilai2',
+//                    'Lulus'
+//                ]
+//            )->default('Pengajuan');
+            $table->enum(
                 'status',
                 [
                     'dikirim',

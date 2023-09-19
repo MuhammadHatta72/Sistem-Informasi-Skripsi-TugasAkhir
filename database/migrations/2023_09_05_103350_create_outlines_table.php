@@ -41,14 +41,14 @@ return new class extends Migration
                     'Diterima DosenPenilai1',
                     'Ditolak DosenPenilai1',
                 ]
-            );
+            )->nullable();
             $table->enum(
                 'status2',
                 [
                     'Diterima DosenPenilai2',
                     'Ditolak DosenPenilai2',
                 ]
-            );
+            )->nullable();
             $table->enum(
                 'status',
                 [

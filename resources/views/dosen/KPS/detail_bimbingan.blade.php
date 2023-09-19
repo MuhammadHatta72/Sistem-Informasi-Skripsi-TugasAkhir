@@ -24,8 +24,10 @@
                                 <label>Pilih Dosen Pembimbing 1</label>
                                 <select class="form-control" name="dosen_pembimbing_1" required>
                                     <option value="">Pilih Dosen</option>
-                                    @foreach ($dosens as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
+                                    @foreach($listDosen as $index => $dosen)
+                                        <option value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $bimbingan->id_dosen_pembimbing_1 ? 'selected' : '' }}>
+                                            {{ $dosen->nama }} | {{ $slots[$index] }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -33,20 +35,27 @@
                                 <label>Pilih Dosen Pembimbing 2</label>
                                 <select class="form-control" name="dosen_pembimbing_2" required>
                                     <option value="">Pilih Dosen</option>
-                                    @foreach ($dosens as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
+                                    @foreach($listDosen as $index => $dosen)
+                                        <option value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $bimbingan->id_dosen_pembimbing_2 ? 'selected' : '' }}>
+                                            {{ $dosen->nama }} | {{ $slots[$index] }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group mt-3">
-                                <label>Pilih Dosen Pembimbing Abstrak</label>
-                                <select class="form-control" name="dosen_pembimbing_abstrak" required>
-                                    <option value="">Pilih Dosen</option>
-                                    @foreach ($dosens as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            @if($bimbingan->mahasiswa->kelas->jenis != 'internasional')
+                                <div class="form-group mt-3">
+                                    <label>Pilih Dosen Pembimbing Abstrak</label>
+                                    <select class="form-control" name="dosen_pembimbing_abstrak" required>
+                                        <option value="">Pilih Dosen</option>
+                                        @foreach($listDosen as $index => $dosen)
+                                            <option value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $bimbingan->id_dosen_pembimbing_abstrak ? 'selected' : '' }}>
+                                                {{ $dosen->nama }} | {{ $slots[$index] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+
                             <button type="submit"
                                     onClick="return confirm('Apakah Anda yakin, sudah memilih dosen tersebut?')"
                                     class="btn btn-primary">Submit

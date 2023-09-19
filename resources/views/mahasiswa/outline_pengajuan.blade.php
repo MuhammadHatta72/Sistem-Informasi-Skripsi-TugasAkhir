@@ -23,9 +23,27 @@
                                     <h5><i class="fas fa-info"></i> Informasi</h5>
                                     <p>Anda sudah mengajukan outline</p>
                                 </div>
-                                <a href=" {{ route('outline_mahasiswa.index') }}" class="btn btn-primary">
+                                <a href=" {{ route('outline_mahasiswa.index') }}" id="test" class="btn btn-primary">
                                     <i class="fas fa-history"></i> Riwayat Outline
                                 </a>
+                                <script>
+                                    document.querySelector('#test').addEventListener('click', function() {
+                                        Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: 'You won\'t be able to revert this!',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Yes, delete it!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                // Perform the action (e.g., submit the form)
+                                                document.querySelector('#form-id').submit();
+                                            }
+                                        })
+                                    });
+                                </script>
                             </div>
                         </div>
 

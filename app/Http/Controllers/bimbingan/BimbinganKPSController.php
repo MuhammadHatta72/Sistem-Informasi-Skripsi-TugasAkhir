@@ -38,27 +38,36 @@ class BimbinganKPSController extends Controller
     public function show($id)
     {
         $bimbingan = Bimbingan::find($id);
-        $dosens = Dosen::all();
-        return view('dosen.KPS.detail_bimbingan', compact('bimbingan', 'dosens'));
+        [$listDosen, $slots] = limit();
+        return view('dosen.KPS.detail_bimbingan', compact('bimbingan', 'listDosen', 'slots'));
     }
 
     public function update(Request $request, string $id)
     {
-
-        $request->validate([
-            'dosen_pembimbing_1' => 'required',
-            'dosen_pembimbing_2' => 'required',
-            'dosen_pembimbing_abstrak' => 'required',
-        ], [
-            'dosen_pembimbing_1.required' => 'Dosen pembimbing 1 wajib diisi',
-            'dosen_pembimbing_2.required' => 'Dosen pembimbing 2 wajib diisi',
-            'dosen_pembimbing_abstrak.required' => 'Dosen pembimbing Abstrak wajib diisi',
-        ]);
-
         $bimbingan = Bimbingan::find($id);
+        if ($bimbingan->mahasiswa->kelas->jenis != 'internasional') {
+            $request->validate([
+                'dosen_pembimbing_1' => 'required',
+                'dosen_pembimbing_2' => 'required',
+                'dosen_pembimbing_abstrak' => 'required',
+            ], [
+                'dosen_pembimbing_1.required' => 'Dosen pembimbing 1 wajib diisi',
+                'dosen_pembimbing_2.required' => 'Dosen pembimbing 2 wajib diisi',
+                'dosen_pembimbing_abstrak.required' => 'Dosen pembimbing Abstrak wajib diisi',
+            ]);
+            $bimbingan->id_dosen_pembimbing_abstrak = $request->dosen_pembimbing_abstrak;
+        } else {
+            $request->validate([
+                'dosen_pembimbing_1' => 'required',
+                'dosen_pembimbing_2' => 'required',
+            ], [
+                'dosen_pembimbing_1.required' => 'Dosen pembimbing 1 wajib diisi',
+                'dosen_pembimbing_2.required' => 'Dosen pembimbing 2 wajib diisi',
+            ]);
+        }
+
         $bimbingan->id_dosen_pembimbing_1 = $request->dosen_pembimbing_1;
         $bimbingan->id_dosen_pembimbing_2 = $request->dosen_pembimbing_2;
-        $bimbingan->id_dosen_pembimbing_abstrak = $request->dosen_pembimbing_abstrak;
         $bimbingan->status = 'diterima kps';
         $bimbingan->save();
 

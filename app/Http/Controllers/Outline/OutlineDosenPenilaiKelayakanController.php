@@ -76,6 +76,7 @@ class OutlineDosenPenilaiKelayakanController extends Controller
         ]);
 
         $outline = Outline::findOrFail($request->id);
+//        dd($request->all(), $outline->id_dosen_penilai_1, $outline->id_dosen_penilai_2, auth()->user()->id_dosen);
         if ($outline->id_dosen_penilai_1 == auth()->user()->id_dosen) {
             $outline->status1 = $request->status;
             $outline->status = $request->status;
@@ -92,9 +93,9 @@ class OutlineDosenPenilaiKelayakanController extends Controller
             return redirect()->route('outline_dosen_penilai.index')->with('error', 'Outline yang dipilih tidak sama dengan dosen penilai lainnya');
         }
 
-        if ($outline->status1 == 'Diterima DosenPenilai1' && $outline->status2 == 'Diterima DosenPenilai2') {
+        if ($outline->status1 === 'Diterima DosenPenilai1' and $outline->status2 === 'Diterima DosenPenilai2') {
             $outline->status = 'Lulus';
-        } else if ($outline->status1 == 'Ditolak DosenPenilai1' || $outline->status2 == 'Ditolak DosenPenilai2') {
+        } else if ($outline->status1 === 'Ditolak DosenPenilai1' and $outline->status2 === 'Ditolak DosenPenilai2') {
             $outline->status = 'Ditolak';
         }
 

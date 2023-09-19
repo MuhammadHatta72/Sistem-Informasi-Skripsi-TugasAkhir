@@ -73,24 +73,28 @@ class ProposalDosenPengujiProposalController extends Controller
 
     public function validasi(Request $request)
     {
-        if ($request->status == 'Lulus') {
-            $request->validate([
-                'nilai_1' => 'required',
-            ]);
+        $request->validate([
+            'nilai' => 'required',
+        ]);
 
-            $proposal = Proposal::find($request->id);
-            $proposal->nilai_1 = $request->nilai_1;
-            $proposal->status = $request->status;
-            $proposal->save();
-
-            return redirect()->route('proposal_dosen_penguji.index')->with('success', 'Selamat Anda Lulus');
-        } else if ($request->status == 'Tidak Lulus') {
-            $proposal = Proposal::find($request->id);
-            $proposal->status = $request->status;
-            $proposal->save();
-
-            return redirect()->route('proposal_dosen_penguji.index')->with('success', 'Maaf, Anda Tidak Lulus');
+        $proposal = Proposal::find($request->id);
+        if ($proposal->id_dosen_penguji_proposal_1 == Auth::user()->dosen->id) {
+            $proposal->nilai_1 = $request->nilai;
+            $proposal->status1 = $request->status;
+        } else if ($proposal->id_dosen_penguji_proposal_2 == Auth::user()->dosen->id) {
+            $proposal->nilai_2 = $request->nilai;
+            $proposal->status2 = $request->status;
         }
+
+        if ($proposal->status1 == 'Diterima DosenPenguji1' && $proposal->status2 == 'Diterima DosenPenguji2') {
+            $proposal->status = 'Lulus';
+        } elseif ($proposal->status1 == 'Ditolak DosenPenguji1' || $proposal->status2 == 'Ditolak DosenPenguji2') {
+            $proposal->status = 'Tidak Lulus';
+        }
+        $proposal->save();
+
+        return redirect()->route('proposal_dosen_penguji.index')->with('success', 'Berhasil Menilai Proposal');
+
     }
 
     public function download($id)

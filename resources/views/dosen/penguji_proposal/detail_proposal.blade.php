@@ -78,9 +78,9 @@
 
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
-                            <label for="nilai_1" class="form-label">Nilai</label>
-                            <input type="number" class="form-control @error('nilai_1') is-invalid @enderror"
-                                id="nilai_1" name="nilai_1" value="{{ old('nilai_1') }}">
+                            <label for="nilai" class="form-label">Nilai</label>
+                            <input type="number" class="form-control @error('nilai') is-invalid @enderror"
+                                id="nilai" name="nilai" value="{{ old('nilai') }}">
                             @error('status')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -88,8 +88,9 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Lulus')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Tidak Lulus')">Tolak</button>
+                    <button type="button" class="btn btn-primary"
+                            onclick="setStatus( {{ $proposal->id_dosen_penguji_proposal_1 == auth()->user()->id_dosen ? "'Diterima DosenPenguji1'" : "'Diterima DosenPenguji2'" }} )">Terima</button>
+                    <button type="button" class="btn btn-danger" onclick="setStatus( {{ $proposal->id_dosen_penguji_proposal_1 == auth()->user()->id_dosen ? "'Ditolak DosenPenguji1'" : "'Ditolak DosenPenguji2'" }} )">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>

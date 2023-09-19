@@ -14,39 +14,35 @@
                     <!-- Dashboard example card 1-->
                     <a class="card lift h-100">
                         <div class="card-header bg-whitesmoke"><h4>Form Pengajuan Bimbingan</h4></div>
-                        @if(!$status_proposal || $jumlah_pengajuan_dieksekusi > 0)
-                        <div class="card-body">
-                            <div class="alert alert-danger">
-                                Anda belum melakukan ujian proposal atau Anda telah mengajukan bimbingan sebelumnya
-                            </div>
-                        </div>
-                        @else
-                            @php
-                                $judul = $proposal->judul;
-                                $bidang = $outline->bidang1->nama;
-                            @endphp
                         @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
                             </div>
                         @endif
+                        @if(is_null($proposal))
+                            <div class="card-body">
+                                <div class="alert alert-danger">
+                                    Anda belum melakukan ujian proposal atau Anda telah mengajukan bimbingan sebelumnya
+                                </div>
+                            </div>
+                        @else
                             <div class="card-body d-flex justify-content-center flex-column">
                                 <form method="POST" action="{{ route('bimbingan_pengajuan.store')}}"
-                                    enctype="multipart/form-data">
+                                      enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="judul" class="form-label">Judul Skripsi</label>
                                         <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                               id="judul" name="judul" value="{{ $judul }}" readonly>
+                                               id="judul" name="judul" value="{{ $proposal->judul }}" readonly>
                                         @error('judul')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -57,24 +53,29 @@
                                     <div class="mb-3">
                                         <label for="bidang" class="form-label">Bidang</label>
                                         <input type="text" class="form-control @error('bidang') is-invalid @enderror"
-                                               id="bidang" name="bidang" value="{{ $bidang }}" readonly>
-                                    @error('bidang')
+                                               id="bidang" name="bidang" value="{{ $proposal->kategori }}" readonly>
+                                        @error('bidang')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="proposalbimbingan" class="form-label">Proposal yang telah disetujui</label>
-                                        <input type="file" accept=".pdf" class="form-control @error('proposalbimbingan') is-invalid @enderror"
-                                            id="proposalbimbingan" name="proposalbimbingan" value="{{ old('judul') }}">
+                                        <label for="proposalbimbingan" class="form-label">Proposal yang telah
+                                            disetujui</label>
+                                        <input type="file" accept=".pdf"
+                                               class="form-control @error('proposalbimbingan') is-invalid @enderror"
+                                               id="proposalbimbingan" name="proposalbimbingan"
+                                               value="{{ old('judul') }}">
                                         @error('proposalbimbingan')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
-                                      </div>
-                                    <button type="submit"  onClick="return confirm('Pastikan data yang dikirim benar !')" class="btn btn-primary">Submit</button>
+                                    </div>
+                                    <button type="submit" onClick="return confirm('Pastikan data yang dikirim benar !')"
+                                            class="btn btn-primary">Submit
+                                    </button>
                                 </form>
                             </div>
                         @endif

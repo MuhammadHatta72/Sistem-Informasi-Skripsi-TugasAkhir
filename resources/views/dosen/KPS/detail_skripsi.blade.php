@@ -24,29 +24,25 @@
                                 <label>Pilih Dosen Penguji</label>
                                 <select class="form-control" name="dosen_penguji_skripsi" required>
                                     <option value="">Pilih Dosen</option>
-                                    @foreach ($dosens as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
+                                    @foreach($listDosen as $index => $dosen)
+                                        <option value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $skripsi->id_dosen_penguji_skripsi ? 'selected' : '' }}>
+                                            {{ $dosen->nama }} | {{ $slots[$index] }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group mt-3">
-                                <label>Pilih Dosen Pembimbing 1</label>
-                                <select class="form-control" name="dosen_pembimbing_1" required>
-                                    <option value="">Pilih Dosen</option>
-                                    @foreach ($dosens as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label>Pilih Dosen Pembimbing 2</label>
-                                <select class="form-control" name="dosen_pembimbing_2" required>
-                                    <option value="">Pilih Dosen</option>
-                                    @foreach ($dosens as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+{{--                            <div class="form-group mt-3">--}}
+{{--                                <label>Pilih Dosen Pembimbing 1</label>--}}
+{{--                                <select class="form-control" name="dosen_pembimbing_1" required>--}}
+{{--                                    <option value=""></option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group mt-3">--}}
+{{--                                <label>Pilih Dosen Pembimbing 2</label>--}}
+{{--                                <select class="form-control" name="dosen_pembimbing_2" required>--}}
+{{--                                    <option value=""></option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                             <button type="submit"
                                     onClick="return confirm('Apakah Anda yakin, sudah memilih dosen tersebut?')"
                                     class="btn btn-primary">Submit

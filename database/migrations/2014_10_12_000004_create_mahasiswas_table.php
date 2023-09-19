@@ -16,6 +16,8 @@ return new class extends Migration
 //            $table->foreignId('id_user')->constrained('users');
             $table->unsignedBigInteger('id_prodi');
             $table->foreign('id_prodi')->references('id')->on('prodis');
+            $table->unsignedBigInteger('id_kelas');
+            $table->foreign('id_kelas')->references('id')->on('kelas');
             $table->integer('nim');
             $table->string('nama');
             $table->timestamps();
