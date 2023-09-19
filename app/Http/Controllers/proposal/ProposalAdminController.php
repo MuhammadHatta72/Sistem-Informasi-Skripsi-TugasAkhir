@@ -31,20 +31,29 @@ class ProposalAdminController extends Controller
     public function validasi(Request $request)
     {
         if ($request->status == 'Diproses') {
+            if ($request->dosen1 === $request->dosen2) {
+                return redirect()->route('proposal_admin.index')->with('error', 'Dosen Penguji Proposal tidak boleh sama');
+            }
             $request->validate([
-                'status' => 'required',
+                'dosen1' => 'required',
+                'dosen2' => 'required',
+                // 'dosen3' => 'required',
             ]);
 
             $proposal = Proposal::find($request->id);
+            $proposal->id_dosen_penguji_proposal_1 = $request->dosen1;
+            $proposal->id_dosen_penguji_proposal_2 = $request->dosen2;
             $proposal->status = $request->status;
             $proposal->save();
         } else if ($request->status == 'Ditolak') {
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;
             $proposal->save();
+
+            return redirect()->route('proposal_admin.index')->with('success', 'Proposal yang di upload tidak sesuai dengan hard file');
         }
 
-        return redirect()->route('proposal_admin.index')->with('success', 'Status berhasil diperbarui');
+        return redirect()->route('proposal_admin.index')->with('success', 'Dosen Penguji Proposal berhasil ditambahkan');
     }
 
     public function download($id)

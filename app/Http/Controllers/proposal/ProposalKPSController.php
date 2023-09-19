@@ -29,27 +29,22 @@ class ProposalKPSController extends Controller
     public function validasi(Request $request)
     {
         if ($request->status == 'Diterima') {
-            if ($request->dosen1 === $request->dosen2) {
-                return redirect()->route('proposal_kps.index')->with('error', 'Dosen Penguji Proposal tidak boleh sama');
-            }
             $request->validate([
-                'dosen1' => 'required',
-                'dosen2' => 'required',
-                // 'dosen3' => 'required',
+                'status' => 'required',
             ]);
 
             $proposal = Proposal::find($request->id);
-            $proposal->id_dosen_penguji_proposal_1 = $request->dosen1;
-            $proposal->id_dosen_penguji_proposal_2 = $request->dosen2;
             $proposal->status = $request->status;
             $proposal->save();
         } else if ($request->status == 'Ditolak') {
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;
             $proposal->save();
+
+            return redirect()->route('proposal_kps.index')->with('success', 'Dosen Penguji Proposal tidak sesuai');
         }
 
-        return redirect()->route('proposal_kps.index')->with('success', 'Status berhasil diperbarui');
+        return redirect()->route('proposal_kps.index')->with('success', 'Proposal berhasil diterima');
     }
 
 

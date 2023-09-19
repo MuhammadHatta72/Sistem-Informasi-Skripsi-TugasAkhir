@@ -41,6 +41,12 @@
             </div>
         @endif
 
+        @if (session()->has('error'))
+            <div class="alert alert-danger col-lg-12" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
