@@ -63,8 +63,8 @@
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <label for="file" class="form-label">File Proposal</label>
-                            <iframe src="{{ asset('storage/assets/proposal/' . $proposal->file) }}" width="100%"
-                                height="600px" frameborder="0"></iframe>
+                            <iframe src="{{ asset('storage/' . $proposal->file) }}" width="100%" height="600px"
+                                frameborder="0"></iframe>
                         </div>
                     </div>
 
@@ -78,30 +78,27 @@
                     <div class="row mb-3">
                         <div class="col-lg-4 col-sm-4">
                             <label for="dosen1">Dosen Penguji Proposal 1</label>
-                            <select class="form-control" id="dosen1" name="dosen1">
-                                @foreach ($listDosen as $dosen)
-                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
+                            <select class="form-control" id="dosen1" name="dosen1" @readonly(true)>
+                                @foreach ($listDosen as $index => $dosen)
+                                    <option value="{{ $dosen->id_dosen }}"
+                                        {{ $dosen->id_dosen == $proposal->id_dosen_penguji_proposal_1 ? 'selected' : '' }}>
+                                        {{ $dosen->nama }} | Kuota: {{ $slots[$index] }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="col-lg-4 col-sm-4">
                             <label for="dosen2">Dosen Penguji Proposal 2</label>
-                            <select class="form-control" id="dosen2" name="dosen2">
-                                @foreach ($listDosen as $dosen)
-                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
+                            <select class="form-control" id="dosen2" name="dosen2" @readonly(true)>
+                                @foreach ($listDosen as $index => $dosen)
+                                    <option value="{{ $dosen->id_dosen }}"
+                                        {{ $dosen->id_dosen == $proposal->id_dosen_penguji_proposal_2 ? 'selected' : '' }}>
+                                        {{ $dosen->nama }} | Kuota: {{ $slots[$index] }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
-
-                        {{-- <div class="col-lg-4 col-sm-4">
-                            <label for="dosen3">Dosen Pembimbing 2</label>
-                            <select class="form-control" id="dosen3" name="dosen3">
-                                @foreach ($dosens as $dosen)
-                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
                     </div>
                     <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
                     <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
@@ -116,4 +113,16 @@
         document.getElementById('status').value = status;
         document.getElementById('submitButton').click();
     }
+</script>
+
+<script>
+    // Mencegah perubahan nilai dengan keyboard
+    $('select[readonly]').on('keydown', function(e) {
+        e.preventDefault();
+    });
+
+    // Mencegah perubahan nilai dengan klik mouse
+    $('select[readonly]').on('mousedown', function(e) {
+        e.preventDefault();
+    });
 </script>

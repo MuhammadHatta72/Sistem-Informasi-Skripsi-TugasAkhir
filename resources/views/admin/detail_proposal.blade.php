@@ -50,8 +50,8 @@
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <label for="file" class="form-label">File Proposal</label>
-                            <iframe src="{{ asset('storage/' . $proposal->file) }}" width="100%"
-                                height="600px" frameborder="0"></iframe>
+                            <iframe src="{{ asset('storage/' . $proposal->file) }}" width="100%" height="600px"
+                                frameborder="0"></iframe>
                         </div>
                     </div>
 
@@ -61,6 +61,33 @@
                                 File</a>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-4 col-sm-4">
+                            <label for="dosen1">Dosen Penguji Proposal 1</label>
+                            <select class="form-control" id="dosen1" name="dosen1">
+                                @foreach ($listDosen as $index => $dosen)
+                                    <option value="{{ $dosen->id_dosen }}"
+                                        {{ $dosen->id_dosen == $proposal->id_dosen_penguji_proposal_1 ? 'selected' : '' }}>
+                                        {{ $dosen->nama }} | Kuota: {{ $slots[$index] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-4">
+                            <label for="dosen2">Dosen Penguji Proposal 2</label>
+                            <select class="form-control" id="dosen2" name="dosen2">
+                                @foreach ($listDosen as $index => $dosen)
+                                    <option value="{{ $dosen->id_dosen }}"
+                                        {{ $dosen->id_dosen == $proposal->id_dosen_penguji_proposal_2 ? 'selected' : '' }}>
+                                        {{ $dosen->nama }} | Kuota: {{ $slots[$index] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <button type="button" class="btn btn-primary" onclick="setStatus('Diproses')">Terima</button>
                     <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
