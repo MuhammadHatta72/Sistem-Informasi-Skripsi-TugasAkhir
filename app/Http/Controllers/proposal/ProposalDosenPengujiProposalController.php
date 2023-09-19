@@ -43,8 +43,8 @@ class ProposalDosenPengujiProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
-        $dosens = Dosen::join('users', 'users.id_dosen', '=', 'dosens.id')->where('sub_role', '')->orWhere('sub_role', null)->get();
-        return view('dosen.penguji_proposal.detail_proposal', compact('proposal', 'dosens'));
+        [$listDosen, $slots] = limit();
+        return view('dosen.penguji_proposal.detail_proposal', compact('proposal', 'listDosen', 'slots'));
     }
 
     /**
