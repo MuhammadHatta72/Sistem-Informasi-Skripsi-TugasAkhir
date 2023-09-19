@@ -15,10 +15,16 @@
                     <a class="card lift h-100">
                         <div class="card-header bg-whitesmoke"><h4>Form Pengajuan Bimbingan</h4></div>
                         @if(!$status_proposal || $jumlah_pengajuan_dieksekusi > 0)
-                        <div class="card-body d-flex justify-content-center flex-column">
-                            <p>Anda belum melakukan <b>Ujian Proposal</b> atau Anda telah mengirimkan <b>Bimbingan</b> sebelumnya</p>
+                        <div class="card-body">
+                            <div class="alert alert-danger">
+                                Anda belum melakukan ujian proposal atau Anda telah mengajukan bimbingan sebelumnya
+                            </div>
                         </div>
                         @else
+                            @php
+                                $judul = $proposal->judul;
+                                $bidang = $outline->bidang1->nama;
+                            @endphp
                         @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -40,11 +46,22 @@
                                     <div class="mb-3">
                                         <label for="judul" class="form-label">Judul Skripsi</label>
                                         <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                            id="judul" name="judul" value="{{ old('judul') }}">
+                                               id="judul" name="judul" value="{{ $judul }}" readonly>
                                         @error('judul')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="bidang" class="form-label">Bidang</label>
+                                        <input type="text" class="form-control @error('bidang') is-invalid @enderror"
+                                               id="bidang" name="bidang" value="{{ $bidang }}" readonly>
+                                    @error('bidang')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                     <div class="mb-3">

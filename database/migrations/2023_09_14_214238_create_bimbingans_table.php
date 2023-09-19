@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_jadwal')->nullable();
             $table->foreign('id_jadwal')->references('id')->on('jadwals');
             $table->string('judul');
+            $table->string('bidang');
             $table->string('proposalbimbingan');
             $table->enum(
                 'status',

@@ -21,9 +21,26 @@ class BimbinganPengajuanController extends Controller
 
     public function create(Request $request)
     {
-        $proposal = Proposal::where('id_mahasiswa', auth()->user()->id_mahasiswa)->where('status', 'lulus')->first();
-        return view('mahasiswa.bimbingan_pengajuan', compact('proposal'));
+        $proposal = Proposal::where('id_mahasiswa', auth()->user()->id_mahasiswa)
+                            ->whereIn('status', ['lulus', 'lulus dengan revisi'])
+                            ->first();
+
+        $jumlah_pengajuan_dieksekusi = Bimbingan::where([
+            ['id_mahasiswa', Auth::user()->mahasiswa->id],
+            ['status', '<>' ,'ditolak admin'],
+            ['status', '<>' ,'ditolak kps'],
+            ['status', '<>' ,'ditolak dosen pembimbing'],
+            ['status', '<>' ,'lulus'],
+        ])->count();
+
+        $data = [
+            'status_proposal' => $proposal ? true : false,
+            'jumlah_pengajuan_dieksekusi' => $jumlah_pengajuan_dieksekusi,
+        ];
+
+        return view('mahasiswa.bimbingan_pengajuan', compact('proposal'), $data);
     }
+
 
     public function show(String  $id)
     {
