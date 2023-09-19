@@ -29,6 +29,8 @@
                     @csrf
                     <input type="hidden" name="status" id="status" value="">
                     <input type="hidden" name="id" value="{{ $outline->id }}">
+                    <input type="hidden" name="pilihan" id="pilihan" value="">
+
 
                     <div class="row mb-3">
                         <div class="col-lg-6 col-sm-6">
@@ -113,7 +115,7 @@
                         <div class="col-lg-12 col-sm-12">
                             <label for="revisi" class="form-label">Revisi</label>
                             <input type="text" class="form-control @error('revisi') is-invalid @enderror"
-                                   id="revisi" name="revisi" value="">
+                                   id="revisi" name="revisi" value="" placeholder="Opsional">
                             @error('revisi')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -121,8 +123,12 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus({{ $outline->id_dosen_penilai_1 == auth()->user()->id_dosen ? "'Diterima DosenPenilai1'" : "'Diterima DosenPenilai2'" }})">Lulus</button>
-                    <button type="button" class="btn btn-danger mx-2" onclick="setStatus( {{ $outline->id_dosen_penilai_1 == auth()->user()->id_dosen ? "'Ditolak DosenPenilai1'" : "'Ditolak DosenPenilai2'" }})">Tidak Lulus</button>
+                    <button type="button" class="btn btn-success"
+                            onclick="setStatus({{ $outline->id_dosen_penilai_1 == auth()->user()->id_dosen ? "'Diterima DosenPenilai1'" : "'Diterima DosenPenilai2'" }}, '1')">Lulus Outline 1</button>
+                    <button type="button" class="btn btn-success mx-2"
+                            onclick="setStatus({{ $outline->id_dosen_penilai_1 == auth()->user()->id_dosen ? "'Diterima DosenPenilai1'" : "'Diterima DosenPenilai2'" }}, '2')">Lulus Outline 2</button>
+                    <button type="button" class="btn btn-danger "
+                            onclick="setStatus( {{ $outline->id_dosen_penilai_1 == auth()->user()->id_dosen ? "'Ditolak DosenPenilai1'" : "'Ditolak DosenPenilai2'" }})">Tidak Lulus</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>
@@ -130,8 +136,9 @@
     </div>
 </div>
 <script>
-    function setStatus(status) {
+    function setStatus(status, pilihan) {
         document.getElementById('status').value = status;
+        document.getElementById('pilihan').value = pilihan;
         document.getElementById('submitButton').click();
     }
 </script>

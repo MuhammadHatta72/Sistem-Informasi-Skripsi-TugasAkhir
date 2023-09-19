@@ -54,7 +54,7 @@
                                                 {{ $outline->dosenPenilai1->nama ?? '-' }}
                                             </td>
                                             <td>{{ $outline->dosenPenilai2->nama ?? '-' }}</td>
-                                            <td>{{ $outline->revisi ?? '-'}}</td>
+                                            <td>{{ $outline->revisi}}</td>
                                             <td>
                                                 @if($outline->status == 'Lulus')
                                                     <span class="badge bg-success text-white">{{ $outline->status }}</span>

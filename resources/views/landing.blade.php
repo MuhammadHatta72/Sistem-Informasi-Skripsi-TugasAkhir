@@ -377,7 +377,7 @@
                     </ul>
                     <ul>
                         <li><a href="#">PUSKOM</a></li>
-                        <li><a href="#">Icikiwir Techno Houses</a></li>
+                        <li><a href="#">Akuntansi Polinema</a></li>
                     </ul>
                 </div>
             </div>
@@ -395,7 +395,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="copyright-text">
-                    <p>Copyright &copy; 2023, Developed By <a href="https://nauval.in/">Icikiwir Technology House</a>
+                    <p>Copyright &copy; 2023, Developed By <a href="">Akuntansi Polinema</a>
                     </p>
                 </div>
             </div>

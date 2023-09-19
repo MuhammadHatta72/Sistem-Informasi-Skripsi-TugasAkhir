@@ -80,7 +80,7 @@ class OutlineKPSController extends Controller
 
     public function validasi(Request $request)
     {
-        if ($request->status == 'Ditolak') {
+        if ($request->status == 'Ditolak KPS') {
             $outline = Outline::find($request->id);
             $outline->status = $request->status;
             $outline->save();

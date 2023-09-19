@@ -40,7 +40,12 @@
             <div class="alert alert-success col-lg-12" role="alert">
                 {{ session('success') }}
             </div>
+        @endif
 
+        @if(session()->has('error'))
+            <div class="alert alert-danger col-lg-12" role="alert">
+                {{ session('error') }}
+            </div>
         @endif
 
         <div class="section-body">
