@@ -60,13 +60,13 @@
                         </div>
                     </div>
 
-                    {{-- <div class="row mb-3">
+                    <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <label for="file" class="form-label">File Proposal</label>
-                            <iframe src="{{ asset('storage/assets/proposal/' . $proposal->file) }}" width="100%"
-                                height="600px" frameborder="0"></iframe>
+                            <iframe src="{{ asset('storage/' . $proposal->file) }}" width="100%" height="600px"
+                                frameborder="0"></iframe>
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
@@ -88,9 +88,13 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary"
-                            onclick="setStatus( {{ $proposal->id_dosen_penguji_proposal_1 == auth()->user()->id_dosen ? "'Diterima DosenPenguji1'" : "'Diterima DosenPenguji2'" }} )">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus( {{ $proposal->id_dosen_penguji_proposal_1 == auth()->user()->id_dosen ? "'Ditolak DosenPenguji1'" : "'Ditolak DosenPenguji2'" }} )">Tolak</button>
+                    <button type="button" class="btn btn-primary mx-2"
+                        onclick="setStatus( {{ $proposal->id_dosen_penguji_proposal_1 == auth()->user()->id_dosen ? "'Diterima DosenPenguji1'" : "'Diterima DosenPenguji2'" }} )">Lulus</button>
+                    <button type="button" class="btn btn-success mx-2"
+                        onclick="setStatus( {{ $proposal->id_dosen_penguji_proposal_1 == auth()->user()->id_dosen ? "'Diterima DosenPenguji1 Revisi'" : "'Diterima DosenPenguji2 Revisi'" }} )">Lulus
+                        dengan revisi</button>
+                    <button type="button" class="btn btn-danger mx-2"
+                        onclick="setStatus( {{ $proposal->id_dosen_penguji_proposal_1 == auth()->user()->id_dosen ? "'Ditolak DosenPenguji1'" : "'Ditolak DosenPenguji2'" }} )">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>

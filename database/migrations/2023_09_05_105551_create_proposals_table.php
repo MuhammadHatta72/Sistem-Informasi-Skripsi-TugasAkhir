@@ -29,6 +29,7 @@ return new class extends Migration
                 'status1',
                 [
                     'Diterima DosenPenguji1',
+                    'Diterima DosenPenguji1 Revisi',
                     'Ditolak DosenPenguji1',
                 ]
             )->nullable();
@@ -36,36 +37,27 @@ return new class extends Migration
                 'status2',
                 [
                     'Diterima DosenPenguji2',
+                    'Diterima DosenPenguji2 Revisi',
                     'Ditolak DosenPenguji2',
                 ]
             )->nullable();
-//            $table->enum(
-//                'status',
-//                [
-//                    'Pengajuan',
-//                    'Diterima KPS',
-//                    'Diterima DosenPenilai1',
-//                    'Diterima DosenPenilai2',
-//                    'Ditolak KPS',
-//                    'Ditolak DosenPenilai1',
-//                    'Ditolak DosenPenilai2',
-//                    'Lulus'
-//                ]
-//            )->default('Pengajuan');
             $table->enum(
                 'status',
                 [
-                    'dikirim',
-                    'diproses',
-                    'diterima',
-                    'ditolak',
+                    'Diproses Admin',
+                    'Diterima Admin',
+                    'Ditolak Admin',
+                    'Diterima KPS',
+                    'Ditolak KPS',
                     'Lulus',
+                    'Lulus dengan Revisi',
                     'Tidak Lulus',
                 ]
-            )->default('dikirim');
+            )->default('Diproses Admin');
             $table->integer('nilai_1')->nullable();
             $table->integer('nilai_2')->nullable();
-            $table->string('revisi')->nullable();
+            $table->string('revisi_1')->nullable();
+            $table->string('revisi_2')->nullable();
             $table->timestamps();
         });
     }
