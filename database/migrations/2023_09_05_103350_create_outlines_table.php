@@ -34,7 +34,9 @@ return new class extends Migration
             $table->string('metpen_1');
             $table->string('metpen_2');
             $table->enum('pilihan', ['1', '2'])->nullable();
-            $table->string('revisi')->nullable();
+            $table->string('catatan_kps')->nullable();
+            $table->string('revisi_1')->nullable();
+            $table->string('revisi_2')->nullable();
             $table->enum(
                 'status1',
                 [

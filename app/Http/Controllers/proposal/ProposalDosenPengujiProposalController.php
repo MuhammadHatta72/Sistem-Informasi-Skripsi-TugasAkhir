@@ -17,7 +17,10 @@ class ProposalDosenPengujiProposalController extends Controller
      */
     public function index()
     {
-        $proposals = Proposal::where('status', 'Diterima KPS')->paginate(10);
+        $proposals = Proposal::where('status', '!=', 'Ditolak')
+            ->where('id_dosen_penguji_proposal_1', auth()->user()->dosen->id)
+            ->orWhere('id_dosen_penguji_proposal_2', auth()->user()->dosen->id)
+            ->paginate(5);
         return view('dosen.penguji_proposal.list_proposal', compact('proposals'));
     }
 
@@ -81,14 +84,16 @@ class ProposalDosenPengujiProposalController extends Controller
         if ($proposal->id_dosen_penguji_proposal_1 == Auth::user()->dosen->id) {
             $proposal->nilai_1 = $request->nilai;
             $proposal->status1 = $request->status;
+            $proposal->status = $request->status;
         } else if ($proposal->id_dosen_penguji_proposal_2 == Auth::user()->dosen->id) {
             $proposal->nilai_2 = $request->nilai;
             $proposal->status2 = $request->status;
+            $proposal->status = $request->status;
         }
 
         if ($proposal->status1 == 'Diterima DosenPenguji1' && $proposal->status2 == 'Diterima DosenPenguji2') {
             $proposal->status = 'Lulus';
-        } elseif ($proposal->status1 == 'Diterima DosenPenguji1' && $proposal->status2 == 'Diterima DosenPenguji2') {
+        } elseif ($proposal->status1 == 'Diterima DosenPenguji1 Revisi' && $proposal->status2 == 'Diterima DosenPenguji2 Revisi') {
             $proposal->status = 'Lulus dengan Revisi';
         } elseif ($proposal->status1 == 'Ditolak DosenPenguji1' || $proposal->status2 == 'Ditolak DosenPenguji2') {
             $proposal->status = 'Tidak Lulus';

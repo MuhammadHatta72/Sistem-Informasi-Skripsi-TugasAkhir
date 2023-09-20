@@ -80,11 +80,13 @@ class OutlineDosenPenilaiKelayakanController extends Controller
         if ($outline->id_dosen_penilai_1 == auth()->user()->id_dosen) {
             $outline->status1 = $request->status;
             $outline->status = $request->status;
+            $outline->revisi_1 = $request->revisi;
         }
 
         if ($outline->id_dosen_penilai_2 == auth()->user()->id_dosen) {
             $outline->status2 = $request->status;
             $outline->status = $request->status;
+            $outline->revisi_2 = $request->revisi;
         }
 
         if ($outline->pilihan == null or $outline->pilihan == $request->pilihan) {
@@ -99,7 +101,7 @@ class OutlineDosenPenilaiKelayakanController extends Controller
             $outline->status = 'Ditolak';
         }
 
-        $outline->revisi = $outline->revisi . "\n" . $request->revisi;
+
         $outline->save();
 
         return redirect()->route('outline_dosen_penilai.index')->with('success', 'Berhasil memvalidasi outline');

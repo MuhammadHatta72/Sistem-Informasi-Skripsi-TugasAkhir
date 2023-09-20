@@ -17,20 +17,26 @@ function limit(): array
     foreach ($dosens as $dosen) {
         $countPenilaiOutline = DB::table('outlines')
             ->where('status', '!=', 'Lulus')
-            ->where('id_dosen_penilai_1', $dosen->id_dosen)
-            ->orWhere('id_dosen_penilai_2', $dosen->id_dosen)
+            ->where(function($query) use ($dosen) {
+                $query->where('id_dosen_penilai_1', $dosen->id_dosen)
+                    ->orWhere('id_dosen_penilai_2', $dosen->id_dosen);
+            })
             ->count();
 
         $countPenilaiProposal = DB::table('proposals')
             ->where('status', '!=', 'Lulus')
-            ->where('id_dosen_penguji_proposal_1', $dosen->id_dosen)
-            ->orWhere('id_dosen_penguji_proposal_2', $dosen->id_dosen)
+            ->where(function($query) use ($dosen) {
+                $query->where('id_dosen_penguji_proposal_1', $dosen->id_dosen)
+                    ->orWhere('id_dosen_penguji_proposal_2', $dosen->id_dosen);
+            })
             ->count();
 
         $countPembimbingSkripsi = DB::table('bimbingans')
-            ->where('id_dosen_pembimbing_1', $dosen->id_dosen)
-            ->orWhere('id_dosen_pembimbing_2', $dosen->id_dosen)
-            ->orWhere('id_dosen_pembimbing_abstrak', $dosen->id_dosen)
+            ->where('status', '!=', 'Lulus')
+            ->where(function($query) use ($dosen) {
+                $query->where('id_dosen_pembimbing_1', $dosen->id_dosen)
+                    ->orWhere('id_dosen_pembimbing_2', $dosen->id_dosen);
+            })
             ->count();
 
         $countPengujiSkripsi = DB::table('skripsis')

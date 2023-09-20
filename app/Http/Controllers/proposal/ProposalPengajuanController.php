@@ -21,7 +21,6 @@ class ProposalPengajuanController extends Controller
     public function create()
     {
         $outline = Outline::where('id_mahasiswa', Auth::user()->mahasiswa->id)->where('status', 'Lulus')->first();
-
         return view('mahasiswa.proposal_pengajuan', compact('outline'));
     }
 

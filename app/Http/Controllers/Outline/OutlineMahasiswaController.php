@@ -18,7 +18,7 @@ class OutlineMahasiswaController extends Controller
      */
     public function index()
     {
-        $outlines = Outline::where('id_mahasiswa', auth()->user()->mahasiswa->id)->paginate(5);
+        $outlines = Outline::where('id_mahasiswa', auth()->user()->mahasiswa->id)->first();
         return view('mahasiswa.outline_history', compact('outlines'));
     }
 

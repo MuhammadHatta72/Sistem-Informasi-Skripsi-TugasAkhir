@@ -76,28 +76,6 @@
                                                         Revisi</span>
                                                 @elseif ($proposal->status == 'Tidak Lulus')
                                                     <span class="badge bg-danger text-white w-50">Tidak Lulus</span>
-
-                                                    {{-- Bagian Dosen Penguji Proposal 1 --}}
-                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji1')
-                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen
-                                                        Penguji Proposal 1</span>
-                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji1 Revisi')
-                                                    <span class="badge bg-warning text-white w-100">Di Nilai Dosen
-                                                        Penguji Proposal 1</span>
-                                                @elseif($proposal->status1 == 'Ditolak DosenPenguji1')
-                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
-                                                        Proposal 1</span>
-
-                                                    {{-- Bagian Dosen Penguji Proposal 2 --}}
-                                                @elseif ($proposal->status2 == 'Diterima DosenPenguji2')
-                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen
-                                                        Penguji Proposal 2</span>
-                                                @elseif ($proposal->status2 == 'Diterima DosenPenguji2 Revisi')
-                                                    <span class="badge bg-warning text-white w-100">Di Nilai Dosen
-                                                        Penguji Proposal 2</span>
-                                                @elseif($proposal->status2 == 'Ditolak DosenPenguji2')
-                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
-                                                        Proposal 2</span>
                                                 @endif
                                             </td>
                                             <td class="d-flex justify-content-center">

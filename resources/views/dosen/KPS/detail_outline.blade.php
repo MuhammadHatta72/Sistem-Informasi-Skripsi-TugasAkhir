@@ -181,8 +181,20 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12">
+                            <label for="catatan" class="form-label">Catatan</label>
+                            <input type="text" class="form-control @error('catatan') is-invalid @enderror"
+                                   id="catatan" name="catatan" value="" placeholder="catatan kps">
+                            @error('catatan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
                     <button type="button" class="btn btn-primary mx-2" onclick="setStatus('Diterima KPS')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak KPS')">Tolak</button>
+                    <button type="button" class="btn btn-danger" id="tolak-button" onclick="setStatus('Ditolak KPS')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>
@@ -194,4 +206,21 @@
         document.getElementById('status').value = status;
         document.getElementById('submitButton').click();
     }
+    document.querySelector('#tolak-button').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform the action (e.g., submit the form)
+                document.querySelector('#form-id').submit();
+            }
+        })
+    });
+
 </script>

@@ -52,6 +52,12 @@ return new class extends Migration
                     'Lulus',
                     'Lulus dengan Revisi',
                     'Tidak Lulus',
+                    'Diterima DosenPenguji2',
+                    'Diterima DosenPenguji2 Revisi',
+                    'Ditolak DosenPenguji2',
+                    'Diterima DosenPenguji1',
+                    'Diterima DosenPenguji1 Revisi',
+                    'Ditolak DosenPenguji1',
                 ]
             )->default('Diproses Admin');
             $table->integer('nilai_1')->nullable();

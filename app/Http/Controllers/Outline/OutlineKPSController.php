@@ -82,6 +82,7 @@ class OutlineKPSController extends Controller
     {
         if ($request->status == 'Ditolak KPS') {
             $outline = Outline::find($request->id);
+            $outline->catatan_kps = $request->catatan;
             $outline->status = $request->status;
             $outline->save();
         } else if ($request->status == 'Diterima KPS' || $request->status == 'Revisi') {
