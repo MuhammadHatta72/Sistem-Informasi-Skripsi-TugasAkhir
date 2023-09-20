@@ -1,4 +1,4 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.kps')
 
 @section('title', 'Pengajuan Skripsi Mahasiswa')
 
@@ -25,7 +25,8 @@
                             <div class="float-right">
                                 <form method="GET">
                                     <div class="input-group">
-                                        <input name="search" type="text" class="form-control" placeholder="Search nama skripsi">
+                                        <input name="search" type="text" class="form-control"
+                                               placeholder="Search nama skripsi">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -38,35 +39,38 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
-                                        <tr>
-                                            <th>NIM</th>
-                                            <th>Nama</th>
-                                            <th>Opsi</th>
-                                        </tr>
-                                    </thead>
-                                   @forelse($skripsis as $skripsi)
-                                   <tbody>
                                     <tr>
-                                        <td><span class="badge badge-info text-white">{{ $skripsi->mahasiswa->nim }}</span></td>
-                                        <td>{{ $skripsi->mahasiswa->nama }}</td>
-                                        <td>
-                                            <a href="{{ route('skripsi-kps.show', $skripsi->id) }}" class="btn btn-warning">Detail</a>
-                                        </td>
+                                        <th>NIM</th>
+                                        <th>Nama</th>
+                                        <th>Opsi</th>
                                     </tr>
-                                   </tbody>
-                                   @empty
+                                    </thead>
+                                    @forelse($skripsis as $skripsi)
+                                        <tbody>
                                         <tr>
-                                             <td colspan="7" class="text-center p-5">
-                                                  Data tidak tersedia
-                                             </td>
+                                            <td>
+                                                <span class="badge badge-info text-white">{{ $skripsi->mahasiswa->nim }}</span>
+                                            </td>
+                                            <td>{{ $skripsi->mahasiswa->nama }}</td>
+                                            <td>
+                                                <a href="{{ route('skripsi-kps.show', $skripsi->id) }}"
+                                                   class="btn btn-warning">Detail</a>
+                                            </td>
                                         </tr>
-                                   @endforelse
+                                        </tbody>
+                                    @empty
+                                        <tr>
+                                            <td colspan="7" class="text-center p-5">
+                                                Data tidak tersedia
+                                            </td>
+                                        </tr>
+                                    @endforelse
                                 </table>
                             </div>
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-{{--                                        {{ $skripsis->withQueryString()->links() }}--}}
+                                        {{--                                        {{ $skripsis->withQueryString()->links() }}--}}
                                     </ul>
                                 </nav>
                             </div>

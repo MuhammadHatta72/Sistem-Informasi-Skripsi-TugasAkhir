@@ -22,79 +22,155 @@
                             <h4>Data History Pengajuan Outline </h4>
                         </div>
                         <div class="card-body">
-                            <div class="float-right">
-                                <form method="GET">
-                                    <div class="input-group">
-                                        <input name="search" type="text" class="form-control" placeholder="Search nama judul">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                            <form method="POST" action="{{ route('outline_mahasiswa.store') }}"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                <ul class="nav nav-pills" id="myTab3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#outline1"
+                                           role="tab" aria-controls="home" aria-selected="true">Outline Pertama</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#outline2"
+                                           role="tab"
+                                           aria-controls="profile" aria-selected="false">Outline Kedua</a>
+                                    </li>
+                                </ul>
+                                <hr>
+                                <div class="tab-content" id="myTabContent2">
+                                    <div class="tab-pane fade show active align-content-start" id="outline1"
+                                         role="tabpanel"
+                                         aria-labelledby="outline1">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="judul1" class="form-label">Judul Outline</label>
+                                                <input type="text"
+                                                       class="form-control @error('judul1') is-invalid @enderror"
+                                                       id="judul1" name="judul1" value="{{ $outlines->judul_1 }}">
+                                                @error('judul1')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-6 col-sm-4">
+                                                <label for="bidang1">Bidang</label>
+                                                <select class="form-control" id="bidang1" name="bidang1">
+                                                    <option value="{{ $outlines->bidang_1 }}">{{ $outlines->bidang1->nama }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="pendahuluan1" class="form-label">Ringkasan
+                                                    Pendahuluan</label>
+                                                <textarea type="text"
+                                                          class="form-control @error('pendahuluan1') is-invalid @enderror"
+                                                          id="pendahuluan1" name="pendahuluan1"
+                                                          style="height: 72px">{{ $outlines->pendahuluan_1 }}</textarea>
+                                                @error('pendahuluan1')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="teori1" class="form-label">Kajian Teori</label>
+                                                <textarea type="text"
+                                                          class="form-control @error('teori1') is-invalid @enderror"
+                                                          id="teori1" name="teori1"
+                                                          style="height: 72px">{{ $outlines->teori_1 }}</textarea>
+                                                @error('teori1')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="metpen1" class="form-label">Metode Penelitian</label>
+                                                <textarea type="text"
+                                                          class="form-control @error('metpen1') is-invalid @enderror"
+                                                          id="metpen1" name="metpen1"
+                                                          style="height: 72px">{{ $outlines->metpen_1 }}</textarea>
+                                                @error('metpen1')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-
-                            <div class="clearfix mb-3"></div>
-
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <tr>
-                                        <th>Judul 1</th>
-                                        <th>Judul 2</th>
-                                        <th>Dosen Penilai 1</th>
-                                        <th>Dosen Penilai 2</th>
-                                        <th>Revisi</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    @forelse($outlines as $outline)
-                                        <tr>
-                                            <td>{{ $outline->judul_1 }}</td>
-                                            <td>{{ $outline->judul_2 }}</td>
-                                            <td>
-                                                {{ $outline->dosenPenilai1->nama ?? '-' }}
-                                            </td>
-                                            <td>{{ $outline->dosenPenilai2->nama ?? '-' }}</td>
-                                            <td>{{ $outline->revisi ?? '-'}}</td>
-                                            <td>
-                                                @if($outline->status == 'Lulus')
-                                                    <span class="badge bg-success text-white">{{ $outline->status }}</span>
-                                                @elseif($outline->status == 'Ditolak*')
-                                                    <span class="badge bg-danger text-white">{{ $outline->status }}</span>
-                                                @else
-                                                    <span class="badge bg-warning text-white">{{ $outline->status }}</span>
-                                                @endif
-                                            </td>
-                                            <td class="d-flex justify-content-center">
-                                                @if($outline->status == 'Pengajuan' || $outline->status == 'Ditolak*')
-                                                    <a href="{{route('outline_mahasiswa.edit', $outline) }}">
-                                                        <button class="badge bg-warning border-0 my-3 mx-3 text-white" type="button">
-                                                            <i class="fas fa-edit"></i> Edit
-                                                        </button>
-                                                    </a>
-                                                    <form action="{{ route('outline_mahasiswa.destroy', $outline) }}" method="POST" class="d-inline">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button class="badge bg-danger border-0 my-3 mx-3 text-white" onclick="return confirm('Yakin Menghapus Pengajuan ?')">
-                                                            <i class="fas fa-trash"></i> Delete
-                                                        </button>
-                                                    </form>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data</td>
-                                        </tr>
-                                    @endforelse
-                                </table>
-                            </div>
-                            <div class="float-right">
-                                <nav>
-                                    <ul class="pagination">
-                                        {{ $outlines->withQueryString()->links() }}
-                                    </ul>
-                                </nav>
-                            </div>
+                                    <div class="tab-pane fade" id="outline2" role="tabpanel" aria-labelledby="outline2">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="judul2" class="form-label">Judul Outline</label>
+                                                <input type="text"
+                                                       class="form-control @error('judul2') is-invalid @enderror"
+                                                       id="judul2" name="judul2" value="{{ $outlines->judul_2 }}">
+                                                @error('judul2')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-6 col-sm-4">
+                                                <label for="bidang2">Bidang</label>
+                                                <select class="form-control" id="bidang2" name="bidang2">
+                                                    <option value="{{ $outlines->bidang_2 }}">{{ $outlines->bidang2->nama }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="pendahuluan2" class="form-label">Ringkasan
+                                                    Pendahuluan</label>
+                                                <textarea type="text"
+                                                          class="form-control @error('pendahuluan2') is-invalid @enderror"
+                                                          id="pendahuluan2" name="pendahuluan2"
+                                                          style="height: 72px">{{ $outlines->pendahuluan_2 }}</textarea>
+                                                @error('pendahuluan2')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="teori2" class="form-label">Kajian Teori</label>
+                                                <textarea type="text"
+                                                          class="form-control @error('teori2') is-invalid @enderror"
+                                                          id="teori2" name="teori2"
+                                                          style="height: 72px">{{ $outlines->teori_2 }}</textarea>
+                                                @error('teori2')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="metpen2" class="form-label">Metode Penelitian</label>
+                                                <textarea type="text"
+                                                          class="form-control @error('metpen2') is-invalid @enderror"
+                                                          id="metpen2" name="metpen2"
+                                                          style="height: 72px">{{ $outlines->metpen_2 }}</textarea>
+                                                @error('metpen2')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\bimbingan;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Outline\StoreOutlineMahasiswaRequest;
-use App\Http\Requests\Outline\UpdateOutlineMahasiswaRequest;
+use App\Http\Requests\Bimbingan\UpdateBimbinganPengajuanRequest;
+use App\Http\Requests\Bimbingan\StoreBimbinganPengajuanRequest;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 use App\Models\Bimbingan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BimbinganPengajuanController extends Controller
 {
@@ -19,10 +21,17 @@ class BimbinganPengajuanController extends Controller
 
     public function create(Request $request)
     {
-        $data = [
-            'status_proposal' => true
-        ];
-        return view('mahasiswa.bimbingan_pengajuan', $data);
+        $proposal = Proposal::where('id_mahasiswa', auth()->user()->id_mahasiswa)
+                            ->whereIn('status', ['lulus', 'lulus dengan revisi'])
+                            ->first();
+        return view('mahasiswa.bimbingan_pengajuan', compact('proposal'));
+    }
+
+
+    public function show(String  $id)
+    {
+        $bimbingan = Bimbingan::find($id);
+        return view('mahasiswa.detail_bimbingan_pengajuan', compact('bimbingan'));
     }
 
     public function store(Request $request)
@@ -37,29 +46,35 @@ class BimbinganPengajuanController extends Controller
             'proposalbimbingan.max' => 'Ukuran proposal bimbingan maksimal 20MB.',
         ]);
 
-        $proposalbimbingan = $request->file('proposalbimbingan');
-
-        if ($proposalbimbingan) {
-            $fileExtension = $proposalbimbingan->getClientOriginalExtension();
-            $fileName = 'proposal_' . time() . '.' . $fileExtension;
-            $proposalbimbingan->move(public_path('storage/proposalbimbingan'), $fileName);
-
-            $bimbingan = new Bimbingan();
-            $bimbingan->id_mahasiswa = Auth::user()->mahasiswa->id;
-            $bimbingan->judul = $request->input('judul');
-            $bimbingan->status = 'pengajuan';
-            $bimbingan->proposalbimbingan = $fileName;
-            $bimbingan->save();
-
-            return redirect()->route('bimbingan_pengajuan.index')->with('success', 'Bimbingan berhasil diajukan');
+        $name_folder = Auth::user()->mahasiswa->nama .'-'. Auth::user()->mahasiswa->nim;
+        //cek apakah folder sudah ada
+        if (Storage::exists('public/proposalbimbingan/' . $name_folder . '/') == false) {
+            //buat folder
+            Storage::makeDirectory('public/proposalbimbingan/' . $name_folder . '/');
         }
 
-        return back()->withErrors(['proposalbimbingan' => 'File proposal tidak ditemukan.']);
-    }
+        $jumlah_pengajuan = Bimbingan::where('id_mahasiswa', Auth::user()->mahasiswa->id)->count();
+        $file_ke = 0;
+        if($jumlah_pengajuan === 0){
+            $file_ke = 1;
+        }else{
+            $file_ke = $jumlah_pengajuan + 1;
+        }
 
-    public function show(Bimbingan $bimbingan)
-    {
-        //
+        //upload proposalbimbingan
+        $file_proposalbimbingan = $request->file('proposalbimbingan');
+        $nama_file_proposalbimbingan = Auth::user()->mahasiswa->nama . "_proposalbimbingan-" .$file_ke . "." . $file_proposalbimbingan->getClientOriginalExtension();
+        Storage::putFileAs('public/proposalbimbingan/' . $name_folder . '/', $file_proposalbimbingan, $nama_file_proposalbimbingan);
+
+        $bimbingan = new Bimbingan();
+        $bimbingan->id_mahasiswa = Auth::user()->mahasiswa->id;
+        $bimbingan->judul = $request->input('judul');
+        $bimbingan->bidang = $request->input('bidang');
+        $bimbingan->status = 'dikirim';
+        $bimbingan->proposalbimbingan = $nama_file_proposalbimbingan;
+        $bimbingan->save();
+
+        return redirect()->route('bimbingan_pengajuan.index')->with('success', 'Bimbingan berhasil diajukan');
     }
 
     /**

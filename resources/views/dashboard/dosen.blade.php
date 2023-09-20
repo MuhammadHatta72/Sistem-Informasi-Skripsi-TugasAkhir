@@ -2,44 +2,6 @@
 
 @section('title', 'Dashboard Dosen')
 
-@section('navbar')
-    @if(auth()->user()->sub_role != null)
-        @php
-            $currentRoute = Route::currentRouteName();
-            $subRole = auth()->user()->sub_role;
-        @endphp
-        @if ($currentRoute != 'home')
-            <a href="{{ route('home') }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-home"></i> Kembali ke Dashboard Utama
-            </a>
-        @endif
-
-        @if ($subRole == 'KPS' && $currentRoute != 'dashboard.kps' && $currentRoute == 'home')
-            <a href="{{ route('dashboard.kps') }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-sign-in-alt"></i> Login Sebagai KPS
-            </a>
-        @elseif ($subRole == 'dosen_penilai' && $currentRoute != 'dashboard.dosen_penilai' && $currentRoute == 'home')
-            <a href="{{ route('dashboard.dosen_penilai') }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Penilai
-            </a>
-        @elseif ($subRole == 'dosen_penguji_proposal' && $currentRoute != 'dashboard.dosen_penguji_proposal' && $currentRoute == 'home')
-            <a href="{{ route('dashboard.dosen_penguji_proposal') }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Penguji Proposal
-            </a>
-        @elseif ($subRole == 'dosen_pembimbing' && $currentRoute != 'dashboard.dosen_pembimbing' && $currentRoute == 'home')
-            <a href="{{ route('dashboard.dosen_pembimbing') }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Pembimbing
-            </a>
-        @elseif ($subRole == 'dosen_penguji_skripsi' && $currentRoute != 'dashboard.dosen_penguji_skripsi' && $currentRoute == 'home')
-            <a href="{{ route('dashboard.dosen_penguji_skripsi') }}" class="dropdown-item has-icon text-success">
-                <i class="fas fa-sign-in-alt"></i> Login Sebagai Dosen Penguji Skripsi
-            </a>
-        @endif
-        <div class="dropdown-divider"></div>
-    @endif
-    @parent
-@endsection
-
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -109,4 +71,87 @@
 
 @section('sidebar')
     @parent
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-sticky-note"></i><span>Outline</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('outline_dosen_penilai.index') }}">Penilai Kelayakan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('outline_dosen_penilai.index') }}">History</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-sticky-note"></i><span>Proposal</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('proposal_dosen_penguji.index') }}">Penguji Proposal</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('proposal_dosen_penguji.index') }}">History</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown {{ (request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*')) ? 'active' : '' }}">
+        <a href="#" class="nav-link has-dropdown">
+            <i class="fas fa-sticky-note"></i><span>Skripsi</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="nav-link" href="{{ route('bimbingan_dosen_pembimbing.index') }}">Bimbingan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('bimbingan_dosen_pembimbing.index') }}">History Bimbingan</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('skripsi.create') }}">Ujian Skripsi</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('skripsi.index') }}">History Skripsi</a>
+            </li>
+        </ul>
+    </li>
+{{--    <li class="menu-header">Outline</li>--}}
+{{--    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('home') }}" class="nav-link">--}}
+{{--            <i class="fas fa-poll-h"></i><span>Penilai Kelayakan</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('home') }}" class="nav-link">--}}
+{{--            <i class="fas fa-poll-h"></i><span>History</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="menu-header">Proposal</li>--}}
+{{--    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('home') }}" class="nav-link">--}}
+{{--            <i class="fas fa-poll-h"></i><span>Penguji Proposal</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('home') }}" class="nav-link">--}}
+{{--            <i class="fas fa-poll-h"></i><span>History</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="menu-header">Skripsi</li>--}}
+{{--    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('home') }}" class="nav-link">--}}
+{{--            <i class="fas fa-poll-h"></i><span>Bimbingan Skripsi</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('home') }}" class="nav-link">--}}
+{{--            <i class="fas fa-poll-h"></i><span>Ujian Skripsi</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('home') }}" class="nav-link">--}}
+{{--            <i class="fas fa-poll-h"></i><span>History</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
 @endsection

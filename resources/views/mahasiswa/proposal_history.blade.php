@@ -52,9 +52,34 @@
                                                 <a href="{{ route('file_proposal.download', $proposal) }}"
                                                     class="btn btn-success">Unduh File</a>
                                             </td>
-                                            <td>{{ $proposal->status }}</td>
+                                            <td>
+                                                {{-- Bagian Admin --}}
+                                                @if ($proposal->status == 'Diproses Admin')
+                                                    <span class="badge bg-warning text-white w-100">Menunggu Persetujuan
+                                                        Admin</span>
+                                                @elseif($proposal->status == 'Diterima Admin')
+                                                    <span class="badge bg-info text-white w-80">Diterima Admin</span>
+                                                @elseif($proposal->status == 'Ditolak Admin')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+
+                                                    {{-- Bagian KPS --}}
+                                                @elseif($proposal->status == 'Diterima KPS')
+                                                    <span class="badge bg-success text-white w-80">Diterima KPS</span>
+                                                @elseif($proposal->status == 'Ditolak KPS')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak KPS</span>
+
+                                                    {{-- Status Akhir Mahasiswa --}}
+                                                @elseif ($proposal->status == 'Lulus')
+                                                    <span class="badge bg-primary text-white w-50">Lulus</span>
+                                                @elseif ($proposal->status == 'Lulus dengan Revisi')
+                                                    <span class="badge bg-success text-white w-100">Lulus Dengan
+                                                        Revisi</span>
+                                                @elseif ($proposal->status == 'Tidak Lulus')
+                                                    <span class="badge bg-danger text-white w-50">Tidak Lulus</span>
+                                                @endif
+                                            </td>
                                             <td class="d-flex justify-content-center">
-                                                @if ($proposal->status == 'Proses' || $proposal->status == 'Ditolak')
+                                                @if ($proposal->status == 'Ditolak Admin' || $proposal->status == 'Ditolak Admin')
                                                     <a href="{{ route('proposal_mahasiswa.edit', $proposal) }}">
                                                         <button class="badge bg-warning border-0 my-3 mx-3 text-white"
                                                             type="button">
@@ -83,7 +108,7 @@
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-                                        {{-- {{ $proposals->withQueryString()->links() }} --}}
+                                        {{ $proposals->withQueryString()->links() }}
                                     </ul>
                                 </nav>
                             </div>

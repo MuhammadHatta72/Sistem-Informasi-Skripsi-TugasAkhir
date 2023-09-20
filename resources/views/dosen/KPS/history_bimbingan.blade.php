@@ -1,44 +1,17 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.kps')
 
-@section('title', 'Dashboard Dosen')
+@section('title', 'History Pengajuan Bimbingan Mahasiswa')
 
 @section('content')
-    <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detail Bimbingan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="modalContent"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <section class="section">
         <div class="section-header">
-            <h1>History Pengajuan Bimbingan</h1>
+            <h1>History Pengajuan Bimbingan Mahasiswa</h1>
         </div>
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @if (session()->has('success'))
+        @if(session()->has('success'))
             <div class="alert alert-success col-lg-12" role="alert">
                 {{ session('success') }}
             </div>
+
         @endif
 
         <div class="section-body">
@@ -46,14 +19,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data History Pengajuan Bimbingan</h4>
+                            <h4>Data History Pengajuan Bimbingan Mahasiswa </h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
                                 <form method="GET">
                                     <div class="input-group">
                                         <input name="search" type="text" class="form-control"
-                                            placeholder="Search nama kegiatan">
+                                               placeholder="Search nama skripsi">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -65,40 +38,31 @@
 
                             <div class="table-responsive">
                                 <table class="table table-striped">
+                                    <thead>
                                     <tr>
+                                        <th>NIM</th>
                                         <th>Nama</th>
-                                        <th>Judul</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Opsi</th>
                                     </tr>
+                                    </thead>
                                     @forelse($bimbingans as $bimbingan)
+                                        <tbody>
                                         <tr>
-                                            <td>{{ $bimbingan->mahasiswa->nama }}</td>
-                                            <td>{{ $bimbingan->judul }}</td>
                                             <td>
-                                                @if ($bimbingan->status == 'dikirim')
-                                                    <span class="badge bg-warning text-white w-50">Proses</span>
-                                                @elseif($bimbingan->status == 'diproses')
-                                                    <span class="badge bg-info text-white w-50">Diterima</span>
-                                                @elseif($bimbingan->status == 'diterima')
-                                                    <span class="badge bg-success text-white w-50">Diterima</span>
-                                                @elseif($bimbingan->status == 'ditolak')
-                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
-                                                @endif
+                                                <span class="badge badge-info text-white">{{ $bimbingan->mahasiswa->nim }}</span>
                                             </td>
-                                            <td class="d-flex">
-                                                @if ($bimbingan->status != 'Proses')
-                                                    <button
-                                                        class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn w-50"
-                                                        type="button" data-id="{{ $bimbingan->id }}">
-                                                        <i class="fas fa-edit"></i> Edit Dosen
-                                                    </button>
-                                                @endif
+                                            <td>{{ $bimbingan->mahasiswa->nama }}</td>
+                                            <td>
+                                                <a href="{{ route('bimbingan-kps.history-detail', $bimbingan->id) }}"
+                                                   class="btn btn-warning">Detail</a>
                                             </td>
                                         </tr>
+                                        </tbody>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data</td>
+                                            <td colspan="7" class="text-center p-5">
+                                                Data tidak tersedia
+                                            </td>
                                         </tr>
                                     @endforelse
                                 </table>
@@ -106,7 +70,7 @@
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-                                        {{ $bimbingans->withQueryString()->links() }}
+                                        {{--                                        {{ $bimbingans->withQueryString()->links() }}--}}
                                     </ul>
                                 </nav>
                             </div>
@@ -116,31 +80,5 @@
             </div>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $('.viewBtn').click(function() {
-                var bimbinganId = $(this).data('id');
-
-                $.ajax({
-                    url: '/outline_KPS/' + bimbinganId,
-                    type: 'GET',
-                    success: function(data) {
-                        $('#modalContent').html(data);
-                        $('#detailModal').modal('show');
-                    },
-                    error: function() {
-                        alert('Error fetching bimbingan detail');
-                    }
-                });
-            });
-        });
-    </script>
-
 @endsection
+

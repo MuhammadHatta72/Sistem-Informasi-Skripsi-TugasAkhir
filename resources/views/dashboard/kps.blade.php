@@ -41,10 +41,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('skripsi.create') }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('bimbingan-kps.index') }}">Pengajuan</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ route('skripsi.index') }}">History</a>
+                <a class="nav-link" href="{{ route('bimbingan-kps.history') }}">History</a>
             </li>
         </ul>
     </li>
@@ -60,6 +60,11 @@
                 <a class="nav-link" href="{{ route('skripsi-kps.history') }}">History</a>
             </li>
         </ul>
+    </li>
+    <li class="nav-item {{ request()->is('dashboard-kps') ? 'active' : '' }}">
+        <a href="{{ route('dashboard.kps') }}" class="nav-link">
+            <i class="fas fa-poll-h"></i><span>Rekap</span>
+        </a>
     </li>
 @endsection
 

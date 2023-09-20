@@ -1,4 +1,4 @@
-@extends('dashboard.dosen_KPS')
+@extends('dashboard.kps')
 
 @section('title', 'Daftar Pengajuan Proposal')
 
@@ -68,15 +68,54 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Judul</th>
+                                        <th>File</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     @forelse($proposals as $proposal)
                                         <tr>
                                             <td>{{ $proposal->mahasiswa->nama }}</td>
                                             <td>{{ $proposal->judul }}</td>
+                                            <td>
+                                                <a href="{{ route('proposal_kps.download', $proposal) }}"
+                                                    class="btn btn-success">Unduh File</a>
+                                            </td>
+                                            <td>
+                                                @if ($proposal->status == 'Diproses Admin')
+                                                    <span class="badge bg-warning text-white w-50">Menunggu Persetujuan
+                                                        Admin</span>
+                                                @elseif($proposal->status == 'Diterima Admin')
+                                                    <span class="badge bg-info text-white w-50">Diterima Admin</span>
+                                                @elseif($proposal->status == 'Ditolak Admin')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+                                                @elseif($proposal->status == 'Diterima KPS')
+                                                    <span class="badge bg-success text-white w-50">Diterima KPS</span>
+                                                @elseif($proposal->status == 'Ditolak KPS')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji1')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen
+                                                        Penguji Proposal 1</span>
+                                                @elseif($proposal->status1 == 'Ditolak DosenPenguji1')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 1</span>
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji2')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen Penguji
+                                                        Proposal 2</span>
+                                                @elseif($proposal->status2 == 'Ditolak DosenPenguji2')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 2</span>
+                                                @elseif ($proposal->status == 'Lulus')
+                                                    <span class="badge bg-primary text-white w-50">Lulus</span>
+                                                @elseif ($proposal->status == 'Lulus dengan Revisi')
+                                                    <span class="badge bg-primary text-white w-50">Lulus Dengan
+                                                        Revisi</span>
+                                                @elseif ($proposal->status == 'Tidak Lulus')
+                                                    <span class="badge bg-danger text-white w-50">Tidak Lulus</span>
+                                                @endif
+                                            </td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $proposal->id_proposal }}">
+                                                    type="button" data-id="{{ $proposal->id }}">
                                                     <i class="fas fa-eye"></i> View
                                                 </button>
                                             </td>
@@ -104,24 +143,24 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            $('.viewBtn').click(function () {
+            $('.viewBtn').click(function() {
                 var proposalId = $(this).data('id');
 
                 $.ajax({
-                    url: '/proposal_kps/1',
+                    url: '/proposal_kps/' + proposalId,
                     type: 'GET',
-                    success: function (data) {
+                    success: function(data) {
                         $('#modalContent').html(data);
                         $('#detailModal').modal('show');
                     },
-                    error: function () {
+                    error: function() {
                         alert('Error fetching proposal detail');
                     }
                 });

@@ -33,8 +33,24 @@ return new class extends Migration
             $table->string('teori_2');
             $table->string('metpen_1');
             $table->string('metpen_2');
-            $table->enum('pilihan', ['1', '2']);
-            $table->string('revisi')->nullable();
+            $table->enum('pilihan', ['1', '2'])->nullable();
+            $table->string('catatan_kps')->nullable();
+            $table->string('revisi_1')->nullable();
+            $table->string('revisi_2')->nullable();
+            $table->enum(
+                'status1',
+                [
+                    'Diterima DosenPenilai1',
+                    'Ditolak DosenPenilai1',
+                ]
+            )->nullable();
+            $table->enum(
+                'status2',
+                [
+                    'Diterima DosenPenilai2',
+                    'Ditolak DosenPenilai2',
+                ]
+            )->nullable();
             $table->enum(
                 'status',
                 [

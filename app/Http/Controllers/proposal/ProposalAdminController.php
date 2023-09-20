@@ -15,7 +15,7 @@ class ProposalAdminController extends Controller
 {
     public function index()
     {
-        $proposals = Proposal::where('status', 'dikirim')->paginate(10);
+        $proposals = Proposal::where('status', 'Diproses Admin')->paginate(10);
 
         return view('admin.list_proposal', compact('proposals'));
     }
@@ -23,27 +23,37 @@ class ProposalAdminController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
-        $dosens = Dosen::join('users', 'users.id_dosen', '=', 'dosens.id')->where('sub_role', '')->orWhere('sub_role', null)->get();
-        return view('admin.detail_proposal', compact('proposal', 'dosens'));
+        [$listDosen, $slots] = limit();
+
+        return view('admin.detail_proposal', compact('proposal', 'listDosen', 'slots'));
     }
 
     public function validasi(Request $request)
     {
-        if ($request->status == 'Diterima') {
+        if ($request->status == 'Diterima Admin') {
+            if ($request->dosen1 === $request->dosen2) {
+                return redirect()->route('proposal_admin.index')->with('error', 'Dosen Penguji Proposal tidak boleh sama');
+            }
             $request->validate([
-                'status' => 'required',
+                'dosen1' => 'required',
+                'dosen2' => 'required',
+                // 'dosen3' => 'required',
             ]);
 
             $proposal = Proposal::find($request->id);
+            $proposal->id_dosen_penguji_proposal_1 = $request->dosen1;
+            $proposal->id_dosen_penguji_proposal_2 = $request->dosen2;
             $proposal->status = $request->status;
             $proposal->save();
-        } else if ($request->status == 'Ditolak') {
+        } else if ($request->status == 'Ditolak Admin') {
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;
             $proposal->save();
+
+            return redirect()->route('proposal_admin.index')->with('success', 'Proposal berhasil ditolak');
         }
 
-        return redirect()->route('proposal_admin.index')->with('success', 'Status berhasil diperbarui');
+        return redirect()->route('proposal_admin.index')->with('success', 'Dosen Penguji Proposal berhasil ditambahkan');
     }
 
     public function download($id)

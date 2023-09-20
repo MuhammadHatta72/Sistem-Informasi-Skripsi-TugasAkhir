@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
 use App\Models\Dosen;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class ProposalDosenPengujiProposalController extends Controller
 {
@@ -14,7 +17,10 @@ class ProposalDosenPengujiProposalController extends Controller
      */
     public function index()
     {
-        $proposals = Proposal::where('status', '!=', 'Ditolak')->paginate(10);
+        $proposals = Proposal::where('status', '!=', 'Ditolak')
+            ->where('id_dosen_penguji_proposal_1', auth()->user()->dosen->id)
+            ->orWhere('id_dosen_penguji_proposal_2', auth()->user()->dosen->id)
+            ->paginate(5);
         return view('dosen.penguji_proposal.list_proposal', compact('proposals'));
     }
 
@@ -37,10 +43,11 @@ class ProposalDosenPengujiProposalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $proposal = Proposal::findOrFail($id);
-        return view('dosen.penguji_proposal.detail_proposal', compact('proposal'));
+        $proposal = Proposal::find($id);
+        [$listDosen, $slots] = limit();
+        return view('dosen.penguji_proposal.detail_proposal', compact('proposal', 'listDosen', 'slots'));
     }
 
     /**
@@ -70,13 +77,39 @@ class ProposalDosenPengujiProposalController extends Controller
     public function validasi(Request $request)
     {
         $request->validate([
-            'status' => 'required',
+            'nilai' => 'required',
         ]);
 
-        $proposal = Proposal::findOrFail($request->id);
-        $proposal->status = $request->status;
+        $proposal = Proposal::find($request->id);
+        if ($proposal->id_dosen_penguji_proposal_1 == Auth::user()->dosen->id) {
+            $proposal->nilai_1 = $request->nilai;
+            $proposal->status1 = $request->status;
+            $proposal->status = $request->status;
+        } else if ($proposal->id_dosen_penguji_proposal_2 == Auth::user()->dosen->id) {
+            $proposal->nilai_2 = $request->nilai;
+            $proposal->status2 = $request->status;
+            $proposal->status = $request->status;
+        }
+
+        if ($proposal->status1 == 'Diterima DosenPenguji1' && $proposal->status2 == 'Diterima DosenPenguji2') {
+            $proposal->status = 'Lulus';
+        } elseif ($proposal->status1 == 'Diterima DosenPenguji1 Revisi' && $proposal->status2 == 'Diterima DosenPenguji2 Revisi') {
+            $proposal->status = 'Lulus dengan Revisi';
+        } elseif ($proposal->status1 == 'Ditolak DosenPenguji1' || $proposal->status2 == 'Ditolak DosenPenguji2') {
+            $proposal->status = 'Tidak Lulus';
+        }
         $proposal->save();
 
-        return redirect()->route('proposal_dosen_penguji.index')->with('success', 'Proposal berhasil divalidasi');
+        return redirect()->route('proposal_dosen_penguji.index')->with('success', 'Berhasil Menilai Proposal');
+    }
+
+    public function download($id)
+    {
+        $proposal = Proposal::find($id);
+        $file = $proposal->file;
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return response()->download(storage_path("app/public/$file"), 'proposal_mahasiswa.pdf', $headers);
     }
 }

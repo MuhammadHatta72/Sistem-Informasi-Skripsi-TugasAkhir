@@ -13,7 +13,7 @@ class OutlineDosenPenilaiKelayakanController extends Controller
      */
     public function index()
     {
-        $outlines = Outline::where('status', '!=','Ditolak')
+        $outlines = Outline::where('status', '!=', 'Ditolak')
             ->where('id_dosen_penilai_1', auth()->user()->dosen->id)
             ->orWhere('id_dosen_penilai_2', auth()->user()->dosen->id)
             ->paginate(5);
@@ -71,25 +71,36 @@ class OutlineDosenPenilaiKelayakanController extends Controller
 
     public function validasi(Request $request)
     {
-
         $request->validate([
             'status' => 'required',
-            'nilai' => 'required',
         ]);
 
         $outline = Outline::findOrFail($request->id);
-        if (auth()->user()->dosen->id == $outline->id_dosen_penilai_1) {
-            $outline->nilai1 = $request->nilai;
-        } else if (auth()->user()->dosen->id == $outline->id_dosen_penilai_2) {
-            $outline->nilai2 = $request->nilai;
+//        dd($request->all(), $outline->id_dosen_penilai_1, $outline->id_dosen_penilai_2, auth()->user()->id_dosen);
+        if ($outline->id_dosen_penilai_1 == auth()->user()->id_dosen) {
+            $outline->status1 = $request->status;
+            $outline->status = $request->status;
+            $outline->revisi_1 = $request->revisi;
         }
 
-//            check previous status
-        if ($outline->status == 'Tidak Lulus' || $request->status == 'Tidak Lulus') {
-            $outline->status = 'Tidak Lulus';
-        } else {
+        if ($outline->id_dosen_penilai_2 == auth()->user()->id_dosen) {
+            $outline->status2 = $request->status;
             $outline->status = $request->status;
+            $outline->revisi_2 = $request->revisi;
         }
+
+        if ($outline->pilihan == null or $outline->pilihan == $request->pilihan) {
+            $outline->pilihan = $request->pilihan;
+        } else {
+            return redirect()->route('outline_dosen_penilai.index')->with('error', 'Outline yang dipilih tidak sama dengan dosen penilai lainnya');
+        }
+
+        if ($outline->status1 === 'Diterima DosenPenilai1' and $outline->status2 === 'Diterima DosenPenilai2') {
+            $outline->status = 'Lulus';
+        } else if ($outline->status1 === 'Ditolak DosenPenilai1' and $outline->status2 === 'Ditolak DosenPenilai2') {
+            $outline->status = 'Ditolak';
+        }
+
 
         $outline->save();
 

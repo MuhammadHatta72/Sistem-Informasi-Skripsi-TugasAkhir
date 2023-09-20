@@ -44,7 +44,7 @@
             <div class="simple-footer">
                 Copyright &copy; 2023
                 <div class="bullet"></div>
-                Developed By <a href="https://nauval.in/">Icikiwir Technology House</a>
+                Developed By <a href="">Akuntansi Polinema</a>
             </div>
         </div>
     </div>

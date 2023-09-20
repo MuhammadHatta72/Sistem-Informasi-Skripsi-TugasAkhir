@@ -23,6 +23,32 @@
 
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                id="nama" name="nama" value="{{ $proposal->mahasiswa->nama }}" readonly>
+                            @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim"
+                                name="nim" value="{{ $proposal->mahasiswa->nim }}" readonly>
+                            @error('nim')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12">
                             <label for="judul" class="form-label">Judul Proposal</label>
                             <input type="text" class="form-control @error('judul') is-invalid @enderror"
                                 id="judul" name="judul" value="{{ $proposal->judul }}" readonly>
@@ -36,7 +62,7 @@
 
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
-                            <label for="kategori" class="form-label">Kategori</label>
+                            <label for="kategori" class="form-label">Bidang</label>
                             <input type="text" class="form-control @error('kategori') is-invalid @enderror"
                                 id="kategori" name="kategori" value="{{ $proposal->kategori }}" readonly>
                             @error('kategori')
@@ -50,19 +76,46 @@
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <label for="file" class="form-label">File Proposal</label>
-                            <iframe src="{{ asset('storage/assets/proposal/' . $proposal->id) }}" width="100%"
-                                height="600px" frameborder="0"></iframe>
-
+                            <iframe src="{{ asset('storage/' . $proposal->file) }}" width="100%" height="600px"
+                                frameborder="0"></iframe>
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
                             <a href="{{ route('proposal_admin.download', $proposal) }}" class="btn btn-success">Unduh
                                 File</a>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-4 col-sm-4">
+                            <label for="dosen1">Dosen Penguji Proposal 1</label>
+                            <select class="form-control" id="dosen1" name="dosen1">
+                                @foreach ($listDosen as $index => $dosen)
+                                    <option value="{{ $dosen->id_dosen }}"
+                                        {{ $dosen->id_dosen == $proposal->id_dosen_penguji_proposal_1 ? 'selected' : '' }}>
+                                        {{ $dosen->nama }} | Kuota: {{ $slots[$index] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-4">
+                            <label for="dosen2">Dosen Penguji Proposal 2</label>
+                            <select class="form-control" id="dosen2" name="dosen2">
+                                @foreach ($listDosen as $index => $dosen)
+                                    <option value="{{ $dosen->id_dosen }}"
+                                        {{ $dosen->id_dosen == $proposal->id_dosen_penguji_proposal_2 ? 'selected' : '' }}>
+                                        {{ $dosen->nama }} | Kuota: {{ $slots[$index] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima Admin')">Terima</button>
+                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak Admin')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>

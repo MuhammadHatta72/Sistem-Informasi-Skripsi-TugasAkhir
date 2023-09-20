@@ -58,13 +58,13 @@
 @section('sidebar')
     @parent
     <li
-        class="nav-item dropdown {{ request()->is('daftar-sarana-prasarana-mahasiswa', 'peminjaman-mahasiswa*') ? 'active' : '' }}">
+        class="nav-item dropdown {{ request()->is('outline_mahasiswa*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-sticky-note"></i><span>Outline</span>
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a class="nav-link" href="{{ route('outline_mahasiswa.create', ['id' => auth()->user()->id]) }}">Pengajuan</a>
+                <a class="nav-link" href="{{ route('outline_mahasiswa.create') }}">Pengajuan</a>
             </li>
             <li>
                 <a class="nav-link" href="{{ route('outline_mahasiswa.index') }}">History</a>

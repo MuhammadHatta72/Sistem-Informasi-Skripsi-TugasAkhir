@@ -27,21 +27,12 @@ return new class extends Migration
             $table->enum(
                 'role',
                 [
+                    'kps',
                     'dosen',
                     'admin',
                     'mahasiswa',
                 ]
             )->default('mahasiswa');
-            $table->enum(
-                'sub_role',
-                [
-                    'KPS',
-                    'dosen_penilai',
-                    'dosen_penguji_proposal',
-                    'dosen_pembimbing',
-                    'dosen_penguji_skripsi',
-                ]
-            )->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

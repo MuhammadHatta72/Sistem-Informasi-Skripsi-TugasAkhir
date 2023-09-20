@@ -14,6 +14,16 @@ class Outline extends Model
         return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');
     }
 
+    public function bidang1()
+    {
+        return $this->belongsTo(Bidang::class, 'id_bidang_1');
+    }
+
+    public function bidang2()
+    {
+        return $this->belongsTo(Bidang::class, 'id_bidang_2');
+    }
+
     public function dosenPenilai1()
     {
         return $this->belongsTo(Dosen::class, 'id_dosen_penilai_1');

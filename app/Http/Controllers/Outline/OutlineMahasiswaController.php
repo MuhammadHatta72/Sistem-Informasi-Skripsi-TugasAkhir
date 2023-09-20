@@ -18,7 +18,7 @@ class OutlineMahasiswaController extends Controller
      */
     public function index()
     {
-        $outlines = Outline::where('id_mahasiswa', auth()->user()->mahasiswa->id)->paginate(5);
+        $outlines = Outline::where('id_mahasiswa', auth()->user()->mahasiswa->id)->first();
         return view('mahasiswa.outline_history', compact('outlines'));
     }
 
@@ -31,8 +31,8 @@ class OutlineMahasiswaController extends Controller
             ->join('prodi_bidang', 'bidangs.id', '=', 'prodi_bidang.id_bidang')
             ->where('prodi_bidang.id_prodi', '=', auth()->user()->mahasiswa->id_prodi)
             ->pluck('bidangs.nama', 'bidangs.id');
-
-        return view('mahasiswa.outline_pengajuan', compact('bidangs'));
+        $outline = Outline::where('id_mahasiswa', auth()->user()->mahasiswa->id)->first();
+        return view('mahasiswa.outline_pengajuan', compact('bidangs', 'outline'));
     }
 
     /**

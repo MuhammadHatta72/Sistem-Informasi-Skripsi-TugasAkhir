@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Skripsi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bimbingan;
 use Illuminate\Http\Request;
 use App\Models\Skripsi;
 use App\Models\Dosen;
+use Illuminate\Support\Facades\DB;
 
 class SkripsiKPSController extends Controller
 {
@@ -40,8 +42,45 @@ class SkripsiKPSController extends Controller
     public function show(string $id)
     {
         $skripsi = Skripsi::find($id);
-        $dosens = Dosen::all();
-        return view('dosen.KPS.detail_skripsi', compact('skripsi', 'dosens'));
+
+        $dosens = Dosen::join('users', 'dosens.id', '=', 'users.id_dosen')
+            ->where('users.role', '<>', 'kps')
+            ->get();
+
+        $listDosen = [];
+        $slots = [];
+
+        foreach ($dosens as $dosen) {
+            $countPenilaiOutline = DB::table('outlines')
+                ->where('status', '!=', 'Lulus')
+                ->where('id_dosen_penilai_1', $dosen->id_dosen)
+                ->orWhere('id_dosen_penilai_2', $dosen->id_dosen)
+                ->count();
+
+            $countPenilaiProposal = DB::table('proposals')
+                ->where('status', '!=', 'Lulus')
+                ->where('id_dosen_penguji_proposal_1', $dosen->id_dosen)
+                ->orWhere('id_dosen_penguji_proposal_2', $dosen->id_dosen)
+                ->count();
+
+            $countPembimbingSkripsi = DB::table('bimbingans')
+                ->where('id_dosen_pembimbing_1', $dosen->id_dosen)
+                ->orWhere('id_dosen_pembimbing_2', $dosen->id_dosen)
+                ->orWhere('id_dosen_pembimbing_abstrak', $dosen->id_dosen)
+                ->count();
+
+            $countPengujiSkripsi = DB::table('skripsis')
+                ->where('id_dosen_penguji_skripsi', $dosen->id_dosen)
+                ->count();
+
+            $total = $countPenilaiOutline + $countPenilaiProposal + $countPembimbingSkripsi + $countPengujiSkripsi;
+
+            if ($total <= $dosen->limit) {
+                $listDosen[] = $dosen;
+                $slots[] = $dosen->limit - $total;
+            }
+        }
+        return view('dosen.KPS.detail_skripsi', compact('skripsi', 'listDosen', 'slots'));
     }
 
     /**
@@ -59,18 +98,16 @@ class SkripsiKPSController extends Controller
     {
         $request->validate([
             'dosen_penguji_skripsi' => 'required',
-            'dosen_pembimbing_1' => 'required',
-            'dosen_pembimbing_2' => 'required',
         ], [
             'dosen_penguji_skripsi.required' => 'Dosen penguji skripsi wajib diisi',
-            'dosen_pembimbing_1.required' => 'Dosen pembimbing 1 wajib diisi',
-            'dosen_pembimbing_2.required' => 'Dosen pembimbing 2 wajib diisi',
         ]);
 
+
         $skripsi = Skripsi::find($id);
+        $bimbingan = Bimbingan::where('id_mahasiswa', $skripsi->id_mahasiswa)->first();
         $skripsi->id_dosen_penguji_skripsi = $request->dosen_penguji_skripsi;
-        $skripsi->id_dosen_pembimbing_1 = $request->dosen_pembimbing_1;
-        $skripsi->id_dosen_pembimbing_2 = $request->dosen_pembimbing_2;
+        $skripsi->id_dosen_pembimbing_1 = $bimbingan->id_dosen_pembimbing_1;
+        $skripsi->id_dosen_pembimbing_2 = $bimbingan->id_dosen_pembimbing_2;
         $skripsi->status = 'dikirim';
         $skripsi->save();
 

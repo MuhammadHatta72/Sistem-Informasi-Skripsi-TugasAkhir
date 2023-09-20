@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\proposal;
 
 use App\Http\Controllers\Controller;
+use App\Models\Outline;
 use Illuminate\Http\Request;
 use App\Models\Proposal;
 use Illuminate\Support\Facades\Auth;
@@ -13,13 +14,14 @@ class ProposalPengajuanController extends Controller
 {
     public function index()
     {
-        $proposals = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->get();
+        $proposals = Proposal::where('id_mahasiswa', Auth::user()->mahasiswa->id)->paginate(10);
         return view('mahasiswa.proposal_history', compact('proposals'));
     }
 
     public function create()
     {
-        return view('mahasiswa.proposal_pengajuan');
+        $outline = Outline::where('id_mahasiswa', Auth::user()->mahasiswa->id)->where('status', 'Lulus')->first();
+        return view('mahasiswa.proposal_pengajuan', compact('outline'));
     }
 
     public function store(Request $request)

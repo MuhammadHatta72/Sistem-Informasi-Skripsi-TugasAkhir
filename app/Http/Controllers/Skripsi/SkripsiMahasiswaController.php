@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Skripsi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bimbingan;
 use Illuminate\Http\Request;
 use App\Models\Skripsi;
 use Illuminate\Support\Facades\Auth;
@@ -70,7 +71,7 @@ class SkripsiMahasiswaController extends Controller
         $file_skla = $request->file('skla');
         $nama_file_skla = Auth::user()->mahasiswa->nama . "_SKLA-" .$file_ke . "." . $file_skla->getClientOriginalExtension();
         Storage::putFileAs('public/Pengajuan_Skripsi/' . $name_folder . '/', $file_skla, $nama_file_skla);
-        
+
 
         //upload file skkm
         $file_skkm = $request->file('skkm');
@@ -82,8 +83,13 @@ class SkripsiMahasiswaController extends Controller
         $nama_file_kompen = Auth::user()->mahasiswa->nama . "_Kompen-" .$file_ke . "." . $file_kompen->getClientOriginalExtension();
         Storage::putFileAs('public/Pengajuan_Skripsi/' . $name_folder . '/', $file_kompen, $nama_file_kompen);
 
+        // assign id_dosen_pembimbing
+        $bimbingan = Bimbingan::where('id_mahasiswa', Auth::user()->mahasiswa->id)->first();
         $skripsi = new Skripsi();
         $skripsi->id_mahasiswa = Auth::user()->mahasiswa->id;
+        $skripsi->id_dosen_pembimbing_1 = $bimbingan->id_dosen_pembimbing_1;
+        $skripsi->id_dosen_pembimbing_2 = $bimbingan->id_dosen_pembimbing_2;
+        /*menambah id dosen pembimbing abstrak*/
         $skripsi->status = 'dikirim';
         $skripsi->file_1 = $nama_file_skla;
         $skripsi->file_2 = $nama_file_skkm;

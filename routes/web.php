@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Outline\OutlineAdminController;
 use App\Http\Controllers\Outline\OutlineDosenPenilaiKelayakanController;
 use App\Http\Controllers\Outline\OutlineKPSController;
 use App\Http\Controllers\Outline\OutlineMahasiswaController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\Bimbingan\BimbinganDosenPembimbingController;
 use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\Bimbingan\BimbinganPengajuanController;
+use App\Http\Controllers\Bimbingan\BimbinganAdminController;
+use App\Http\Controllers\Bimbingan\BimbinganKPSController;
 use App\Http\Controllers\SkripsiController;
 use App\Http\Controllers\Skripsi\SkripsiMahasiswaController;
 use App\Http\Controllers\Skripsi\SkripsiAdminController;
@@ -47,6 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 return (new DashboardController)->admin();
             } elseif (Auth::user()->role == 'dosen') {
                 return (new DashboardController)->dosen();
+            } elseif (Auth::user()->role == 'kps') {
+                return (new DashboardController)->kps();
             } else {
                 return (new DashboardController)->mahasiswa();
             }
@@ -60,65 +65,83 @@ Route::get('edit-profile', function () {
 })->name('profile.edit');
 
 Route::middleware('can:admin')->group(function () {
+    // Route Surat Tugas
     Route::get('surat-tugas', [AdminController::class, 'surat_tugas'])->name('admin.surat_tugas');
     Route::post('surat-tugas', [AdminController::class, 'surat_tugas_store'])->name('admin.print_surat_tugas');
+
+    // Route Skripsi
     Route::resource('skripsi-admin', SkripsiAdminController::class);
+
+    // Route Bimbingan
+    Route::resource('bimbingan-admin', BimbinganAdminController::class);
+
+    // Route Proposal
     Route::resource('proposal_admin', ProposalAdminController::class);
     Route::get('/proposal_download/{proposalId}', [ProposalAdminController::class, 'download'])->name('proposal_admin.download');
     Route::post('/proposal/admin/validasi', [ProposalAdminController::class, 'validasi'])->name('proposal_admin.validasi');
+    Route::resource('outline_admin', OutlineAdminController::class);
+
+});
+
+Route::middleware('can:kps')->group(function () {
+    // Route Outline
+    Route::view('dashboard-kps', 'dashboard.kps')->name('dashboard.kps');
+    Route::resource('outline_KPS', OutlineKPSController::class);
+    Route::post('outline_KPS_validasi', [OutlineKPSController::class, 'validasi'])->name('outline_KPS.validasi');
+    Route::get('outline_history', [OutlineKPSController::class, 'history'])->name('outline_KPS.history');
+
+    // Route Proposal
+    Route::post('/proposal/kps/validasi', [ProposalKPSController::class, 'validasi'])->name('proposal_kps.validasi');
+    Route::resource('proposal_kps', ProposalKPSController::class);
+    Route::get('/proposal_history', [ProposalKPSController::class, 'history'])->name('proposal_kps.history');
+    Route::get('/proposal_kps_download/{proposalId}', [ProposalKPSController::class, 'download'])->name('proposal_kps.download');
+
+
+    // Route Bimbingan
+    Route::resource('bimbingan-kps', BimbinganKPSController::class);
+    Route::get('/bimbingan-history', [BimbinganKPSController::class, 'history'])->name('bimbingan-kps.history');
+    Route::get('/bimbingan-history-detail-kps', [BimbinganKPSController::class, 'historyShow'])->name('bimbingan-kps.history-detail');
+
+    // Route Skripsi
+    Route::resource('skripsi-kps', SkripsiKPSController::class);
+    Route::get('/skripsi-history-kps', [SkripsiKPSController::class, 'history'])->name('skripsi-kps.history');
+    Route::get('/skripsi-history-detail-kps', [SkripsiKPSController::class, 'historyShow'])->name('skripsi-kps.history-detail');
 });
 
 Route::middleware('can:dosen')->group(function () {
 
-    Route::middleware('can:KPS')->group(function () {
-        Route::view('dashboard-kps', 'dashboard.dosen_KPS')->name('dashboard.kps');
-        Route::resource('outline_KPS', OutlineKPSController::class);
-        Route::post('outline_KPS_validasi', [OutlineKPSController::class, 'validasi'])->name('outline_KPS.validasi');
+    Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');
+    Route::resource('outline_dosen_penilai', OutlineDosenPenilaiKelayakanController::class);
+    Route::post('outline_dosen_penilai', [OutlineDosenPenilaiKelayakanController::class, 'validasi'])->name('outline_dosen_penilai.validasi');
 
-        Route::post('/proposal/kps/validasi', [ProposalKPSController::class, 'validasi'])->name('proposal_kps.validasi');
-        Route::get('outline_history', [OutlineKPSController::class, 'history'])->name('outline_KPS.history');
-        Route::resource('proposal_kps', ProposalKPSController::class);
-        //        Route::post('/proposal_kps/{id}', [ProposalKPSController::class, 'show'])->name('proposal_kps.show');
-        Route::get('/proposal_history', [ProposalKPSController::class, 'history'])->name('proposal_kps.history');
-        Route::resource('skripsi-kps', SkripsiKPSController::class);
-        Route::get('/skripsi-history-kps', [SkripsiKPSController::class, 'history'])->name('skripsi-kps.history');
-        Route::get('/skripsi-history-detail-kps', [SkripsiKPSController::class, 'historyShow'])->name('skripsi-kps.history-detail');
-    });
+    Route::view('dashboard-dosen_penguji_proposal', 'dashboard.dosen_penguji_proposal')->name('dashboard.dosen_penguji_proposal');
+    Route::resource('proposal_dosen_penguji', ProposalDosenPengujiProposalController::class);
+    Route::post('proposal_dosen_penguji_validasi', [ProposalDosenPengujiProposalController::class, 'validasi'])->name('proposal_dosen_penguji.validasi');
+    Route::get('/proposal_dosen_penguji_download/{proposalId}', [ProposalDosenPengujiProposalController::class, 'download'])->name('proposal_dosen_penguji.download');
 
-    Route::middleware('can:dosen_penilai')->group(function () {
-        Route::view('dashboard-dosen_penilai', 'dashboard.dosen_penilai')->name('dashboard.dosen_penilai');
-        Route::resource('outline_dosen_penilai', OutlineDosenPenilaiKelayakanController::class);
-        Route::post('outline_dosen_penilai_validasi', [OutlineDosenPenilaiKelayakanController::class, 'validasi'])->name('outline_dosen_penilai.validasi');
-    });
+    Route::view('dashboard-dosen_pembimbing', 'dashboard.dosen_pembimbing')->name('dashboard.dosen_pembimbing');
+    Route::resource('bimbingan_dosen_pembimbing', BimbinganDosenPembimbingController::class);
 
-    Route::middleware('can:dosen_penguji_proposal')->group(function () {
-        Route::view('dashboard-dosen_penguji_proposal', 'dashboard.dosen_penguji_proposal')->name('dashboard.dosen_penguji_proposal');
-        Route::resource('proposal_dosen_penguji', ProposalDosenPengujiProposalController::class);
-        Route::post('proposal_dosen_penguji_validasi', [ProposalDosenPengujiProposalController::class, 'validasi'])->name('proposal_dosen_penguji.validasi');
-    });
-
-    Route::middleware('can:dosen_pembimbing')->group(function () {
-        Route::view('dashboard-dosen_pembimbing', 'dashboard.dosen_pembimbing')->name('dashboard.dosen_pembimbing');
-        Route::resource('bimbingan_dosen_pembimbing', BimbinganDosenPembimbingController::class);
-        Route::post('bimbingan_dosen_pembimbing_validasi', [BimbinganDosenPembimbingController::class, 'validasi'])->name('proposal_pembimbing.validasi');
-    });
-
-    Route::middleware('can:dosen_penguji_skripsi')->group(function () {
-        Route::view('dashboard-dosen_penguji_skripsi', 'dashboard.dosen_penguji_skripsi')->name('dashboard.dosen_penguji_skripsi');
-    });
+    Route::view('dashboard-dosen_penguji_skripsi', 'dashboard.dosen_penguji_skripsi')->name('dashboard.dosen_penguji_skripsi');
 });
 
 Route::middleware('can:mahasiswa')->group(function () {
+    // Route Outline
     Route::resource('outline_mahasiswa', OutlineMahasiswaController::class);
-    Route::resource('bimbingan_pengajuan', BimbinganPengajuanController::class);
-    Route::resource('skripsi', SkripsiMahasiswaController::class);
+
+    // Route Proposal
     Route::get('/proposal_pengajuan', [ProposalPengajuanController::class, 'index'])->name('proposal_pengajuan.index');
     Route::post('/proposal_pengajuan', [ProposalPengajuanController::class, 'store'])->name('proposal_pengajuan.store');
     Route::get('/proposal_pengajuan/create', [ProposalPengajuanController::class, 'create'])->name('proposal_pengajuan.create');
     Route::get('/file_template', [ProposalPengajuanController::class, 'download'])->name('file_template.download');
     Route::get('/file_proposal', [ProposalPengajuanController::class, 'file'])->name('file_proposal.download');
 
+    // Route Bimbingan
+    Route::resource('bimbingan_pengajuan', BimbinganPengajuanController::class);
     Route::get('/bimbingan_pengajuan', [BimbinganPengajuanController::class, 'index'])->name('bimbingan_pengajuan.index');
     Route::post('/bimbingan_pengajuan', [BimbinganPengajuanController::class, 'store'])->name('bimbingan_pengajuan.store');
     Route::get('/bimbingan_pengajuan/create', [BimbinganPengajuanController::class, 'create'])->name('bimbingan_pengajuan.create');
+
+    // Route Skripsi
+    Route::resource('skripsi', SkripsiMahasiswaController::class);
 });

@@ -42,7 +42,7 @@
                                             <th>Judul</th>
                                             <th>Dosen Pembimbing 1</th>
                                             <th>Dosen Pembimbing 2</th>
-                                            <th>Dosen Pembimbing Intern</th>
+                                            <th>Dosen Pembimbing Abstrak</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -53,35 +53,29 @@
                                         <td>{{$bimbingan->judul}}</td>
                                         <td>{{ $bimbingan->dosenPembimbing1->nama ?? '-' }}</td>
                                         <td>{{ $bimbingan->dosenPembimbing2->nama ?? '-' }}</td>
-                                        <td>{{ $bimbingan->dosenPembimbingIntern->nama ?? '-' }}</td>
+                                        <td>{{ $bimbingan->dosenPembimbingAbstrak->nama ?? '-' }}</td>
                                         <td>
-                                            @if($bimbingan->status == 'Lulus')
-                                                <span class="badge bg-success text-white">{{ $bimbingan->status }}</span>
-                                            @elseif($bimbingan->status == 'Ditolak*')
-                                                <span class="badge bg-danger text-white">{{ $bimbingan->status }}</span>
+                                            @if($bimbingan->status == 'dikirim')
+                                            <span class="badge badge-info">Dikirim</span>
+                                            @elseif($bimbingan->status == 'diterima admin')
+                                            <span class="badge badge-warning">Diterima Admin</span>
+                                            @elseif($bimbingan->status == 'ditolak admin')
+                                            <span class="badge badge-danger">Ditolak Admin</span>
+                                            @elseif($bimbingan->status == 'diterima kps')
+                                            <span class="badge badge-warning">Diterima KPS</span>
+                                            @elseif($bimbingan->status == 'ditolak kps')
+                                            <span class="badge badge-danger">Ditolak KPS</span>
+                                            @elseif($bimbingan->status == 'diproses dosen pembimbing')
+                                            <span class="badge badge-warning">Diproses Dosen Pembimbing</span>
+                                            @elseif($bimbingan->status == 'ditolak dosen pembimbing')
+                                            <span class="badge badge-danger">Ditolak Dosen Pembimbing</span>
+                                            @elseif($bimbingan->status == 'lulus bimbingan')
+                                            <span class="badge badge-success">Lulus Bimbingan</span>
                                             @else
-                                                <span class="badge bg-warning text-white">{{ $bimbingan->status }}</span>
+                                            <span class="badge badge-success">Diterima</span>
                                             @endif
                                         </td>
-                                        <td class="d-flex justify-content-center">
-                                            @if($bimbingan->status == 'Pengajuan' || $bimbingan->status == 'Ditolak*')
-                                                <a href="{{route('bimbingan_pengajuan.edit', $bimbingan) }}">
-                                                    <button class="badge bg-warning border-0 my-3 mx-3 text-white" type="button">
-                                                        <i class="fas fa-edit"></i> Edit
-                                                    </button>
-                                                </a>
-                                                <form action="{{ route('bimbingan_pengajuan.destroy', $bimbingan) }}" method="POST" class="d-inline">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button class="badge bg-danger border-0 my-3 mx-3 text-white" onclick="return confirm('Yakin Menghapus Pengajuan ?')">
-                                                        <i class="fas fa-trash"></i> Delete
-                                                    </button>
-                                                </form>
-                                            @endif
-                                        </td>
-<td>
-
-</td>
+                                        <td><a class="btn btn-primary" href="{{ route('bimbingan_pengajuan.show', $bimbingan) }}">Detail</a></td>
                                     </tr>
                                    </tbody>
                                    @empty

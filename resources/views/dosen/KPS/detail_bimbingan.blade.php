@@ -1,111 +1,104 @@
-<div class="section-body">
-    <div class="row">
-        <div class="col-xl-12 mb-4">
-            <!-- Dashboard example card 1-->
-            <div class="card-body d-flex justify-content-center flex-column">
-                <!-- Menampilkan pesan sukses -->
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                <!-- Menampilkan pesan error -->
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                <!-- Membuat form untuk mengirim data bimbingan -->
-                <form method="POST" action="{{ route('bimbingan_kps.validasi') }}" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="status" id="status" value="">
-                    <input type="hidden" name="id" value="{{ $bimbingan->id }}">
+<!-- outline_pengajuan.blade.php -->
+@extends('dashboard.kps')
 
-                    <div class="row mb-3">
-                        <div class="col-lg-12 col-sm-12">
-                            <label for="judul" class="form-label">Judul Bimbingan</label>
-                            <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                id="judul" name="judul" value="{{ $bimbingan->judul }}" readonly>
-                            @error('judul')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+@section('title', 'Detail Pengajuan Bimbingan')
+
+@section('content')
+    <section class="section">
+        <div class="section-header">
+            <h1>Pengajuan Bimbingan</h1>
+        </div>
+
+        <div class="section-body ">
+            <div class="col-12 col-sm-5 col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-whitesmoke">
+                        <h4>Pemilihan Dosen</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="{{ route('bimbingan-kps.index') }}" class="btn btn-warning">Kembali</a>
+                        <form action="{{ route('bimbingan-kps.update', $bimbingan->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group mt-3">
+                                <label>Pilih Dosen Pembimbing 1</label>
+                                <select class="form-control" name="dosen_pembimbing_1" required>
+                                    <option value="">Pilih Dosen</option>
+                                    @foreach($listDosen as $index => $dosen)
+                                        <option value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $bimbingan->id_dosen_pembimbing_1 ? 'selected' : '' }}>
+                                            {{ $dosen->nama }} | {{ $slots[$index] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label>Pilih Dosen Pembimbing 2</label>
+                                <select class="form-control" name="dosen_pembimbing_2" required>
+                                    <option value="">Pilih Dosen</option>
+                                    @foreach($listDosen as $index => $dosen)
+                                        <option value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $bimbingan->id_dosen_pembimbing_2 ? 'selected' : '' }}>
+                                            {{ $dosen->nama }} | {{ $slots[$index] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @if($bimbingan->mahasiswa->kelas->jenis != 'internasional')
+                                <div class="form-group mt-3">
+                                    <label>Pilih Dosen Pembimbing Abstrak</label>
+                                    <select class="form-control" name="dosen_pembimbing_abstrak" required>
+                                        <option value="">Pilih Dosen</option>
+                                        @foreach($listDosen as $index => $dosen)
+                                            <option value="{{ $dosen->id_dosen }}" {{ $dosen->id_dosen == $bimbingan->id_dosen_pembimbing_abstrak ? 'selected' : '' }}>
+                                                {{ $dosen->nama }} | {{ $slots[$index] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            @enderror
+                            @endif
+
+                            <button type="submit"
+                                    onClick="return confirm('Apakah Anda yakin, sudah memilih dosen tersebut?')"
+                                    class="btn btn-primary">Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-whitesmoke">
+                        <h4>Detail Pengajuan Bimbingan</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-pills" id="tabPengajuan" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#proposalbimbingan"
+                                   role="tab" aria-controls="home" aria-selected="true">Proses Bimbingan</a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="tab-content" id="myTabContent2">
+                            <div class="tab-pane fade show active align-content-start" id="proposalbimbingan"
+                                 role="tabpanel"
+                                 aria-labelledby="proposalbimbingan">
+                                <object
+                                        data="{{ asset('storage/proposalbimbingan/' . $bimbingan->mahasiswa->nama . '-' . $bimbingan->mahasiswa->nim . '/' . $bimbingan->proposalbimbingan) }}"
+                                        type="application/pdf"
+                                        width="100%"
+                                        height="800"
+                                >
+
+                                    <iframe
+                                            src="{{ asset('storage/proposalbimbingan/' . $bimbingan->mahasiswa->nama . '-' . $bimbingan->mahasiswa->nim . '/' . $bimbingan->proposalbimbingan) }}"
+                                            width="500"
+                                            height="678"
+                                    >
+                                        <p>This browser does not support PDF!</p>
+                                    </iframe>
+                                </object>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-12 col-sm-12">
-                            <label for="data1" class="form-label">Data 1</label>
-                            <textarea type="text" class="form-control @error('data1') is-invalid @enderror" id="data1" name="data1"
-                                style="height: 72px" readonly>{{ $bimbingan->data1 }}</textarea>
-                            @error('data1')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-12 col-sm-12">
-                            <label for="data2" class="form-label">Data 2</label>
-                            <textarea type="text" class="form-control @error('data2') is-invalid @enderror" id="data2" name="data2"
-                                style="height: 72px" readonly>{{ $bimbingan->data2 }}</textarea>
-                            @error('data2')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-12 col-sm-12">
-                            <label for="data3" class="form-label">Data 3</label>
-                            <textarea type="text" class="form-control @error('data3') is-invalid @enderror" id="data3" name="data3"
-                                style="height: 72px" readonly>{{ $bimbingan->data3 }}</textarea>
-                            @error('data3')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-4 col-sm-4">
-                            <label for="dosen1">Dosen Pembimbing Bimbingan</label>
-                            <select class="form-control" id="dosen1" name="dosen1">
-                                @foreach ($dosens as $dosen)
-                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        {{-- <div class="col-lg-4 col-sm-4">
-                            <label for="dosen2">Dosen Pembimbing 1</label>
-                            <select class="form-control" id="dosen2" name="dosen2">
-                                @foreach ($dosens as $dosen)
-                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-sm-4">
-                            <label for="dosen3">Dosen Pembimbing 2</label>
-                            <select class="form-control" id="dosen3" name="dosen3">
-                                @foreach ($dosens as $dosen)
-                                    <option value="{{ $dosen->id_dosen }}">{{ $dosen->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
-                    <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<script>
-    function setStatus(status) {
-        document.getElementById('status').value = status;
-        document.getElementById('submitButton').click();
-    }
-</script>
+    </section>
+@endsection

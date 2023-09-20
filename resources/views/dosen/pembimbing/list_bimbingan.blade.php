@@ -1,4 +1,4 @@
-@extends('dashboard.dosen_pembimbing')
+@extends('dashboard.dosen')
 
 @section('title', 'Dashboard Dosen Pembimbing Bimbingan')
 
@@ -22,7 +22,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>Penilaian Bimbingan</h1>
+            <h1>Daftar Pengajuan Bimbingan</h1>
         </div>
 
         @if ($errors->any())
@@ -46,7 +46,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data Bimbingan</h4>
+                            <h4>Data Pengajuan Bimbingan</h4>
                         </div>
                         <div class="card-body">
                             <div class="float-right">
@@ -66,32 +66,29 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
+                                        <th>NIM</th>
                                         <th>Nama</th>
-                                        <th>Judul</th>
                                         <th>Action</th>
                                     </tr>
-                                @forelse($bimbingans as $bimbingan)
-                                        <tr>
-                                            <td>{{ $bimbingan->mahasiswa->nama }}</td>
-                                            <td>{{ $bimbingan->judul }}</td>
-                                            <td class="d-flex justify-content-center">
-                                                <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                    type="button" data-id="{{ $bimbingan->id }}">
-                                                    <i class="fas fa-eye"></i> View
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data</td>
-                                        </tr>
-                                    @endforelse
+                                    @forelse($bimbingans as $bimbingan)
+                                    <tr>
+                                        <td><span class="badge badge-info text-white">{{ $bimbingan->mahasiswa->nim }}</span></td>
+                                        <td>{{ $bimbingan->mahasiswa->nama }}</td>
+                                        <td>
+                                            <a href="{{ route('bimbingan_dosen_pembimbing.show', $bimbingan->id) }}" class="btn btn-warning">Detail</a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">Tidak ada data</td>
+                                    </tr>
+                                @endforelse
                                 </table>
                             </div>
                             <div class="float-right">
                                 <nav>
                                     <ul class="pagination">
-                                        {{ $bimbingan->withQueryString()->links() }}
+                                        {{-- {{ $bimbingan->withQueryString()->links() }} --}}
                                     </ul>
                                 </nav>
                             </div>
