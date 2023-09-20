@@ -13,7 +13,7 @@
                 <div class="col-xl-12 mb-4">
                     <!-- Dashboard example card 1-->
                     <div class="card lift h-100">
-                        @if(is_null($outline))
+                        @if (is_null($outline))
                             <div class="card-header bg-whitesmoke">
                                 <h4>Form Pengajuan Proposal</h4>
                             </div>
@@ -23,10 +23,10 @@
                                 </div>
                             </div>
                         @else
-                            @if($outline->pilihan == 1)
+                            @if ($outline->pilihan == 1)
                                 @php
-                                $judul = $outline->judul_1;
-                                $bidang = $outline->bidang1->nama;
+                                    $judul = $outline->judul_1;
+                                    $bidang = $outline->bidang1->nama;
                                 @endphp
                             @endif
 
@@ -41,27 +41,27 @@
                             @endif
                             <div class="card-body">
                                 <form method="POST" action="{{ route('proposal_pengajuan.store') }}"
-                                      enctype="multipart/form-data">
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="judul" class="form-label">Judul Proposal</label>
                                         <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                               id="judul" name="judul" value="{{ $judul }}" readonly>
+                                            id="judul" name="judul" value="{{ $judul }}" readonly>
                                         @error('judul')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="kategori" class="form-label">Kategori</label>
                                         <input type="text" class="form-control @error('ketegori') is-invalid @enderror"
-                                               id="kategori" name="kategori" value="{{ $bidang }}" readonly>
+                                            id="kategori" name="kategori" value="{{ $bidang }}" readonly>
                                         @error('kategori')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 
@@ -74,11 +74,11 @@
                                     <div class=" mb-3">
                                         <label for="file" class="form-label">Upload Proposal</label>
                                         <input type="file" class="form-control @error('file') is-invalid @enderror"
-                                               id="file" name="file" value="{{ old('file') }}">
+                                            id="file" name="file" value="{{ old('file') }}">
                                         @error('file')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 
@@ -92,12 +92,3 @@
         </div>
     </section>
 @endsection
-
-
-
-
-{{--                        @if ()--}}
-{{--                            Anda belum memiliki outline yang valid--}}
-{{--                        @else--}}
-<!-- display any success message -->
-{{--                         @endif--}}

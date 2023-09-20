@@ -17,7 +17,7 @@ class ProposalDosenPengujiProposalController extends Controller
      */
     public function index()
     {
-        $proposals = Proposal::where('status', 'Diterima')->paginate(10);
+        $proposals = Proposal::where('status', 'Diterima KPS')->paginate(10);
         return view('dosen.penguji_proposal.list_proposal', compact('proposals'));
     }
 
@@ -88,13 +88,14 @@ class ProposalDosenPengujiProposalController extends Controller
 
         if ($proposal->status1 == 'Diterima DosenPenguji1' && $proposal->status2 == 'Diterima DosenPenguji2') {
             $proposal->status = 'Lulus';
+        } elseif ($proposal->status1 == 'Diterima DosenPenguji1' && $proposal->status2 == 'Diterima DosenPenguji2') {
+            $proposal->status = 'Lulus dengan Revisi';
         } elseif ($proposal->status1 == 'Ditolak DosenPenguji1' || $proposal->status2 == 'Ditolak DosenPenguji2') {
             $proposal->status = 'Tidak Lulus';
         }
         $proposal->save();
 
         return redirect()->route('proposal_dosen_penguji.index')->with('success', 'Berhasil Menilai Proposal');
-
     }
 
     public function download($id)
