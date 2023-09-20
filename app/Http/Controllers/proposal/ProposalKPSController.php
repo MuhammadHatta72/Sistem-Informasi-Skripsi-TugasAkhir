@@ -14,7 +14,7 @@ class ProposalKPSController extends Controller
 {
     public  function index()
     {
-        $proposals = Proposal::where('status', 'diproses')->paginate(10);
+        $proposals = Proposal::where('status', 'Diterima Admin')->paginate(10);
 
         return view('dosen.KPS.list_proposal', compact('proposals'));
     }
@@ -28,7 +28,7 @@ class ProposalKPSController extends Controller
 
     public function validasi(Request $request)
     {
-        if ($request->status == 'Diterima') {
+        if ($request->status == 'Diterima KPS') {
             $request->validate([
                 'status' => 'required',
             ]);
@@ -36,7 +36,7 @@ class ProposalKPSController extends Controller
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;
             $proposal->save();
-        } else if ($request->status == 'Ditolak') {
+        } else if ($request->status == 'Ditolak KPS') {
             $proposal = Proposal::find($request->id);
             $proposal->status = $request->status;
             $proposal->save();

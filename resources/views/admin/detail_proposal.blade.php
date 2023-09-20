@@ -23,6 +23,32 @@
 
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                id="nama" name="nama" value="{{ $proposal->mahasiswa->nama }}" readonly>
+                            @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim"
+                                name="nim" value="{{ $proposal->mahasiswa->nim }}" readonly>
+                            @error('nim')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12">
                             <label for="judul" class="form-label">Judul Proposal</label>
                             <input type="text" class="form-control @error('judul') is-invalid @enderror"
                                 id="judul" name="judul" value="{{ $proposal->judul }}" readonly>
@@ -36,7 +62,7 @@
 
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
-                            <label for="kategori" class="form-label">Kategori</label>
+                            <label for="kategori" class="form-label">Bidang</label>
                             <input type="text" class="form-control @error('kategori') is-invalid @enderror"
                                 id="kategori" name="kategori" value="{{ $proposal->kategori }}" readonly>
                             @error('kategori')
@@ -88,8 +114,8 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diproses')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
+                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima Admin')">Terima</button>
+                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak Admin')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>

@@ -53,22 +53,55 @@
                                                     class="btn btn-success">Unduh File</a>
                                             </td>
                                             <td>
-                                                @if ($proposal->status == 'dikirim')
-                                                    <span class="badge bg-warning text-white w-50">Dikirim</span>
-                                                @elseif($proposal->status == 'diproses')
-                                                    <span class="badge bg-info text-white w-50">Diproses</span>
-                                                @elseif($proposal->status == 'diterima')
-                                                    <span class="badge bg-success text-white w-50">Diterima</span>
+                                                {{-- Bagian Admin --}}
+                                                @if ($proposal->status == 'Diproses Admin')
+                                                    <span class="badge bg-warning text-white w-100">Menunggu Persetujuan
+                                                        Admin</span>
+                                                @elseif($proposal->status == 'Diterima Admin')
+                                                    <span class="badge bg-info text-white w-80">Diterima Admin</span>
+                                                @elseif($proposal->status == 'Ditolak Admin')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+
+                                                    {{-- Bagian KPS --}}
+                                                @elseif($proposal->status == 'Diterima KPS')
+                                                    <span class="badge bg-success text-white w-80">Diterima KPS</span>
+                                                @elseif($proposal->status == 'Ditolak KPS')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak KPS</span>
+
+                                                    {{-- Status Akhir Mahasiswa --}}
                                                 @elseif ($proposal->status == 'Lulus')
                                                     <span class="badge bg-primary text-white w-50">Lulus</span>
+                                                @elseif ($proposal->status == 'Lulus dengan Revisi')
+                                                    <span class="badge bg-success text-white w-100">Lulus Dengan
+                                                        Revisi</span>
                                                 @elseif ($proposal->status == 'Tidak Lulus')
                                                     <span class="badge bg-danger text-white w-50">Tidak Lulus</span>
-                                                @elseif($proposal->status == 'ditolak')
-                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
+
+                                                    {{-- Bagian Dosen Penguji Proposal 1 --}}
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji1')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen
+                                                        Penguji Proposal 1</span>
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji1 Revisi')
+                                                    <span class="badge bg-warning text-white w-100">Di Nilai Dosen
+                                                        Penguji Proposal 1</span>
+                                                @elseif($proposal->status1 == 'Ditolak DosenPenguji1')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 1</span>
+
+                                                    {{-- Bagian Dosen Penguji Proposal 2 --}}
+                                                @elseif ($proposal->status2 == 'Diterima DosenPenguji2')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen
+                                                        Penguji Proposal 2</span>
+                                                @elseif ($proposal->status2 == 'Diterima DosenPenguji2 Revisi')
+                                                    <span class="badge bg-warning text-white w-100">Di Nilai Dosen
+                                                        Penguji Proposal 2</span>
+                                                @elseif($proposal->status2 == 'Ditolak DosenPenguji2')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 2</span>
                                                 @endif
                                             </td>
                                             <td class="d-flex justify-content-center">
-                                                @if ($proposal->status == 'Ditolak')
+                                                @if ($proposal->status == 'Ditolak Admin' || $proposal->status == 'Ditolak Admin')
                                                     <a href="{{ route('proposal_mahasiswa.edit', $proposal) }}">
                                                         <button class="badge bg-warning border-0 my-3 mx-3 text-white"
                                                             type="button">

@@ -4,8 +4,7 @@
 
 @section('content')
     <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -54,7 +53,7 @@
                                 <form method="GET">
                                     <div class="input-group">
                                         <input name="search" type="text" class="form-control"
-                                               placeholder="Search nama kegiatan">
+                                            placeholder="Search nama kegiatan">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -79,22 +78,44 @@
                                             <td>{{ $proposal->judul }}</td>
                                             <td>
                                                 <a href="{{ route('proposal_kps.download', $proposal) }}"
-                                                   class="btn btn-success">Unduh File</a>
+                                                    class="btn btn-success">Unduh File</a>
                                             </td>
                                             <td>
-                                                @if ($proposal->status == 'dikirim')
-                                                    <span class="badge bg-warning text-white w-50">Dikirim</span>
-                                                @elseif($proposal->status == 'diproses')
-                                                    <span class="badge bg-info text-white w-50">Diproses</span>
-                                                @elseif($proposal->status == 'diterima')
-                                                    <span class="badge bg-success text-white w-50">Diterima</span>
-                                                @elseif($proposal->status == 'ditolak')
-                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
+                                                @if ($proposal->status == 'Diproses Admin')
+                                                    <span class="badge bg-warning text-white w-50">Menunggu Persetujuan
+                                                        Admin</span>
+                                                @elseif($proposal->status == 'Diterima Admin')
+                                                    <span class="badge bg-info text-white w-50">Diterima Admin</span>
+                                                @elseif($proposal->status == 'Ditolak Admin')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+                                                @elseif($proposal->status == 'Diterima KPS')
+                                                    <span class="badge bg-success text-white w-50">Diterima KPS</span>
+                                                @elseif($proposal->status == 'Ditolak KPS')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji1')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen
+                                                        Penguji Proposal 1</span>
+                                                @elseif($proposal->status1 == 'Ditolak DosenPenguji1')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 1</span>
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji2')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen Penguji
+                                                        Proposal 2</span>
+                                                @elseif($proposal->status2 == 'Ditolak DosenPenguji2')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 2</span>
+                                                @elseif ($proposal->status == 'Lulus')
+                                                    <span class="badge bg-primary text-white w-50">Lulus</span>
+                                                @elseif ($proposal->status == 'Lulus dengan Revisi')
+                                                    <span class="badge bg-primary text-white w-50">Lulus Dengan
+                                                        Revisi</span>
+                                                @elseif ($proposal->status == 'Tidak Lulus')
+                                                    <span class="badge bg-danger text-white w-50">Tidak Lulus</span>
                                                 @endif
                                             </td>
                                             <td class="d-flex justify-content-center">
                                                 <button class="badge bg-primary border-0 my-3 mx-3 text-white viewBtn"
-                                                        type="button" data-id="{{ $proposal->id }}">
+                                                    type="button" data-id="{{ $proposal->id }}">
                                                     <i class="fas fa-eye"></i> View
                                                 </button>
                                             </td>
@@ -122,24 +143,24 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            $('.viewBtn').click(function () {
+            $('.viewBtn').click(function() {
                 var proposalId = $(this).data('id');
 
                 $.ajax({
                     url: '/proposal_kps/' + proposalId,
                     type: 'GET',
-                    success: function (data) {
+                    success: function(data) {
                         $('#modalContent').html(data);
                         $('#detailModal').modal('show');
                     },
-                    error: function () {
+                    error: function() {
                         alert('Error fetching proposal detail');
                     }
                 });

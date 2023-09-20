@@ -81,16 +81,36 @@
                                                     class="btn btn-success">Unduh File</a>
                                             </td>
                                             <td>
-                                                @if ($proposal->status == 'dikirim')
-                                                    <span class="badge bg-warning text-white w-50">Dikirim</span>
-                                                @elseif($proposal->status == 'diproses')
-                                                    <span class="badge bg-info text-white w-50">Diproses</span>
-                                                @elseif($proposal->status == 'diterima')
-                                                    <span class="badge bg-success text-white w-50">Diterima</span>
-                                                @elseif ($proposal->status == 'lulus')
+                                                @if ($proposal->status == 'Diproses Admin')
+                                                    <span class="badge bg-warning text-white w-50">Menunggu Persetujuan
+                                                        Admin</span>
+                                                @elseif($proposal->status == 'Diterima Admin')
+                                                    <span class="badge bg-info text-white w-50">Diterima Admin</span>
+                                                @elseif($proposal->status == 'Ditolak Admin')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+                                                @elseif($proposal->status == 'Diterima KPS')
+                                                    <span class="badge bg-success text-white w-50">Diterima KPS</span>
+                                                @elseif($proposal->status == 'Ditolak KPS')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Admin</span>
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji1')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen
+                                                        Penguji Proposal 1</span>
+                                                @elseif($proposal->status1 == 'Ditolak DosenPenguji1')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 1</span>
+                                                @elseif ($proposal->status1 == 'Diterima DosenPenguji2')
+                                                    <span class="badge bg-warning text-white w-50">Di Nilai Dosen Penguji
+                                                        Proposal 2</span>
+                                                @elseif($proposal->status2 == 'Ditolak DosenPenguji2')
+                                                    <span class="badge bg-danger text-white w-50">Ditolak Dosen Penguji
+                                                        Proposal 2</span>
+                                                @elseif ($proposal->status == 'Lulus')
                                                     <span class="badge bg-primary text-white w-50">Lulus</span>
-                                                @elseif($proposal->status == 'ditolak')
-                                                    <span class="badge bg-danger text-white w-50">Ditolak</span>
+                                                @elseif ($proposal->status == 'Lulus dengan Revisi')
+                                                    <span class="badge bg-primary text-white w-50">Lulus Dengan
+                                                        Revisi</span>
+                                                @elseif ($proposal->status == 'Tidak Lulus')
+                                                    <span class="badge bg-danger text-white w-50">Tidak Lulus</span>
                                                 @endif
                                             </td>
                                             <td class="d-flex justify-content-center">

@@ -36,6 +36,19 @@
 
                     <div class="row mb-3">
                         <div class="col-lg-12 col-sm-12">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim"
+                                name="nim" value="{{ $proposal->mahasiswa->nim }}" readonly>
+                            @error('nim')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-sm-12">
                             <label for="judul" class="form-label">Judul Proposal</label>
                             <input type="text" class="form-control @error('judul') is-invalid @enderror"
                                 id="judul" name="judul" value="{{ $proposal->judul }}" readonly>
@@ -100,8 +113,8 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima')">Terima</button>
-                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak')">Tolak</button>
+                    <button type="button" class="btn btn-primary" onclick="setStatus('Diterima KPS')">Terima</button>
+                    <button type="button" class="btn btn-danger" onclick="setStatus('Ditolak KPS')">Tolak</button>
                     <button type="submit" class="btn btn-success d-none" id="submitButton">Submit</button>
                 </form>
             </div>
