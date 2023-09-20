@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('teori_2');
             $table->string('metpen_1');
             $table->string('metpen_2');
-            $table->enum('pilihan', ['1', '2']);
+            $table->enum('pilihan', ['1', '2'])->nullable();
             $table->string('revisi')->nullable();
             $table->enum(
                 'status1',
